@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Je reprends mon trône — By Tata Éléonore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#4A2F1C;
+  --bg-card:rgba(232,199,126,0.09);
+  --ink:#F2E6CC;
+  --ink-soft:#E0CFA8;
+  --gold:#D9A94A;
+  --gold-deep:#EFC272;
+  --gold-tint:rgba(217,169,74,0.35);
+  --rose:#D08A52;
+  --muted:#C2AC8A;
+  --border:rgba(217,169,74,0.35);
+  --card-tint:rgba(217,169,74,0.07);
+  --toast-bg:#1E120A;
+  --toast-text:#F0CE82;
+}
+[data-theme="dark"]{
+  --bg:#170D06;
+  --bg-card:rgba(232,199,126,0.05);
+  --ink:#EAD9B5;
+  --ink-soft:#D2BD93;
+  --gold:#D4A24A;
+  --gold-deep:#E8B85C;
+  --gold-tint:rgba(212,162,74,0.4);
+  --rose:#C97A42;
+  --muted:#A8916D;
+  --border:rgba(212,162,74,0.3);
+  --card-tint:rgba(212,162,74,0.06);
+  --toast-bg:#000000;
+  --toast-text:#E8B85C;
+}
+.theme-toggle{
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:1000;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  color:var(--gold-deep);
+  font-size:16px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .25s;
+}
+.theme-toggle:hover{border-color:var(--gold);transform:scale(1.08)}
+html,body{background:var(--bg);min-height:100vh}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% -8%, rgba(169,128,47,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 35% at 85% 100%, rgba(125,52,65,0.05) 0%, transparent 60%),
+    var(--bg);
+  color:var(--ink);
+  font-family:'EB Garamond',serif;
+  font-weight:600;
+  text-shadow:0 0 0.4px currentColor;
+}
+.crown-header{text-align:center;padding:48px 20px 36px;position:relative;overflow:hidden}
+.crown-svg{display:block;margin:0 auto 20px;animation:crownFloat 4s ease-in-out infinite}
+@keyframes crownFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.brand-line{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.55em;text-transform:uppercase;color:var(--gold-deep);opacity:.85;margin-bottom:14px}
+.app-title{font-family:'Playfair Display',serif;font-size:clamp(32px,9vw,62px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:.01em}
+.app-title em{font-style:italic;color:var(--rose);display:block}
+.app-subtitle{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--rose);margin-top:12px;opacity:.85}
+.divider{display:flex;align-items:center;gap:12px;margin:20px auto;max-width:300px}
+.divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.divider-gem{color:var(--gold);font-size:10px}
+.quote-card{margin:0 auto 36px;max-width:640px;padding:0 20px}
+.quote-inner{background:linear-gradient(135deg,rgba(169,128,47,.06),rgba(125,52,65,.04));border:1px solid var(--border);border-top:2px solid var(--gold);padding:28px 32px;text-align:center;position:relative;border-radius:2px}
+.quote-mark{font-family:'Playfair Display',serif;font-size:72px;color:var(--gold);opacity:.25;position:absolute;top:-16px;left:16px;line-height:1}
+.quote-text{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:clamp(16px,3.5vw,20px);line-height:1.65;color:var(--ink);margin-bottom:12px}
+.quote-author{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);opacity:.85}
+.nav-tabs{display:flex;justify-content:center;align-items:center;gap:6px;padding:0 16px 28px;flex-wrap:wrap}
+.tab-group-label{
+  flex-basis:100%;
+  text-align:center;
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--muted);
+  opacity:.55;
+  margin:10px 0 2px;
+}
+.tab-group-label:first-child{margin-top:0}
+.tab-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--muted);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.25em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:all .25s;border-radius:1px}
+.tab-btn:hover{color:var(--gold-deep);border-color:var(--gold)}
+.tab-btn.active{background:linear-gradient(135deg,rgba(169,128,47,.16),rgba(169,128,47,.06));border-color:var(--gold);color:var(--gold-deep);font-weight:600}
+.content{max-width:660px;margin:0 auto;padding:0 20px 80px}
+.view{display:none}
+.view.active{display:block}
+.section-block{margin-bottom:28px;animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.section-icon{font-size:18px;flex-shrink:0}
+.section-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold-deep);opacity:.95}
+.intro-text{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-weight:600;
+  font-size:16px;
+  line-height:1.65;
+  color:var(--ink-soft);
+  margin-bottom:24px;
+  padding:0 4px;
+  border-left:2px solid var(--gold-tint);
+  padding-left:16px;
+}
+.field-input{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;color:var(--ink);font-family:'EB Garamond',serif;font-size:18px;font-weight:600;padding:14px 18px;outline:none;transition:border-color .25s,box-shadow .25s;resize:vertical;line-height:1.65;min-height:56px}
+.field-input::placeholder{color:rgba(232,217,188,0.4);font-style:italic}
+.field-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(169,128,47,0.08)}
+.gratitude-list{display:flex;flex-direction:column;gap:10px}
+.gratitude-item{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:12px 16px;transition:border-color .25s}
+.gratitude-item:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(169,128,47,0.08)}
+.gratitude-num{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:var(--gold);opacity:.65;min-width:20px;text-align:center}
+.gratitude-input{flex:1;background:none;border:none;color:var(--ink);font-family:'EB Garamond',serif;font-size:18px;font-weight:600;outline:none;line-height:1.5}
+.gratitude-input::placeholder{color:rgba(232,217,188,0.4);font-style:italic}
+.save-btn{display:block;width:100%;margin-top:40px;background:linear-gradient(135deg,rgba(169,128,47,.18),rgba(169,128,47,.07));border:1px solid var(--gold);color:var(--gold-deep);font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:.45em;text-transform:uppercase;padding:16px;cursor:pointer;transition:all .3s;border-radius:1px}
+.save-btn:hover{background:rgba(169,128,47,.25);letter-spacing:.55em}
+.history-day{border:1px solid var(--border);border-left:2px solid var(--rose);background:var(--bg-card);border-radius:2px;margin-bottom:20px;overflow:hidden;animation:fadeUp .35s ease both}
+.history-day-header{padding:16px 20px;background:rgba(125,52,65,.05);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s}
+.history-day-header:hover{background:rgba(125,52,65,.09)}
+.history-day-date{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep)}
+.history-day-toggle{color:var(--muted);font-size:12px}
+.history-day-body{padding:20px;display:none}
+.history-day-body.open{display:block}
+.history-section-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--rose);opacity:.9;margin:16px 0 6px}
+.history-section-title:first-child{margin-top:0}
+.history-text{font-family:'EB Garamond',serif;font-size:17px;font-weight:600;line-height:1.6;color:var(--ink-soft)}
+.history-gratitude-item{display:flex;gap:10px;margin-bottom:4px}
+.history-gnum{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--gold);opacity:.55;min-width:16px}
+.empty-state{text-align:center;padding:60px 20px;font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--muted);opacity:.75}
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--toast-bg);border:1px solid var(--gold);color:var(--toast-text);font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;padding:12px 28px;border-radius:2px;transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:999;text-align:center;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.signature{text-align:center;padding:32px 20px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--muted);opacity:.7}
+.footer-contact{
+  display:inline-block;
+  margin-top:8px;
+  font-family:'Cinzel',serif;
+  font-style:normal;
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:none;
+  color:var(--gold-deep);
+  opacity:.85;
+}
+.replay-welcome-btn{
+  display:inline-block;
+  margin-top:14px;
+  background:none;
+  border:none;
+  font-family:'Cinzel',serif;
+  font-style:normal;
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:none;
+  color:var(--muted);
+  opacity:.55;
+  text-decoration:underline;
+  cursor:pointer;
+  padding:4px;
+}
+.replay-welcome-btn:hover{opacity:.85}
+
+/* 101 rêves */
+.dream-progress{
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  text-align:center;
+  margin-bottom:24px;
+  opacity:.85;
+}
+.dream-list{display:flex;flex-direction:column;gap:14px}
+.dream-group{border:1px solid var(--border);border-radius:2px;overflow:hidden}
+.dream-group-header{
+  padding:13px 18px;
+  background:var(--card-tint);
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+}
+.dream-group-body{display:none;flex-direction:column;gap:8px;padding:10px}
+.dream-group-body.open{display:flex}
+.dream-item{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:10px 16px;transition:border-color .2s,background .3s}
+.dream-item:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(169,128,47,0.08)}
+.dream-item.done{background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));border-color:var(--gold)}
+.dream-num{font-family:'Cinzel',serif;font-size:11px;color:var(--gold);opacity:.6;min-width:22px;text-align:right}
+.dream-input{flex:1;background:none;border:none;color:var(--ink);font-family:'EB Garamond',serif;font-size:17px;font-weight:600;outline:none;line-height:1.5}
+.dream-input::placeholder{color:rgba(232,217,188,0.35);font-style:italic}
+.dream-item.done .dream-input{text-decoration:line-through;opacity:.55}
+.dream-check{
+  flex-shrink:0;
+  width:26px;height:26px;
+  border:1px solid var(--border);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  font-size:13px;
+  color:var(--gold);
+  background:var(--bg-card);
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  user-select:none;
+}
+.dream-check.done{
+  background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+  border-color:var(--gold);
+  color:#fff;
+  transform:scale(1.15) rotate(8deg);
+}
+@keyframes sparklePop{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.5) rotate(15deg)}
+  100%{transform:scale(1.15) rotate(8deg)}
+}
+.dream-check.celebrate{animation:sparklePop .5s ease}
+
+/* Galerie des rêves accomplis */
+.dream-gallery{
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+}
+.dream-gallery-title{
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  text-align:center;
+  margin-bottom:16px;
+}
+.dream-gallery-empty{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:14px;
+  color:var(--muted);
+  opacity:.7;
+}
+.dream-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:linear-gradient(135deg,var(--gold-tint),transparent);
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:6px 14px;
+  margin:4px;
+  font-family:'EB Garamond',serif;
+  font-weight:600;
+  font-size:14px;
+  color:var(--ink);
+}
+.dream-gallery-grid{text-align:center}
+
+/* Connais-toi */
+.self-grid{display:flex;flex-direction:column;gap:28px}
+.self-textarea{min-height:160px}
+.self-note{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:center;
+  opacity:.7;
+  margin:-12px 0 24px;
+}
+
+/* Table d'alignement */
+.align-row{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-left:2px solid var(--rose);
+  border-radius:2px;
+  padding:18px 20px;
+  margin-bottom:14px;
+}
+.align-row-num{
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:12px;
+}
+.align-field{margin-bottom:12px}
+.align-field:last-child{margin-bottom:0}
+.align-label{
+  display:block;
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+.align-input{
+  width:100%;
+  background:var(--card-tint);
+  border:1px solid var(--border);
+  border-radius:2px;
+  color:var(--ink);
+  font-family:'EB Garamond',serif;
+  font-size:15px;
+  font-weight:600;
+  padding:9px 12px;
+  outline:none;
+  transition:border-color .2s;
+}
+.align-input:focus{border-color:var(--gold)}
+.align-input::placeholder{color:rgba(232,217,188,0.35);font-style:italic}
+.align-field.dontwant .align-input{border-left:3px solid var(--rose)}
+.align-field.want .align-input{border-left:3px solid var(--gold)}
+.align-field.action .align-input{border-left:3px solid var(--muted)}
+
+/* Stats / streak bar */
+.stats-bar{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  max-width:640px;
+  margin:0 auto 16px;
+  padding:0 20px;
+}
+.stat-card{
+  text-align:center;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:16px 8px;
+}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:26px;
+  font-weight:700;
+  color:var(--gold-deep);
+  display:block;
+}
+.stat-label{
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:4px;
+  display:block;
+}
+
+/* Progression du jour */
+.today-progress{
+  max-width:640px;
+  margin:0 auto 36px;
+  padding:0 20px;
+}
+.today-progress-label{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:center;
+  margin-bottom:10px;
+}
+.today-progress-dots{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.progress-dot{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  font-size:9px;
+  color:var(--muted);
+  font-family:'Cinzel',serif;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.progress-dot-circle{
+  width:22px;height:22px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--bg-card);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;
+  transition:all .25s;
+}
+.progress-dot.filled .progress-dot-circle{
+  background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+  border-color:var(--gold);
+  color:#1A0F08;
+}
+
+/* PDF export button */
+.export-btn{
+  display:block;
+  width:100%;
+  margin-bottom:28px;
+  background:var(--bg-card);
+  border:1px dashed var(--gold);
+  color:var(--gold-deep);
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  padding:14px;
+  cursor:pointer;
+  transition:all .25s;
+  border-radius:2px;
+}
+.export-btn:hover{background:var(--card-tint);border-style:solid}
+
+/* Méthode de respiration */
+.method-btn{
+  display:block;
+  width:100%;
+  margin:16px 0 0;
+  background:var(--card-tint);
+  border:1px solid var(--border);
+  color:var(--gold-deep);
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  padding:13px;
+  cursor:pointer;
+  transition:all .25s;
+  border-radius:2px;
+}
+.method-btn:hover{background:var(--gold-tint);border-color:var(--gold)}
+.method-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.88);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  padding:24px;
+}
+.method-overlay.open{display:flex}
+.method-box{
+  text-align:center;
+  max-width:380px;
+}
+.method-circle{
+  width:160px;height:160px;
+  border-radius:50%;
+  border:2px solid var(--gold);
+  margin:0 auto 32px;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle,rgba(217,169,74,.15),transparent 70%);
+  transition:transform 4s ease-in-out;
+}
+.method-circle.breathe{transform:scale(1.25)}
+.method-timer{
+  font-family:'Playfair Display',serif;
+  font-size:36px;
+  color:var(--gold-deep);
+  font-weight:700;
+}
+.method-step{
+  font-family:'Cinzel',serif;
+  font-size:13px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#F2E6CC;
+  margin-bottom:8px;
+  min-height:20px;
+}
+.method-sub{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:15px;
+  color:rgba(242,230,204,0.65);
+  margin-bottom:28px;
+}
+.method-teaching{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-weight:600;
+  font-size:16px;
+  line-height:1.7;
+  color:#F2E6CC;
+  margin-bottom:32px;
+}
+.welcome-coaching{
+  font-family:'EB Garamond',serif;
+  font-size:13px;
+  line-height:1.6;
+  color:rgba(242,230,204,0.75);
+  margin:-12px 0 26px;
+  padding-top:18px;
+  border-top:1px solid rgba(242,230,204,0.15);
+}
+.welcome-contact{
+  display:inline-block;
+  margin-top:6px;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:.1em;
+  color:#D9A94A;
+}
+.method-start{
+  display:block;
+  width:100%;
+  margin-bottom:14px;
+  background:linear-gradient(135deg,rgba(217,169,74,.3),rgba(217,169,74,.12));
+  border:1px solid #D9A94A;
+  color:#F2E6CC;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  padding:14px;
+  cursor:pointer;
+  border-radius:2px;
+}
+.method-close{
+  background:none;
+  border:1px solid rgba(242,230,204,0.3);
+  color:rgba(242,230,204,0.7);
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  padding:8px 20px;
+  border-radius:2px;
+  cursor:pointer;
+}
+
+/* Célébration journée complète */
+.celebration-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.75);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2500;
+  pointer-events:none;
+}
+.celebration-overlay.open{display:flex}
+.celebration-box{
+  text-align:center;
+  animation:celebrationPop .6s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes celebrationPop{
+  0%{transform:scale(.5);opacity:0}
+  60%{transform:scale(1.1);opacity:1}
+  100%{transform:scale(1);opacity:1}
+}
+.celebration-icon{
+  font-size:56px;
+  margin-bottom:12px;
+  animation:celebrationFloat 1.2s ease-in-out infinite;
+}
+@keyframes celebrationFloat{
+  0%,100%{transform:translateY(0) rotate(-4deg)}
+  50%{transform:translateY(-10px) rotate(4deg)}
+}
+.celebration-text{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:700;
+  font-size:24px;
+  color:#F2E6CC;
+  margin-bottom:6px;
+}
+.celebration-sub{
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#D9A94A;
+}
+
+/* Carte du jour planétaire */
+.planet-card{margin:0 auto 28px;max-width:640px;padding:0 20px}
+.planet-inner{
+  background:linear-gradient(135deg,rgba(125,52,65,.05),rgba(169,128,47,.05));
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:26px 28px;
+  text-align:center;
+}
+.planet-symbol{font-size:30px;margin-bottom:6px;line-height:1}
+.planet-day-theme{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);opacity:.9;margin-bottom:6px}
+.planet-name{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:19px;color:var(--ink);margin-bottom:16px}
+.planet-actions{display:flex;flex-direction:column;gap:7px;text-align:left;max-width:440px;margin:0 auto}
+.planet-action-item{font-family:'EB Garamond',serif;font-weight:600;font-size:15px;color:var(--ink-soft);display:flex;gap:8px;align-items:flex-start;line-height:1.4}
+.planet-action-item::before{content:'✦';color:var(--gold);flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div class="method-overlay" id="welcome-overlay">
+  <div class="method-box">
+    <div class="method-step">Bienvenue<br>toi qui reprends ta place</div>
+    <p class="method-teaching">Chaque mot que tu y poses est une pierre vers le trône qui t'attend déjà.<br><br>Tata Éléonore</p>
+    <p class="welcome-coaching">Si tu désires aller plus loin, contacte-moi tout simplement.<br><span class="welcome-contact">contact@tataeleonore.com</span></p>
+    <button class="method-start" id="welcome-close">Je reprends mon trône</button>
+  </div>
+</div>
+
+<div class="celebration-overlay" id="celebration-overlay">
+  <div class="celebration-box">
+    <div class="celebration-icon">✦</div>
+    <div class="celebration-text">Journée complète</div>
+    <div class="celebration-sub">Intention et gratitude sont ancrées ✦</div>
+  </div>
+</div>
+
+<button class="theme-toggle" id="theme-toggle" title="Changer de thème">●</button>
+
+<div class="crown-header">
+  <svg class="crown-svg" width="72" height="48" viewBox="0 0 72 48" fill="none">
+    <path d="M8 40 L8 20 L20 32 L36 8 L52 32 L64 20 L64 40 Z" fill="none" stroke="#B8822A" stroke-width="1.5" stroke-linejoin="round"/>
+    <circle cx="36" cy="7" r="3" fill="#B8822A" opacity="0.85"/>
+    <circle cx="8" cy="19" r="2.5" fill="#B8822A" opacity="0.65"/>
+    <circle cx="64" cy="19" r="2.5" fill="#B8822A" opacity="0.65"/>
+    <line x1="6" y1="42" x2="66" y2="42" stroke="#B8822A" stroke-width="1" opacity="0.5"/>
+    <line x1="4" y1="45" x2="68" y2="45" stroke="#B8822A" stroke-width="0.5" opacity="0.3"/>
+  </svg>
+  <div class="brand-line">By Tata Éléonore</div>
+  <h1 class="app-title">Je reprends<em>mon trône</em></h1>
+  <div class="app-subtitle">Journal de gratitude &amp; d'éveil</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem">✦</div><div class="divider-line"></div></div>
+</div>
+
+<div class="quote-card">
+  <div class="quote-inner">
+    <span class="quote-mark">"</span>
+    <p class="quote-text" id="quote-text"></p>
+    <p class="quote-author" id="quote-author"></p>
+  </div>
+</div>
+
+<div class="planet-card" id="planet-card"></div>
+
+<div class="stats-bar" id="stats-bar"></div>
+
+<div class="today-progress">
+  <div class="today-progress-label">Aujourd'hui</div>
+  <div class="today-progress-dots" id="today-progress-dots"></div>
+</div>
+
+
+<div class="nav-tabs">
+  <span class="tab-group-label">Rituel</span>
+  <button class="tab-btn active" data-tab="matin">Matin</button>
+  <button class="tab-btn" data-tab="soir">Soir</button>
+  <span class="tab-group-label">Exploration</span>
+  <button class="tab-btn" data-tab="alignement">Alignement</button>
+  <button class="tab-btn" data-tab="reves">101 Rêves</button>
+  <button class="tab-btn" data-tab="connaistoi">Connais-toi</button>
+  <span class="tab-group-label">Mémoire</span>
+  <button class="tab-btn" data-tab="histoire">Historique</button>
+</div>
+
+<div class="content">
+
+  <div class="view active" id="view-matin">
+    <div class="section-block">
+      <div class="section-header"><span class="section-label">Mon intention du jour</span></div>
+      <textarea class="field-input" id="intention" rows="3" placeholder="Aujourd'hui, je choisis de…"></textarea>
+      <button class="method-btn" id="open-method">Ancrer cette intention en 66 secondes</button>
+    </div>
+  </div>
+
+  <div class="view" id="view-soir">
+    <p class="intro-text">Une gratitude, c'est large : un miracle remarqué aujourd'hui, une synchronicité reconnue, quelque chose appris ou compris, un endroit découvert pour la première fois, un défi traversé, une personne croisée au bon moment, un mot qui t'a touchée… Et on démarre.</p>
+    <div class="section-block">
+      <div class="section-header"><span class="section-label">5 choses pour lesquelles tu es reconnaissant·e aujourd'hui</span></div>
+      <div class="gratitude-list" id="gratitude-list"></div>
+    </div>
+    <button class="save-btn" id="save-soir">✦ Clore cette journée avec grâce ✦</button>
+  </div>
+
+  <div class="view" id="view-alignement">
+    <p class="intro-text">Ce que tu rejettes éclaire ce que tu désires. Pose ici ce que tu ne veux plus, son opposé exact, puis l'action concrète qui t'en rapproche un peu plus chaque jour.</p>
+    <div id="align-list"></div>
+    <button class="save-btn" id="save-alignement">✦ Ancrer cette table ✦</button>
+  </div>
+
+  <div class="view" id="view-reves">
+    <p class="intro-text">Note ici tous les rêves que tu veux garder en tête — grands ou petits, lointains ou proches. Les voir écrits, c'est déjà commencer à les vivre.</p>
+    <div class="dream-progress" id="dream-progress">0 / 101 rêves inscrits</div>
+    <div class="dream-list" id="dream-list"></div>
+    <div class="dream-gallery">
+      <div class="dream-gallery-title">✦ Galerie des rêves accomplis ✦</div>
+      <div class="dream-gallery-grid" id="dream-gallery"></div>
+    </div>
+    <button class="save-btn" id="save-reves">✦ Graver mes rêves ✦</button>
+  </div>
+
+  <div class="view" id="view-connaistoi">
+    <p class="intro-text">Se connaître, c'est le premier pas vers toute transformation. Note ici ce que tu sais de toi, sans filtre et sans jugement.</p>
+    <p class="self-note">✦ Pas un rituel quotidien — reviens-y simplement quand tu sens que tu as changé.</p>
+    <div class="self-grid">
+      <div class="section-block">
+        <div class="section-header"><span class="section-label">Ma force</span></div>
+        <textarea class="field-input self-textarea" id="qualites" placeholder="Ce qui fait ma force, ma lumière, ma singularité…"></textarea>
+      </div>
+      <div class="section-block" style="animation-delay:.05s">
+        <div class="section-header"><span class="section-label">Ce que j'ai à développer</span></div>
+        <textarea class="field-input self-textarea" id="defauts" placeholder="Ce sur quoi je travaille, avec douceur et honnêteté…"></textarea>
+      </div>
+    </div>
+    <button class="save-btn" id="save-connaistoi">✦ Ancrer cette vérité ✦</button>
+  </div>
+
+  <div class="view" id="view-histoire">
+    <button class="export-btn" id="export-pdf">Exporter "Mon Livre de Gratitude" en PDF</button>
+    <div id="history-container"></div>
+  </div>
+
+</div>
+
+<div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">contact@tataeleonore.com</span><br><button class="replay-welcome-btn" id="replay-welcome">Revoir le message d'accueil</button></div>
+<div class="toast" id="toast">✦ Gravé dans ton royaume ✦</div>
+
+<div class="method-overlay" id="method-overlay">
+  <div class="method-box" id="method-intro">
+    <div class="method-step">Avant de commencer</div>
+    <p class="method-teaching">Convoque une émotion pour envoyer ton intention à l'univers. Comme un timbre permet à une lettre d'être envoyée, ton intention a besoin d'une émotion pour être reçue.</p>
+    <button class="method-start" id="method-start">Commencer</button>
+    <button class="method-close" id="method-close-intro">Fermer</button>
+  </div>
+  <div class="method-box" id="method-practice" style="display:none">
+    <div class="method-step" id="method-step">Respire</div>
+    <div class="method-sub" id="method-sub"></div>
+    <div class="method-circle" id="method-circle">
+      <div class="method-timer" id="method-timer">1:06</div>
+    </div>
+    <button class="method-close" id="method-close">Fermer</button>
+  </div>
+</div>
+
+<script>
+const QUOTES = [
+  { text: "Une reine ne demande pas la permission de briller.", author: "Anonyme" },
+  { text: "Le miracle, c'est de marcher sur la terre, pas sur les eaux.", author: "Thich Nhat Hanh" },
+  { text: "Ce que tu penses, tu le deviens. Ce que tu ressens, tu l'attires.", author: "Bouddha" },
+  { text: "La gratitude transforme ce que nous avons en suffisance.", author: "Melody Beattie" },
+  { text: "Tu n'es pas en train de chercher le sens de ta vie. Tu es le sens de ta vie.", author: "Joseph Campbell" },
+  { text: "Les intentions sont les semences de nos réalités futures.", author: "Wayne Dyer" },
+  { text: "Chaque matin, nous renaissons. Ce que nous faisons aujourd'hui importe le plus.", author: "Bouddha" },
+  { text: "La synchronicité est la danse de l'univers avec ton âme.", author: "Carl Jung" },
+  { text: "Ta vie est le reflet de tes pensées les plus intimes.", author: "Brian Tracy" },
+  { text: "Une femme avec de la vision est inarrêtable.", author: "Anonyme" },
+  { text: "Les miracles sont partout — il suffit de les voir.", author: "Albert Einstein" },
+  { text: "Reprends ton pouvoir, reprends ton trône.", author: "Tata Éléonore" },
+  { text: "Ce n'est pas l'environnement qui façonne la reine — c'est la reine qui façonne l'environnement.", author: "Anonyme" },
+  { text: "La reconnaissance est la mémoire du cœur.", author: "Hans Christian Andersen" },
+  { text: "Chaque défi est une initiation déguisée.", author: "Anonyme" },
+  { text: "Connais-toi toi-même, et tu connaîtras l'univers et les dieux.", author: "Socrate" },
+  { text: "Rêver, c'est déjà commencer à créer.", author: "Anonyme" },
+  { text: "Une couronne ne pèse rien sur une tête qui sait pourquoi elle la porte.", author: "Tata Éléonore" },
+  { text: "Ta vulnérabilité n'a jamais été ta faiblesse — c'est ta carte au trésor.", author: "Tata Éléonore" },
+  { text: "On ne reprend pas son trône en demandant pardon d'exister.", author: "Tata Éléonore" },
+  { text: "Chaque jour noté est une pierre posée sur le chemin de qui tu deviens.", author: "Tata Éléonore" },
+  { text: "Le défi d'aujourd'hui est la sagesse de demain, déjà en marche.", author: "Tata Éléonore" },
+  { text: "Tu n'as pas besoin qu'on t'autorise à être entière.", author: "Tata Éléonore" },
+  { text: "La gratitude n'efface pas la douleur, elle lui fait simplement de la place pour respirer.", author: "Tata Éléonore" },
+  { text: "Le bonheur n'est pas une affaire de circonstances, mais de dispositions.", author: "Martha Washington" },
+  { text: "Ce qui ne te tue pas te rend simplement plus toi-même.", author: "Tata Éléonore" },
+  { text: "Pour atteindre quelque chose qu'on n'a jamais eu, il faut faire quelque chose qu'on n'a jamais fait.", author: "Anonyme" },
+  { text: "Nous ne voyons pas les choses telles qu'elles sont, mais telles que nous sommes.", author: "Anaïs Nin" },
+  { text: "La gratitude est la plus belle des fleurs qui s'épanouisse dans l'âme.", author: "Anonyme" },
+  { text: "Ta patience d'aujourd'hui est la récolte de demain.", author: "Tata Éléonore" },
+  { text: "Le silence aussi est une réponse — surtout face à ce qui ne te respecte pas.", author: "Tata Éléonore" },
+  { text: "On ne guérit pas en évitant la blessure, mais en la regardant avec amour.", author: "Tata Éléonore" },
+  { text: "Aie le courage de vivre selon ton cœur et ton intuition.", author: "Steve Jobs" },
+  { text: "Ce que tu cherches te cherche aussi.", author: "Rumi" },
+  { text: "La vraie reine sait que son trône n'a jamais été ailleurs qu'en elle-même.", author: "Tata Éléonore" },
+  { text: "Tout ce qui t'arrive est une occasion de te demander qui tu choisis d'être.", author: "Tata Éléonore" },
+  { text: "On ne devient pas reine en un jour, on le devient à chaque petit choix répété.", author: "Tata Éléonore" },
+  { text: "Ta sensibilité est une boussole, pas un défaut.", author: "Tata Éléonore" },
+  { text: "Le passé t'a façonnée. Il ne te définit pas.", author: "Tata Éléonore" },
+  { text: "Personne ne peut te voler ta paix sans ta permission.", author: "Tata Éléonore" },
+  { text: "Avance, même doucement — surtout doucement.", author: "Tata Éléonore" },
+  { text: "Ce que tu arroses chaque jour finit toujours par grandir.", author: "Tata Éléonore" },
+  { text: "Il n'y a pas de mauvais moment pour redevenir toi-même.", author: "Tata Éléonore" },
+  { text: "Le doute n'est pas l'ennemi de la foi, il en est parfois la porte d'entrée.", author: "Tata Éléonore" },
+  { text: "On ne perd jamais vraiment, on apprend simplement plus lentement que prévu.", author: "Tata Éléonore" },
+  { text: "L'abandon le plus dangereux est celui qu'on fait de soi-même.", author: "Tata Éléonore" },
+  { text: "Le succès, c'est se relever une fois de plus que l'on tombe.", author: "Oliver Goldsmith" },
+  { text: "Notre plus grande faiblesse réside dans l'abandon. La façon la plus sûre de réussir est d'essayer une fois de plus.", author: "Thomas Edison" },
+  { text: "La vie, c'est ce qui se passe quand on est occupé à faire d'autres projets.", author: "John Lennon" },
+  { text: "Le bonheur n'est pas une destination, c'est une façon de voyager.", author: "Margaret Lee Runbeck" },
+  { text: "Ce n'est pas la charge qui t'accable, mais la façon dont tu la portes.", author: "Lou Holtz" },
+  { text: "Sois toi-même, tout le monde l'est déjà.", author: "Oscar Wilde" },
+  { text: "L'avenir appartient à ceux qui croient à la beauté de leurs rêves.", author: "Eleanor Roosevelt" },
+  { text: "Tu es plus forte que tu ne le crois et plus capable que tu ne l'imagines.", author: "Anonyme" },
+];
+
+const STORAGE_KEY = "eleonore_days";
+const DREAMS_KEY = "eleonore_reves";
+const SELF_KEY = "eleonore_connaistoi";
+const ALIGN_KEY = "eleonore_alignement";
+const ALIGN_COUNT = 12;
+const DREAM_COUNT = 101;
+
+// Correspondance planétaire des jours (index = Date.getDay(), 0 = Dimanche)
+const PLANETARY_DAYS = [
+  { day: "Dimanche", planet: "Soleil", symbol: "☉", theme: "Repos & Introspection",
+    actions: ["Repose-toi sans culpabilité", "Fais le bilan de ta semaine", "Prends soin de ta lumière intérieure", "Ne fais rien, sois simplement"] },
+  { day: "Lundi", planet: "Lune", symbol: "☽", theme: "Famille & Émotions",
+    actions: ["Prends des nouvelles d'un proche", "Soigne ton foyer", "Écoute ton intuition", "Crée un moment en famille"] },
+  { day: "Mardi", planet: "Mars", symbol: "♂", theme: "Action & Justice",
+    actions: ["Affronte ce que tu évites", "Défends une injustice", "Bouge ton corps, fais du sport", "Prends une décision courageuse"] },
+  { day: "Mercredi", planet: "Mercure", symbol: "☿", theme: "Communication & Administratif",
+    actions: ["Règle les papiers en attente", "Envoie les emails importants", "Apprends quelque chose de nouveau", "Clarifie un malentendu"] },
+  { day: "Jeudi", planet: "Jupiter", symbol: "♃", theme: "Abondance & Expansion",
+    actions: ["Occupe-toi de tes finances", "Fais une demande ou négocie", "Investis en toi-même", "Pense grand"] },
+  { day: "Vendredi", planet: "Vénus", symbol: "♀", theme: "Amour & Beauté",
+    actions: ["Prends soin de ton apparence", "Exprime ton amour à quelqu'un", "Savoure un plaisir simple", "Crée de la beauté autour de toi"] },
+  { day: "Samedi", planet: "Saturne", symbol: "♄", theme: "Karma & Discipline",
+    actions: ["Fais le tri, intérieur et extérieur", "Tire une leçon du passé", "Clôture ce qui doit l'être", "Structure ta semaine à venir"] },
+];
+
+function getTodayKey(){ return new Date().toISOString().slice(0,10); }
+function getQuoteForDate(key){
+  const daysSinceEpoch = Math.floor(new Date(key + "T12:00:00").getTime() / 86400000);
+  return QUOTES[((daysSinceEpoch % QUOTES.length) + QUOTES.length) % QUOTES.length];
+}
+function formatDisplayDate(key){
+  return new Date(key+"T12:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+}
+function emptyDay(){
+  return { intention:"", gratitudes:["","","","",""], synchronicite:"", miracle:"", apprentissage:"", defi:"" };
+}
+function loadJSON(key, fallback){
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; }
+}
+function saveJSON(key, value){
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+let days = loadJSON(STORAGE_KEY, {});
+let dreams = loadJSON(DREAMS_KEY, new Array(DREAM_COUNT).fill(""));
+// Migration: support old format (array of strings) -> new format (array of {text, done})
+dreams = dreams.map(d => (typeof d === "string") ? { text: d, done: false } : (d || { text: "", done: false }));
+if (dreams.length < DREAM_COUNT) {
+  while (dreams.length < DREAM_COUNT) dreams.push({ text: "", done: false });
+}
+let selfKnowledge = loadJSON(SELF_KEY, { qualites: "", defauts: "" });
+let alignment = loadJSON(ALIGN_KEY, new Array(ALIGN_COUNT).fill(null));
+if (alignment.length < ALIGN_COUNT) {
+  while (alignment.length < ALIGN_COUNT) alignment.push(null);
+}
+alignment = alignment.map(a => a || { dontWant: "", want: "", action: "" });
+const THEME_KEY = "eleonore_theme";
+
+const todayKey = getTodayKey();
+if (!days[todayKey]) days[todayKey] = emptyDay();
+
+// Message de bienvenue (une seule fois)
+const WELCOME_KEY = "eleonore_welcomed";
+if (!localStorage.getItem(WELCOME_KEY)) {
+  document.getElementById("welcome-overlay").classList.add("open");
+}
+document.getElementById("welcome-close").addEventListener("click", () => {
+  localStorage.setItem(WELCOME_KEY, "1");
+  document.getElementById("welcome-overlay").classList.remove("open");
+});
+document.getElementById("replay-welcome").addEventListener("click", () => {
+  document.getElementById("welcome-overlay").classList.add("open");
+});
+
+// Quote
+const q = getQuoteForDate(todayKey);
+document.getElementById("quote-text").textContent = q.text;
+document.getElementById("quote-author").textContent = "— " + q.author;
+
+// Carte du jour planétaire
+function renderPlanetDay(){
+  const p = PLANETARY_DAYS[new Date().getDay()];
+  document.getElementById("planet-card").innerHTML = `
+    <div class="planet-inner">
+      <div class="planet-symbol">${p.symbol}</div>
+      <div class="planet-day-theme">${p.day} — Jour de ${p.planet}</div>
+      <div class="planet-name">${p.theme}</div>
+      <div class="planet-actions">
+        ${p.actions.map(a => `<div class="planet-action-item">${a}</div>`).join("")}
+      </div>
+    </div>`;
+}
+renderPlanetDay();
+
+// Thème clair/sombre
+function applyTheme(theme){
+  if (theme === "dark") document.documentElement.setAttribute("data-theme", "dark");
+  else document.documentElement.removeAttribute("data-theme");
+  document.getElementById("theme-toggle").textContent = theme === "dark" ? "○" : "●";
+}
+let currentTheme = localStorage.getItem(THEME_KEY) || "light";
+applyTheme(currentTheme);
+document.getElementById("theme-toggle").addEventListener("click", () => {
+  currentTheme = currentTheme === "light" ? "dark" : "light";
+  localStorage.setItem(THEME_KEY, currentTheme);
+  applyTheme(currentTheme);
+});
+
+// Statistiques (streak, jours, rêves réalisés)
+function dayIsComplete(entry){
+  if (!entry) return false;
+  return !!(entry.intention && entry.intention.trim() && entry.gratitudes && entry.gratitudes.some(g => g && g.trim()));
+}
+function computeStreak(){
+  let count = 0;
+  const d = new Date();
+  while (true) {
+    const key = d.toISOString().slice(0,10);
+    if (dayIsComplete(days[key])) {
+      count++;
+      d.setDate(d.getDate() - 1);
+    } else break;
+  }
+  return count;
+}
+function renderStats(){
+  const totalDays = Object.values(days).filter(dayIsComplete).length;
+  const streak = computeStreak();
+  const dreamsRealised = dreams.filter(d => d.done).length;
+  document.getElementById("stats-bar").innerHTML = `
+    <div class="stat-card"><span class="stat-num">${streak}</span><span class="stat-label">Jours consécutifs</span></div>
+    <div class="stat-card"><span class="stat-num">${totalDays}</span><span class="stat-label">Jours notés</span></div>
+    <div class="stat-card"><span class="stat-num">${dreamsRealised}</span><span class="stat-label">Rêves réalisés</span></div>
+  `;
+  renderTodayProgress();
+}
+function renderTodayProgress(){
+  const t = days[todayKey] || emptyDay();
+  const items = [
+    { label: "Intention", done: !!t.intention },
+    { label: "Gratitudes", done: t.gratitudes && t.gratitudes.some(g => g) },
+  ];
+  document.getElementById("today-progress-dots").innerHTML = items.map(it => `
+    <div class="progress-dot${it.done ? " filled" : ""}">
+      <div class="progress-dot-circle">${it.done ? "✓" : ""}</div>
+      <span>${it.label}</span>
+    </div>`).join("");
+}
+renderStats();
+
+// Tabs
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("view-" + btn.dataset.tab).classList.add("active");
+    if (btn.dataset.tab === "histoire") renderHistory();
+  });
+});
+
+// Fill daily fields
+function fillFields(){
+  const t = days[todayKey];
+  document.getElementById("intention").value = t.intention;
+
+  const list = document.getElementById("gratitude-list");
+  list.innerHTML = "";
+  t.gratitudes.forEach((g, i) => {
+    const row = document.createElement("div");
+    row.className = "gratitude-item";
+    row.innerHTML = `<div class="gratitude-num">${i+1}</div><input class="gratitude-input" placeholder="Je suis reconnaissant·e pour…" data-index="${i}" value="${g.replace(/"/g,'&quot;')}">`;
+    list.appendChild(row);
+  });
+  list.querySelectorAll(".gratitude-input").forEach(input => {
+    input.addEventListener("input", e => {
+      days[todayKey].gratitudes[Number(e.target.dataset.index)] = e.target.value;
+    });
+  });
+}
+fillFields();
+
+document.getElementById("intention").addEventListener("input", e => { days[todayKey].intention = e.target.value; });
+
+function showToast(msg){
+  const toast = document.getElementById("toast");
+  if (msg) toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function checkDayCompletion(){
+  const t = days[todayKey];
+  if (dayIsComplete(t) && !t._celebrated) {
+    t._celebrated = true;
+    saveJSON(STORAGE_KEY, days);
+    showCelebration();
+  }
+}
+function showCelebration(){
+  const overlay = document.getElementById("celebration-overlay");
+  overlay.classList.add("open");
+  setTimeout(() => overlay.classList.remove("open"), 2600);
+}
+document.getElementById("save-soir").addEventListener("click", () => { saveJSON(STORAGE_KEY, days); renderStats(); showToast("✦ Gravé dans ton royaume ✦"); checkDayCompletion(); });
+
+// Méthode de respiration / visualisation (1 min 06)
+let methodTimerInterval = null;
+function openMethod(){
+  document.getElementById("method-overlay").classList.add("open");
+  document.getElementById("method-intro").style.display = "block";
+  document.getElementById("method-practice").style.display = "none";
+}
+function closeMethod(){
+  clearInterval(methodTimerInterval);
+  document.getElementById("method-overlay").classList.remove("open");
+}
+function startMethod(){
+  document.getElementById("method-intro").style.display = "none";
+  document.getElementById("method-practice").style.display = "block";
+
+  const stepEl = document.getElementById("method-step");
+  const subEl = document.getElementById("method-sub");
+  const timerEl = document.getElementById("method-timer");
+  const circleEl = document.getElementById("method-circle");
+
+  let remaining = 66; // 1 min 06
+  const steps = [
+    { at: 66, step: "Respire", sub: "" },
+    { at: 56, step: "Ferme les yeux", sub: "Laisse ton corps se détendre" },
+    { at: 40, step: "Visualise", sub: "Ce que tu veux vraiment, en détail" },
+    { at: 15, step: "Ressens", sub: "Comme si c'était déjà là" },
+    { at: 5, step: "Reviens", sub: "Doucement, en douceur" },
+  ];
+
+  function render(){
+    const m = Math.floor(remaining / 60);
+    const s = String(remaining % 60).padStart(2, "0");
+    timerEl.textContent = `${m}:${s}`;
+    const current = steps.find(st => remaining <= st.at) || steps[0];
+    stepEl.textContent = current.step;
+    subEl.textContent = current.sub;
+  }
+  render();
+  circleEl.classList.add("breathe");
+  let breatheToggle = true;
+
+  clearInterval(methodTimerInterval);
+  methodTimerInterval = setInterval(() => {
+    remaining--;
+    if (remaining % 4 === 0) {
+      breatheToggle = !breatheToggle;
+      circleEl.classList.toggle("breathe", breatheToggle);
+    }
+    if (remaining <= 0) {
+      clearInterval(methodTimerInterval);
+      stepEl.textContent = "✦ Intention ancrée ✦";
+      subEl.textContent = "Tu peux ouvrir les yeux";
+      timerEl.textContent = "0:00";
+    } else {
+      render();
+    }
+  }, 1000);
+}
+document.getElementById("open-method").addEventListener("click", () => {
+  saveJSON(STORAGE_KEY, days);
+  renderStats();
+  checkDayCompletion();
+  openMethod();
+});
+document.getElementById("method-start").addEventListener("click", startMethod);
+document.getElementById("method-close-intro").addEventListener("click", closeMethod);
+document.getElementById("method-close").addEventListener("click", closeMethod);
+
+// 101 rêves
+function updateDreamProgress(){
+  const filled = dreams.filter(d => d.text && d.text.trim()).length;
+  const done = dreams.filter(d => d.done).length;
+  document.getElementById("dream-progress").textContent = `${filled} / ${DREAM_COUNT} rêves inscrits · ${done} réalisés ✨`;
+  renderDreamGallery();
+}
+function renderDreamGallery(){
+  const gallery = document.getElementById("dream-gallery");
+  const accomplished = dreams.filter(d => d.done && d.text && d.text.trim());
+  if (accomplished.length === 0) {
+    gallery.innerHTML = `<div class="dream-gallery-empty">Ton premier rêve accompli apparaîtra ici ✦</div>`;
+    return;
+  }
+  gallery.innerHTML = accomplished.map(d => `<span class="dream-chip">★ ${escapeHtml(d.text)}</span>`).join("");
+}
+function renderDreams(){
+  const container = document.getElementById("dream-list");
+  const chunkSize = 25;
+  let html = "";
+  for (let start = 0; start < DREAM_COUNT; start += chunkSize) {
+    const end = Math.min(start + chunkSize, DREAM_COUNT);
+    const isFirst = start === 0;
+    html += `<div class="dream-group">
+      <div class="dream-group-header" data-start="${start}">
+        <span>Rêves ${start+1}–${end}</span>
+        <span class="dream-group-toggle">${isFirst ? "▲" : "▼"}</span>
+      </div>
+      <div class="dream-group-body${isFirst ? " open" : ""}" data-body-start="${start}">`;
+    for (let i = start; i < end; i++) {
+      const d = dreams[i];
+      html += `<div class="dream-item${d.done ? " done" : ""}"><div class="dream-num">${i+1}.</div><input class="dream-input" placeholder="Un rêve à réaliser…" data-index="${i}" value="${(d.text||"").replace(/"/g,'&quot;')}"><div class="dream-check${d.done ? " done" : ""}" data-index="${i}" title="Marquer comme réalisé">${d.done ? "★" : "☆"}</div></div>`;
+    }
+    html += `</div></div>`;
+  }
+  container.innerHTML = html;
+
+  container.querySelectorAll(".dream-group-header").forEach(header => {
+    header.addEventListener("click", () => {
+      const start = header.dataset.start;
+      const body = container.querySelector(`[data-body-start="${start}"]`);
+      const toggle = header.querySelector(".dream-group-toggle");
+      body.classList.toggle("open");
+      toggle.textContent = body.classList.contains("open") ? "▲" : "▼";
+    });
+  });
+  container.querySelectorAll(".dream-input").forEach(input => {
+    input.addEventListener("input", e => {
+      dreams[Number(e.target.dataset.index)].text = e.target.value;
+      updateDreamProgress();
+    });
+  });
+  container.querySelectorAll(".dream-check").forEach(check => {
+    check.addEventListener("click", e => {
+      const idx = Number(e.target.dataset.index);
+      dreams[idx].done = !dreams[idx].done;
+      const item = check.closest(".dream-item");
+      item.classList.toggle("done", dreams[idx].done);
+      check.classList.toggle("done", dreams[idx].done);
+      check.textContent = dreams[idx].done ? "★" : "☆";
+      if (dreams[idx].done) {
+        check.classList.add("celebrate");
+        setTimeout(() => check.classList.remove("celebrate"), 500);
+        showToast("✦ Un rêve réalisé, ton royaume s'agrandit ✦");
+      }
+      updateDreamProgress();
+      saveJSON(DREAMS_KEY, dreams);
+      renderStats();
+    });
+  });
+  updateDreamProgress();
+}
+renderDreams();
+document.getElementById("save-reves").addEventListener("click", () => { saveJSON(DREAMS_KEY, dreams); showToast("✦ Tes rêves sont gravés ✦"); });
+
+// Connais-toi toi-même
+document.getElementById("qualites").value = selfKnowledge.qualites;
+document.getElementById("defauts").value = selfKnowledge.defauts;
+document.getElementById("qualites").addEventListener("input", e => { selfKnowledge.qualites = e.target.value; });
+document.getElementById("defauts").addEventListener("input", e => { selfKnowledge.defauts = e.target.value; });
+document.getElementById("save-connaistoi").addEventListener("click", () => { saveJSON(SELF_KEY, selfKnowledge); showToast("✦ Cette vérité est ancrée ✦"); });
+
+// Table d'alignement
+function renderAlignment(){
+  const container = document.getElementById("align-list");
+  container.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < ALIGN_COUNT; i++) {
+    const a = alignment[i];
+    const row = document.createElement("div");
+    row.className = "align-row";
+    row.innerHTML = `
+      <div class="align-row-num">${i+1} / ${ALIGN_COUNT}</div>
+      <div class="align-field dontwant">
+        <span class="align-label">Je ne veux plus</span>
+        <input class="align-input" data-index="${i}" data-field="dontWant" placeholder="Ce que je ne veux plus…" value="${(a.dontWant||"").replace(/"/g,'&quot;')}">
+      </div>
+      <div class="align-field want">
+        <span class="align-label">Je veux à la place</span>
+        <input class="align-input" data-index="${i}" data-field="want" placeholder="L'exact opposé, ce que je désire…" value="${(a.want||"").replace(/"/g,'&quot;')}">
+      </div>
+      <div class="align-field action">
+        <span class="align-label">L'action pour y arriver</span>
+        <input class="align-input" data-index="${i}" data-field="action" placeholder="Ce que je mets en place dès maintenant…" value="${(a.action||"").replace(/"/g,'&quot;')}">
+      </div>`;
+    frag.appendChild(row);
+  }
+  container.appendChild(frag);
+  container.querySelectorAll(".align-input").forEach(input => {
+    input.addEventListener("input", e => {
+      const idx = Number(e.target.dataset.index);
+      const field = e.target.dataset.field;
+      alignment[idx][field] = e.target.value;
+    });
+  });
+}
+renderAlignment();
+document.getElementById("save-alignement").addEventListener("click", () => { saveJSON(ALIGN_KEY, alignment); showToast("✦ Ta table d'alignement est ancrée ✦"); });
+
+function historyBodyHTML(key, entry){
+  return `
+    <div class="hist-field"><label class="history-section-title">Intention du matin</label>
+      <textarea class="field-input hist-input" data-key="${key}" data-field="intention" rows="2" placeholder="Aujourd'hui, je choisis de…">${escapeHtml(entry.intention)}</textarea>
+    </div>
+    <div class="hist-field" style="margin-top:14px"><label class="history-section-title">5 Gratitudes</label>
+      <div class="gratitude-list">
+        ${[0,1,2,3,4].map(i => `
+          <div class="gratitude-item">
+            <div class="gratitude-num">${i+1}</div>
+            <input class="gratitude-input hist-grat-input" data-key="${key}" data-gindex="${i}" placeholder="Je suis reconnaissant·e pour…" value="${escapeHtml(entry.gratitudes[i] || "")}">
+          </div>`).join("")}
+      </div>
+    </div>
+    <button class="save-btn hist-save-btn" data-key="${key}" style="margin-top:18px;font-size:9px;padding:12px">✦ Enregistrer les modifications ✦</button>
+  `;
+}
+function escapeHtml(str){
+  const div = document.createElement("div");
+  div.textContent = str || "";
+  return div.innerHTML;
+}
+
+function renderHistory(){
+  const container = document.getElementById("history-container");
+  const keys = Object.keys(days).sort((a,b) => b.localeCompare(a));
+  if (keys.length === 0) {
+    container.innerHTML = `<div class="empty-state">Ton histoire s'écrit chaque jour…</div>`;
+    return;
+  }
+  container.innerHTML = keys.map(key => {
+    const isToday = key === todayKey;
+    return `
+      <div class="history-day">
+        <div class="history-day-header" data-key="${key}">
+          <span class="history-day-date">${isToday ? "✦ " : ""}${formatDisplayDate(key)}${isToday ? " — Aujourd'hui" : ""}</span>
+          <span class="history-day-toggle">▼</span>
+        </div>
+        <div class="history-day-body" data-body="${key}">${historyBodyHTML(key, days[key])}</div>
+      </div>`;
+  }).join("");
+
+  container.querySelectorAll(".history-day-header").forEach(header => {
+    header.addEventListener("click", () => {
+      const key = header.dataset.key;
+      const body = container.querySelector(`[data-body="${key}"]`);
+      const toggle = header.querySelector(".history-day-toggle");
+      body.classList.toggle("open");
+      toggle.textContent = body.classList.contains("open") ? "▲" : "▼";
+    });
+  });
+
+  container.querySelectorAll(".hist-save-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const key = btn.dataset.key;
+      const body = container.querySelector(`[data-body="${key}"]`);
+      const entry = days[key] || emptyDay();
+      body.querySelectorAll(".hist-input").forEach(input => {
+        entry[input.dataset.field] = input.value;
+      });
+      body.querySelectorAll(".hist-grat-input").forEach(input => {
+        entry.gratitudes[Number(input.dataset.gindex)] = input.value;
+      });
+      days[key] = entry;
+      saveJSON(STORAGE_KEY, days);
+      renderStats();
+      if (key === todayKey) fillFields();
+      showToast("✦ Jour modifié et gravé ✦");
+    });
+  });
+}
+
+// Export PDF — "Mon Livre de Gratitude"
+function exportPDF(){
+  const keys = Object.keys(days).filter(k => {
+    const e = days[k];
+    return e && (e.intention || (e.gratitudes && e.gratitudes.some(g => g)));
+  }).sort();
+  if (keys.length === 0) {
+    showToast("✦ Rien à graver encore ✦");
+    return;
+  }
+  const pages = keys.map(key => {
+    const e = days[key];
+    let html = `<div class="day"><h2>${formatDisplayDate(key)}</h2>`;
+    if (e.intention) html += `<div class="sec"><span class="label">Intention du matin</span><p>${escapeHtml(e.intention)}</p></div>`;
+    if (e.gratitudes && e.gratitudes.some(g=>g)) {
+      html += `<div class="sec"><span class="label">5 Gratitudes</span><ol>`;
+      e.gratitudes.filter(g=>g).forEach(g => { html += `<li>${escapeHtml(g)}</li>`; });
+      html += `</ol></div>`;
+    }
+    html += `</div>`;
+    return html;
+  }).join("");
+
+  const printWin = window.open("", "_blank");
+  printWin.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Mon Livre de Gratitude</title>
+  <style>
+    body{font-family:Georgia,'EB Garamond',serif;color:#2A1A12;max-width:680px;margin:0 auto;padding:48px 32px;line-height:1.6}
+    h1{text-align:center;font-size:32px;margin-bottom:4px}
+    .sub{text-align:center;font-style:italic;color:#7D3441;margin-bottom:48px;font-size:14px;letter-spacing:.05em}
+    .day{margin-bottom:40px;page-break-inside:avoid;border-bottom:1px solid #ddd;padding-bottom:24px}
+    .day h2{font-size:18px;text-transform:capitalize;color:#7D3441;margin-bottom:14px}
+    .label{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#A9802F;font-weight:bold;margin-top:14px}
+    .sec p{margin:4px 0 0}
+    ol{margin:4px 0 0;padding-left:20px}
+    @media print{ body{padding:20px} }
+  </style></head><body>
+  <h1>Mon Livre de Gratitude</h1>
+  <p class="sub">By Tata Éléonore — Je reprends mon trône</p>
+  ${pages}
+  </body></html>`);
+  printWin.document.close();
+  printWin.onload = () => { printWin.focus(); printWin.print(); };
+}
+document.getElementById("export-pdf").addEventListener("click", exportPDF);
+</script>
+
+</body>
+</html>
