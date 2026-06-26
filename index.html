@@ -598,6 +598,23 @@ body{
   color:rgba(242,230,204,0.65);
   margin-bottom:28px;
 }
+.method-affirmation{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:600;
+  font-size:17px;
+  line-height:1.5;
+  color:#E8C77E;
+  min-height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:24px 0 8px;
+  opacity:0;
+  transition:opacity 1s ease;
+  padding:0 8px;
+}
+.method-affirmation.show{opacity:1}
 .method-teaching{
   font-family:'EB Garamond',serif;
   font-style:italic;
@@ -865,6 +882,7 @@ body{
   <div class="method-box" id="method-intro">
     <div class="method-step">Avant de commencer</div>
     <p class="method-teaching">Convoque une émotion pour envoyer ton intention à l'univers. Comme un timbre permet à une lettre d'être envoyée, ton intention a besoin d'une émotion pour être reçue.</p>
+    <p class="welcome-coaching">Tu peux fermer les yeux pendant la pratique, ou les garder ouverts pour suivre le texte — comme tu préfères.</p>
     <button class="method-start" id="method-start">Commencer</button>
     <button class="method-close" id="method-close-intro">Fermer</button>
   </div>
@@ -874,8 +892,9 @@ body{
     <div class="method-circle" id="method-circle">
       <div class="method-timer" id="method-timer">1:06</div>
     </div>
+    <div class="method-affirmation" id="method-affirmation"></div>
     <button class="method-close" id="method-close">Fermer</button>
-    <audio id="practice-audio" preload="auto" src="66S.mp3"></audio></audio>
+    <audio id="practice-audio" preload="auto" src="66S.mp3"></audio>
   </div>
 </div>
 
@@ -1148,6 +1167,7 @@ document.getElementById("save-soir").addEventListener("click", () => { saveJSON(
 
 // Méthode de respiration / visualisation (1 min 06)
 let methodTimerInterval = null;
+let affirmationInterval = null;
 function openMethod(){
   document.getElementById("method-overlay").classList.add("open");
   document.getElementById("method-intro").style.display = "block";
@@ -1155,6 +1175,7 @@ function openMethod(){
 }
 function closeMethod(){
   clearInterval(methodTimerInterval);
+  clearInterval(affirmationInterval);
   const audio = document.getElementById("practice-audio");
   audio.pause();
   audio.currentTime = 0;
@@ -1172,11 +1193,43 @@ function startMethod(){
   const subEl = document.getElementById("method-sub");
   const timerEl = document.getElementById("method-timer");
   const circleEl = document.getElementById("method-circle");
+  const affirmationEl = document.getElementById("method-affirmation");
+
+  // Affirmations construites à partir de l'intention du jour
+  const rawIntention = (days[todayKey].intention || "").trim();
+  const intentionQuoted = rawIntention ? `« ${rawIntention} »` : null;
+  const affirmations = intentionQuoted ? [
+    intentionQuoted,
+    "Cette intention est déjà en moi.",
+    intentionQuoted,
+    "Je suis en train de la faire grandir.",
+    intentionQuoted,
+    "L'univers reçoit ce que je ressens.",
+    intentionQuoted,
+    "Elle s'ancre, respiration après respiration.",
+  ] : [
+    "Mon intention est déjà en moi.",
+    "Chaque respiration m'en rapproche.",
+    "L'univers reçoit ce que je ressens.",
+    "Je suis exactement là où je dois être.",
+  ];
+  let affirmationIndex = 0;
+  function showAffirmation(){
+    affirmationEl.classList.remove("show");
+    setTimeout(() => {
+      affirmationEl.textContent = affirmations[affirmationIndex % affirmations.length];
+      affirmationEl.classList.add("show");
+      affirmationIndex++;
+    }, 400);
+  }
+  showAffirmation();
+  clearInterval(affirmationInterval);
+  affirmationInterval = setInterval(showAffirmation, 8000);
 
   let remaining = 66; // 1 min 06
   const steps = [
     { at: 66, step: "Respire", sub: "" },
-    { at: 56, step: "Ferme les yeux", sub: "Laisse ton corps se détendre" },
+    { at: 56, step: "Ferme les yeux si tu veux", sub: "Ou garde-les ouverts" },
     { at: 40, step: "Visualise", sub: "Ce que tu veux vraiment, en détail" },
     { at: 15, step: "Ressens", sub: "Comme si c'était déjà là" },
     { at: 5, step: "Reviens", sub: "Doucement, en douceur" },
@@ -1203,9 +1256,15 @@ function startMethod(){
     }
     if (remaining <= 0) {
       clearInterval(methodTimerInterval);
+      clearInterval(affirmationInterval);
       stepEl.textContent = "✦ Intention ancrée ✦";
       subEl.textContent = "Tu peux ouvrir les yeux";
       timerEl.textContent = "0:00";
+      affirmationEl.classList.remove("show");
+      setTimeout(() => {
+        affirmationEl.textContent = intentionQuoted || "Elle est ancrée en moi.";
+        affirmationEl.classList.add("show");
+      }, 400);
       const fadeInterval = setInterval(() => {
         if (audio.volume > 0.05) { audio.volume -= 0.05; }
         else { audio.pause(); audio.currentTime = 0; audio.volume = 1; clearInterval(fadeInterval); }
