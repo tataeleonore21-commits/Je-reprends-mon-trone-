@@ -605,11 +605,11 @@ body{
   font-size:17px;
   line-height:1.5;
   color:#E8C77E;
-  min-height:54px;
+  min-height:80px;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin:24px 0 8px;
+  margin:24px 0 36px;
   opacity:0;
   transition:opacity 1s ease;
   padding:0 8px;
@@ -629,7 +629,7 @@ body{
   font-size:13px;
   line-height:1.6;
   color:rgba(242,230,204,0.75);
-  margin:18px 0 0;
+  margin:18px 0 26px;
   padding-top:18px;
   border-top:1px solid rgba(242,230,204,0.15);
 }
@@ -644,7 +644,7 @@ body{
 .method-start{
   display:block;
   width:100%;
-  margin-bottom:14px;
+  margin:8px 0 22px;
   background:linear-gradient(135deg,rgba(217,169,74,.3),rgba(217,169,74,.12));
   border:1px solid #D9A94A;
   color:#F2E6CC;
@@ -658,6 +658,8 @@ body{
   border-radius:2px;
 }
 .method-close{
+  display:block;
+  margin:72px auto 0;
   background:none;
   border:1px solid rgba(242,230,204,0.3);
   color:rgba(242,230,204,0.7);
@@ -731,6 +733,7 @@ body{
 .planet-action-item{font-family:'EB Garamond',serif;font-weight:600;font-size:15px;color:var(--ink-soft);display:flex;gap:8px;align-items:flex-start;line-height:1.4}
 .planet-action-item::before{content:'✦';color:var(--gold);flex-shrink:0}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -1486,38 +1489,82 @@ function exportPDF(){
     showToast("✦ Rien à graver encore ✦");
     return;
   }
-  const pages = keys.map(key => {
-    const e = days[key];
-    let html = `<div class="day"><h2>${formatDisplayDate(key)}</h2>`;
-    if (e.intention) html += `<div class="sec"><span class="label">Intention du matin</span><p>${escapeHtml(e.intention)}</p></div>`;
-    if (e.gratitudes && e.gratitudes.some(g=>g)) {
-      html += `<div class="sec"><span class="label">5 Gratitudes</span><ol>`;
-      e.gratitudes.filter(g=>g).forEach(g => { html += `<li>${escapeHtml(g)}</li>`; });
-      html += `</ol></div>`;
-    }
-    html += `</div>`;
-    return html;
-  }).join("");
+  if (!window.jspdf) {
+    showToast("✦ Le générateur PDF n'a pas pu se charger ✦");
+    return;
+  }
 
-  const printWin = window.open("", "_blank");
-  printWin.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Mon Livre de Gratitude</title>
-  <style>
-    body{font-family:Georgia,'EB Garamond',serif;color:#2A1A12;max-width:680px;margin:0 auto;padding:48px 32px;line-height:1.6}
-    h1{text-align:center;font-size:32px;margin-bottom:4px}
-    .sub{text-align:center;font-style:italic;color:#7D3441;margin-bottom:48px;font-size:14px;letter-spacing:.05em}
-    .day{margin-bottom:40px;page-break-inside:avoid;border-bottom:1px solid #ddd;padding-bottom:24px}
-    .day h2{font-size:18px;text-transform:capitalize;color:#7D3441;margin-bottom:14px}
-    .label{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#A9802F;font-weight:bold;margin-top:14px}
-    .sec p{margin:4px 0 0}
-    ol{margin:4px 0 0;padding-left:20px}
-    @media print{ body{padding:20px} }
-  </style></head><body>
-  <h1>Mon Livre de Gratitude</h1>
-  <p class="sub">By Tata Éléonore — Je reprends mon trône</p>
-  ${pages}
-  </body></html>`);
-  printWin.document.close();
-  printWin.onload = () => { printWin.focus(); printWin.print(); };
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 56;
+  const maxWidth = pageWidth - margin * 2;
+  let y = margin;
+
+  function ensureSpace(neededHeight){
+    if (y + neededHeight > pageHeight - margin) {
+      doc.addPage();
+      y = margin;
+    }
+  }
+
+  // Page de titre
+  doc.setFont("times", "bolditalic");
+  doc.setFontSize(26);
+  doc.setTextColor(40, 25, 15);
+  doc.text("Mon Livre de Gratitude", pageWidth / 2, 110, { align: "center" });
+  doc.setFont("times", "italic");
+  doc.setFontSize(13);
+  doc.setTextColor(120, 60, 50);
+  doc.text("By Tata Éléonore — Je reprends mon trône", pageWidth / 2, 136, { align: "center" });
+  doc.setDrawColor(180, 140, 60);
+  doc.line(pageWidth / 2 - 60, 155, pageWidth / 2 + 60, 155);
+  doc.addPage();
+  y = margin;
+
+  keys.forEach(key => {
+    const e = days[key];
+    ensureSpace(40);
+    doc.setFont("times", "bold");
+    doc.setFontSize(15);
+    doc.setTextColor(120, 60, 50);
+    const dateLabel = formatDisplayDate(key);
+    doc.text(dateLabel.charAt(0).toUpperCase() + dateLabel.slice(1), margin, y);
+    y += 10;
+    doc.setDrawColor(220, 210, 195);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 22;
+
+    function writeSection(label, lines){
+      ensureSpace(20);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      doc.setTextColor(170, 130, 50);
+      doc.text(label.toUpperCase(), margin, y);
+      y += 14;
+      doc.setFont("times", "normal");
+      doc.setFontSize(12);
+      doc.setTextColor(40, 25, 15);
+      lines.forEach(line => {
+        const wrapped = doc.splitTextToSize(line, maxWidth);
+        wrapped.forEach(w => {
+          ensureSpace(16);
+          doc.text(w, margin, y);
+          y += 16;
+        });
+      });
+      y += 10;
+    }
+
+    if (e.intention) writeSection("Intention du matin", [e.intention]);
+    if (e.gratitudes && e.gratitudes.some(g => g)) {
+      writeSection("5 Gratitudes", e.gratitudes.filter(g => g).map((g, i) => `${i + 1}. ${g}`));
+    }
+    y += 14;
+  });
+
+  doc.save("Mon-Livre-de-Gratitude.pdf");
 }
 document.getElementById("export-pdf").addEventListener("click", exportPDF);
 </script>
