@@ -570,7 +570,7 @@ body{
   width:160px;height:160px;
   border-radius:50%;
   border:2px solid var(--gold);
-  margin:0 auto 32px;
+  margin:0 auto 56px;
   display:flex;align-items:center;justify-content:center;
   background:radial-gradient(circle,rgba(217,169,74,.15),transparent 70%);
   transition:transform 4s ease-in-out;
@@ -1268,10 +1268,8 @@ function startMethod(){
         affirmationEl.textContent = intentionQuoted || "Elle est ancrée en moi.";
         affirmationEl.classList.add("show");
       }, 400);
-      const fadeInterval = setInterval(() => {
-        if (audio.volume > 0.05) { audio.volume -= 0.05; }
-        else { audio.pause(); audio.currentTime = 0; audio.volume = 1; clearInterval(fadeInterval); }
-      }, 80);
+      audio.pause();
+      audio.currentTime = 0;
     } else {
       render();
     }
