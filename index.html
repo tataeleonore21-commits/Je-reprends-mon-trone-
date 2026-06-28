@@ -537,7 +537,7 @@ body{
 .method-btn:hover{background:var(--gold-tint);border-color:var(--gold)}
 .method-overlay{
   position:fixed;inset:0;
-  background:rgba(0,0,0,0.88);
+  background:#0A0603;
   display:none;
   align-items:flex-start;
   justify-content:center;
@@ -549,6 +549,7 @@ body{
 .method-overlay.open{display:flex}
 .method-box{
   margin:40px 0;
+  padding-bottom:80px;
 }
 #welcome-overlay{
   background:
@@ -658,9 +659,14 @@ body{
   border-radius:2px;
 }
 .method-close{
+  position:fixed;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2100;
   display:block;
-  margin:72px auto 0;
-  background:none;
+  margin:0;
+  background:#0A0603;
   border:1px solid rgba(242,230,204,0.3);
   color:rgba(242,230,204,0.7);
   font-family:'Cinzel',serif;
@@ -1204,9 +1210,7 @@ function startMethod(){
   const affirmations = intentionQuoted ? [
     intentionQuoted,
     "Cette intention est déjà en moi.",
-    intentionQuoted,
     "Je suis en train de la faire grandir.",
-    intentionQuoted,
     "L'univers reçoit ce que je ressens.",
     intentionQuoted,
     "Elle s'ancre, respiration après respiration.",
@@ -1261,7 +1265,7 @@ function startMethod(){
       clearInterval(methodTimerInterval);
       clearInterval(affirmationInterval);
       stepEl.textContent = "✦ Intention ancrée ✦";
-      subEl.textContent = "Tu peux ouvrir les yeux";
+      subEl.textContent = "";
       timerEl.textContent = "0:00";
       affirmationEl.classList.remove("show");
       setTimeout(() => {
