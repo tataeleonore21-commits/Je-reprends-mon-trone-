@@ -739,7 +739,6 @@ body{
 .planet-action-item{font-family:'EB Garamond',serif;font-weight:600;font-size:15px;color:var(--ink-soft);display:flex;gap:8px;align-items:flex-start;line-height:1.4}
 .planet-action-item::before{content:'✦';color:var(--gold);flex-shrink:0}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -1185,32 +1184,13 @@ function openMethod(){
   document.getElementById("method-intro").style.display = "block";
   document.getElementById("method-practice").style.display = "none";
 }
-function fadeOutAudio(audio, duration, callback){
-  if (!audio) return;
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const source = ctx.createMediaElementSource(audio);
-  const gainNode = ctx.createGain();
-  source.connect(gainNode);
-  gainNode.connect(ctx.destination);
-  gainNode.gain.setValueAtTime(1, ctx.currentTime);
-  gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
-  setTimeout(() => {
-    audio.pause();
-    audio.currentTime = 0;
-    ctx.close();
-    if (callback) callback();
-  }, duration * 1000);
-}
 function closeMethod(){
   clearInterval(methodTimerInterval);
   clearInterval(affirmationInterval);
   const audio = document.getElementById("practice-audio");
-  fadeOutAudio(audio, 1.5, () => {
-    document.getElementById("method-overlay").classList.remove("open");
-  });
-  setTimeout(() => {
-    document.getElementById("method-overlay").classList.remove("open");
-  }, 1600);
+  audio.pause();
+  audio.currentTime = 0;
+  document.getElementById("method-overlay").classList.remove("open");
 }
 function startMethod(){
   document.getElementById("method-intro").style.display = "none";
@@ -1295,7 +1275,6 @@ function startMethod(){
         affirmationEl.textContent = intentionQuoted || "Elle est ancrée en moi.";
         affirmationEl.classList.add("show");
       }, 400);
-      fadeOutAudio(audio, 2.5);
     } else {
       render();
     }
@@ -1504,248 +1483,91 @@ function renderHistory(){
 }
 
 // Export PDF — "Mon Livre de Gratitude"
+function openPrintPage(title, htmlContent){
+  const win = window.open("", "_blank");
+  if (!win) { showToast("✦ Autorise les pop-ups pour exporter ✦"); return; }
+  win.document.write(`<!DOCTYPE html><html lang="fr"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${title}</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Georgia,serif;color:#2A1A12;max-width:680px;margin:0 auto;padding:32px 24px;line-height:1.65;background:#FBF7F0}
+    .save-hint{background:#2A1A12;color:#E8C77E;font-family:Arial,sans-serif;font-size:13px;padding:12px 16px;text-align:center;border-radius:4px;margin-bottom:28px}
+    h1{font-size:28px;text-align:center;color:#2A1A12;margin-bottom:6px}
+    .sub{text-align:center;font-style:italic;color:#7A5A1E;margin-bottom:32px;font-size:13px}
+    .divider{border:none;border-top:1px solid #D4AF6A;margin:20px 0}
+    .day-date{font-size:15px;font-weight:bold;color:#7A5A1E;margin-bottom:10px;text-transform:capitalize}
+    .section-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#A9802F;font-weight:bold;margin-top:12px;display:block}
+    .section-text{font-size:14px;margin-top:4px;color:#2A1A12}
+    ol{margin:4px 0 0;padding-left:20px;font-size:14px}
+    .dream-item{font-size:14px;padding:3px 0;color:#2A1A12}
+    .dream-done{text-decoration:line-through;opacity:.55}
+    @media print{.save-hint{display:none}}
+  </style>
+  </head><body>
+  <div class="save-hint">Sur iPhone : appuie sur Partager (carré avec flèche) → Enregistrer en PDF</div>
+  <h1>${title}</h1>
+  <p class="sub">By Tata Éléonore — Je reprends mon trône</p>
+  <hr class="divider">
+  ${htmlContent}
+  </body></html>`);
+  win.document.close();
+}
+
 function exportPDF(){
   const keys = Object.keys(days).filter(k => {
     const e = days[k];
     return e && (e.intention || (e.gratitudes && e.gratitudes.some(g => g)));
   }).sort();
-  if (keys.length === 0) {
-    showToast("✦ Rien à graver encore ✦");
-    return;
-  }
-  if (typeof window.jsPDF === "undefined") {
-    showToast("✦ Le générateur PDF n'a pas pu se charger ✦");
-    return;
-  }
-
-  const jsPDF = window.jsPDF;
-  const doc = new jsPDF({ unit: "pt", format: "a4" });
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const pageHeight = doc.internal.pageSize.getHeight();
-  const margin = 56;
-  const maxWidth = pageWidth - margin * 2;
-  let y = margin;
-
-  function ensureSpace(neededHeight){
-    if (y + neededHeight > pageHeight - margin) {
-      doc.addPage();
-      y = margin;
-    }
-  }
-
-  // Page de titre
-  doc.setFont("times", "bolditalic");
-  doc.setFontSize(26);
-  doc.setTextColor(40, 25, 15);
-  doc.text("Mon Livre de Gratitude", pageWidth / 2, 110, { align: "center" });
-  doc.setFont("times", "italic");
-  doc.setFontSize(13);
-  doc.setTextColor(120, 60, 50);
-  doc.text("By Tata Éléonore — Je reprends mon trône", pageWidth / 2, 136, { align: "center" });
-  doc.setDrawColor(180, 140, 60);
-  doc.line(pageWidth / 2 - 60, 155, pageWidth / 2 + 60, 155);
-  doc.addPage();
-  y = margin;
-
-  keys.forEach(key => {
+  if (keys.length === 0) { showToast("✦ Rien à graver encore ✦"); return; }
+  const html = keys.map(key => {
     const e = days[key];
-    ensureSpace(40);
-    doc.setFont("times", "bold");
-    doc.setFontSize(15);
-    doc.setTextColor(120, 60, 50);
-    const dateLabel = formatDisplayDate(key);
-    doc.text(dateLabel.charAt(0).toUpperCase() + dateLabel.slice(1), margin, y);
-    y += 10;
-    doc.setDrawColor(220, 210, 195);
-    doc.line(margin, y, pageWidth - margin, y);
-    y += 22;
-
-    function writeSection(label, lines){
-      ensureSpace(20);
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(9);
-      doc.setTextColor(170, 130, 50);
-      doc.text(label.toUpperCase(), margin, y);
-      y += 14;
-      doc.setFont("times", "normal");
-      doc.setFontSize(12);
-      doc.setTextColor(40, 25, 15);
-      lines.forEach(line => {
-        const wrapped = doc.splitTextToSize(line, maxWidth);
-        wrapped.forEach(w => {
-          ensureSpace(16);
-          doc.text(w, margin, y);
-          y += 16;
-        });
-      });
-      y += 10;
-    }
-
-    if (e.intention) writeSection("Intention du matin", [e.intention]);
+    let s = `<p class="day-date">${formatDisplayDate(key)}</p>`;
+    if (e.intention) s += `<span class="section-label">Intention du matin</span><p class="section-text">${escapeHtml(e.intention)}</p>`;
     if (e.gratitudes && e.gratitudes.some(g => g)) {
-      writeSection("5 Gratitudes", e.gratitudes.filter(g => g).map((g, i) => `${i + 1}. ${g}`));
+      s += `<span class="section-label">5 Gratitudes</span><ol>`;
+      e.gratitudes.filter(g => g).forEach(g => { s += `<li>${escapeHtml(g)}</li>`; });
+      s += `</ol>`;
     }
-    y += 14;
-  });
-
-  doc.save("Mon-Livre-de-Gratitude.pdf");
+    return s + `<hr class="divider">`;
+  }).join("");
+  openPrintPage("Mon Livre de Gratitude", html);
 }
 document.getElementById("export-pdf").addEventListener("click", exportPDF);
 
 function exportReves(){
-  if (typeof window.jsPDF === "undefined") { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
-  const jsPDF = window.jsPDF;
-  const doc = new jsPDF({ unit: "pt", format: "a4" });
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const pageHeight = doc.internal.pageSize.getHeight();
-  const margin = 56;
-  let y = margin;
-
-  function ensureSpace(h){ if (y + h > pageHeight - margin) { doc.addPage(); y = margin; } }
-
-  // Titre
-  doc.setFont("times", "bolditalic");
-  doc.setFontSize(26);
-  doc.setTextColor(40, 25, 15);
-  doc.text("Mes 101 Rêves", pageWidth / 2, 110, { align: "center" });
-  doc.setFont("times", "italic");
-  doc.setFontSize(13);
-  doc.setTextColor(120, 60, 50);
-  doc.text("By Tata Éléonore — Je reprends mon trône", pageWidth / 2, 136, { align: "center" });
-  doc.setDrawColor(180, 140, 60);
-  doc.line(pageWidth / 2 - 60, 148, pageWidth / 2 + 60, 148);
-  y = 190;
-
   const remplies = dreams.filter(d => d.text && d.text.trim());
-  const realisees = remplies.filter(d => d.done);
-  const enCours = remplies.filter(d => !d.done);
-
-  function writeSection(title, list){
-    if (list.length === 0) return;
-    ensureSpace(30);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.setTextColor(170, 130, 50);
-    doc.text(title.toUpperCase(), margin, y);
-    y += 6;
-    doc.setDrawColor(220, 200, 170);
-    doc.line(margin, y, pageWidth - margin, y);
-    y += 18;
-    list.forEach((d, i) => {
-      ensureSpace(18);
-      doc.setFont("times", "normal");
-      doc.setFontSize(12);
-      doc.setTextColor(40, 25, 15);
-      const num = String(i + 1).padStart(3, " ");
-      const lines = doc.splitTextToSize(`${num}. ${d.text}`, pageWidth - margin * 2 - 10);
-      lines.forEach(line => {
-        ensureSpace(16);
-        doc.text(line, margin, y);
-        y += 16;
-      });
-    });
-    y += 16;
-  }
-
-  if (enCours.length > 0) writeSection(`Mes rêves (${enCours.length})`, enCours);
-  if (realisees.length > 0) writeSection(`Rêves réalisés ★ (${realisees.length})`, realisees);
-
-  if (remplies.length === 0) {
-    doc.setFont("times", "italic");
-    doc.setFontSize(14);
-    doc.setTextColor(120, 100, 80);
-    doc.text("Tes rêves s'écriront ici, un à un.", pageWidth / 2, 220, { align: "center" });
-  }
-
-  doc.save("Mes-101-Reves.pdf");
+  if (remplies.length === 0) { showToast("✦ Aucun rêve inscrit encore ✦"); return; }
+  const html = remplies.map((d, i) =>
+    `<div class="dream-item${d.done ? " dream-done" : ""}">
+      ${i+1}. ${escapeHtml(d.text)}${d.done ? " ★" : ""}
+    </div>`
+  ).join("");
+  openPrintPage("Mes 101 Rêves", html);
 }
 document.getElementById("export-reves").addEventListener("click", exportReves);
 
 function exportAlignement(){
-  if (typeof window.jsPDF === "undefined") { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
-  const jsPDF = window.jsPDF;
-  const doc = new jsPDF({ unit: "pt", format: "a4" });
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const pageHeight = doc.internal.pageSize.getHeight();
-  const margin = 56;
-  let y = margin;
-  function ensureSpace(h){ if (y + h > pageHeight - margin) { doc.addPage(); y = margin; } }
-
-  doc.setFont("times", "bolditalic");
-  doc.setFontSize(26);
-  doc.setTextColor(40, 25, 15);
-  doc.text("Table d'Alignement", pageWidth / 2, 110, { align: "center" });
-  doc.setFont("times", "italic");
-  doc.setFontSize(13);
-  doc.setTextColor(120, 60, 50);
-  doc.text("By Tata Éléonore — Je reprends mon trône", pageWidth / 2, 136, { align: "center" });
-  doc.setDrawColor(180, 140, 60);
-  doc.line(pageWidth / 2 - 60, 148, pageWidth / 2 + 60, 148);
-  y = 190;
-
-  alignment.forEach((a, i) => {
-    if (!a.dontWant && !a.want && !a.action) return;
-    ensureSpace(30);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.setTextColor(170, 130, 50);
-    doc.text(`${i + 1} / 12`, margin, y);
-    y += 16;
-    [["Je ne veux plus", a.dontWant], ["Je veux à la place", a.want], ["L'action pour y arriver", a.action]].forEach(([label, val]) => {
-      if (!val) return;
-      ensureSpace(28);
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(9);
-      doc.setTextColor(120, 60, 50);
-      doc.text(label.toUpperCase(), margin, y);
-      y += 13;
-      doc.setFont("times", "normal");
-      doc.setFontSize(12);
-      doc.setTextColor(40, 25, 15);
-      const lines = doc.splitTextToSize(val, pageWidth - margin * 2);
-      lines.forEach(l => { ensureSpace(16); doc.text(l, margin, y); y += 16; });
-    });
-    y += 12;
-  });
-  doc.save("Table-Alignement.pdf");
+  const lignes = alignment.filter(a => a.dontWant || a.want || a.action);
+  if (lignes.length === 0) { showToast("✦ Table vide encore ✦"); return; }
+  const html = lignes.map((a, i) => `
+    <div style="margin-bottom:16px">
+      <p style="font-weight:bold;color:#7A5A1E;font-size:12px">${i+1} / 12</p>
+      ${a.dontWant ? `<span class="section-label">Je ne veux plus</span><p class="section-text">${escapeHtml(a.dontWant)}</p>` : ""}
+      ${a.want ? `<span class="section-label">Je veux à la place</span><p class="section-text">${escapeHtml(a.want)}</p>` : ""}
+      ${a.action ? `<span class="section-label">L'action pour y arriver</span><p class="section-text">${escapeHtml(a.action)}</p>` : ""}
+    </div><hr class="divider">`).join("");
+  openPrintPage("Table d'Alignement", html);
 }
 document.getElementById("export-alignement").addEventListener("click", exportAlignement);
 
 function exportConnaistoi(){
-  if (typeof window.jsPDF === "undefined") { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
-  const jsPDF = window.jsPDF;
-  const doc = new jsPDF({ unit: "pt", format: "a4" });
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const margin = 56;
-  let y = margin;
-
-  doc.setFont("times", "bolditalic");
-  doc.setFontSize(26);
-  doc.setTextColor(40, 25, 15);
-  doc.text("Connais-toi toi-même", pageWidth / 2, 110, { align: "center" });
-  doc.setFont("times", "italic");
-  doc.setFontSize(13);
-  doc.setTextColor(120, 60, 50);
-  doc.text("By Tata Éléonore — Je reprends mon trône", pageWidth / 2, 136, { align: "center" });
-  doc.setDrawColor(180, 140, 60);
-  doc.line(pageWidth / 2 - 60, 148, pageWidth / 2 + 60, 148);
-  y = 190;
-
-  [["Ma force", selfKnowledge.qualites], ["Ce que j'ai à développer", selfKnowledge.defauts]].forEach(([label, val]) => {
-    if (!val) return;
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.setTextColor(170, 130, 50);
-    doc.text(label.toUpperCase(), margin, y);
-    y += 16;
-    doc.setFont("times", "normal");
-    doc.setFontSize(12);
-    doc.setTextColor(40, 25, 15);
-    const lines = doc.splitTextToSize(val, pageWidth - margin * 2);
-    lines.forEach(l => { y += 16; doc.text(l, margin, y); });
-    y += 32;
-  });
-  doc.save("Connais-toi-toi-meme.pdf");
+  if (!selfKnowledge.qualites && !selfKnowledge.defauts) { showToast("✦ Rien à exporter encore ✦"); return; }
+  const html = `
+    ${selfKnowledge.qualites ? `<span class="section-label">Ma force</span><p class="section-text">${escapeHtml(selfKnowledge.qualites)}</p><br>` : ""}
+    ${selfKnowledge.defauts ? `<span class="section-label">Ce que j'ai à développer</span><p class="section-text">${escapeHtml(selfKnowledge.defauts)}</p>` : ""}`;
+  openPrintPage("Connais-toi toi-même", html);
 }
 document.getElementById("export-connaistoi").addEventListener("click", exportConnaistoi);
 </script>
