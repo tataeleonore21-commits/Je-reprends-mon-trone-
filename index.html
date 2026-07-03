@@ -1185,13 +1185,32 @@ function openMethod(){
   document.getElementById("method-intro").style.display = "block";
   document.getElementById("method-practice").style.display = "none";
 }
+function fadeOutAudio(audio, duration, callback){
+  if (!audio) return;
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const source = ctx.createMediaElementSource(audio);
+  const gainNode = ctx.createGain();
+  source.connect(gainNode);
+  gainNode.connect(ctx.destination);
+  gainNode.gain.setValueAtTime(1, ctx.currentTime);
+  gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
+  setTimeout(() => {
+    audio.pause();
+    audio.currentTime = 0;
+    ctx.close();
+    if (callback) callback();
+  }, duration * 1000);
+}
 function closeMethod(){
   clearInterval(methodTimerInterval);
   clearInterval(affirmationInterval);
   const audio = document.getElementById("practice-audio");
-  audio.pause();
-  audio.currentTime = 0;
-  document.getElementById("method-overlay").classList.remove("open");
+  fadeOutAudio(audio, 1.5, () => {
+    document.getElementById("method-overlay").classList.remove("open");
+  });
+  setTimeout(() => {
+    document.getElementById("method-overlay").classList.remove("open");
+  }, 1600);
 }
 function startMethod(){
   document.getElementById("method-intro").style.display = "none";
@@ -1200,6 +1219,7 @@ function startMethod(){
   const audio = document.getElementById("practice-audio");
   try { audio.currentTime = 0; } catch(e) {}
   audio.play().catch(() => {});
+
 
   const stepEl = document.getElementById("method-step");
   const subEl = document.getElementById("method-sub");
@@ -1275,8 +1295,7 @@ function startMethod(){
         affirmationEl.textContent = intentionQuoted || "Elle est ancrée en moi.";
         affirmationEl.classList.add("show");
       }, 400);
-      audio.pause();
-      audio.currentTime = 0;
+      fadeOutAudio(audio, 2.5);
     } else {
       render();
     }
