@@ -114,6 +114,164 @@ body{
 .tab-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--muted);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.25em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:all .25s;border-radius:1px}
 .tab-btn:hover{color:var(--gold-deep);border-color:var(--gold)}
 .tab-btn.active{background:linear-gradient(135deg,rgba(169,128,47,.16),rgba(169,128,47,.06));border-color:var(--gold);color:var(--gold-deep);font-weight:600}
+.tab-btn-premium{
+  background:linear-gradient(135deg,rgba(169,128,47,.2),rgba(169,128,47,.08));
+  border-color:var(--gold);
+  color:var(--gold-deep);
+  font-weight:600;
+}
+
+/* Oracle Premium */
+.oracle-container{
+  text-align:center;
+  padding:0 0 40px;
+}
+.oracle-lock{
+  font-size:32px;
+  margin-bottom:8px;
+}
+.oracle-premium-badge{
+  display:inline-block;
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  border:1px solid var(--gold);
+  padding:4px 14px;
+  border-radius:20px;
+  margin-bottom:24px;
+}
+.oracle-title{
+  font-family:'Playfair Display',serif;
+  font-size:26px;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:8px;
+}
+.oracle-subtitle{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:16px;
+  color:var(--muted);
+  margin-bottom:36px;
+}
+.oracle-number-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:36px;
+}
+.oracle-num-btn{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:18px 8px;
+  cursor:pointer;
+  transition:all .25s;
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:700;
+  color:var(--gold-deep);
+  touch-action:manipulation;
+}
+.oracle-num-btn:hover,.oracle-num-btn.selected{
+  background:linear-gradient(135deg,rgba(169,128,47,.2),rgba(169,128,47,.05));
+  border-color:var(--gold);
+  transform:scale(1.05);
+}
+.oracle-result{
+  display:none;
+  animation:fadeUp .5s ease both;
+}
+.oracle-result.show{display:block}
+.oracle-number-meaning{
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:16px;
+}
+.oracle-card{
+  background:linear-gradient(135deg,rgba(169,128,47,.08),rgba(169,128,47,.02));
+  border:1px solid var(--gold);
+  border-top:2px solid var(--gold);
+  border-radius:2px;
+  padding:32px 24px;
+  margin-bottom:24px;
+  position:relative;
+}
+.oracle-quote-mark{
+  font-family:'Playfair Display',serif;
+  font-size:64px;
+  color:var(--gold);
+  opacity:.2;
+  position:absolute;
+  top:-12px;
+  left:16px;
+  line-height:1;
+}
+.oracle-message{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:clamp(17px,4vw,22px);
+  line-height:1.65;
+  color:var(--ink);
+}
+.oracle-signature{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:16px;
+}
+.oracle-reset-btn{
+  background:none;
+  border:1px solid var(--border);
+  color:var(--muted);
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  padding:8px 20px;
+  border-radius:2px;
+  cursor:pointer;
+  margin-top:8px;
+}
+.oracle-premium-cta{
+  background:linear-gradient(135deg,rgba(169,128,47,.15),rgba(169,128,47,.05));
+  border:1px solid var(--gold);
+  border-radius:2px;
+  padding:24px;
+  margin-top:32px;
+  text-align:center;
+}
+.oracle-cta-text{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:15px;
+  color:var(--ink-soft);
+  margin-bottom:16px;
+  line-height:1.6;
+}
+.oracle-cta-btn{
+  display:block;
+  width:100%;
+  background:linear-gradient(135deg,rgba(169,128,47,.25),rgba(169,128,47,.1));
+  border:1px solid var(--gold);
+  color:var(--gold-deep);
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  padding:14px;
+  cursor:pointer;
+  border-radius:2px;
+  text-decoration:none;
+}
 .content{max-width:660px;margin:0 auto;padding:0 20px 80px}
 .view{display:none}
 .view.active{display:block}
@@ -826,6 +984,8 @@ body{
   <button class="tab-btn" data-tab="connaistoi">Connais-toi</button>
   <span class="tab-group-label">Mémoire</span>
   <button class="tab-btn" data-tab="histoire">Historique</button>
+  <span class="tab-group-label">Premium</span>
+  <button class="tab-btn tab-btn-premium" data-tab="premium">✦ Oracle</button>
 </div>
 
 <div class="content">
@@ -886,6 +1046,42 @@ body{
   <div class="view" id="view-histoire">
     <button class="export-btn" id="export-pdf">Télécharger mon journal complet en PDF</button>
     <div id="history-container"></div>
+  </div>
+
+  <div class="view" id="view-premium">
+    <div class="oracle-container">
+      <div class="oracle-lock">✦</div>
+      <div class="oracle-premium-badge">Espace Premium</div>
+      <h2 class="oracle-title">L'Oracle du Jour</h2>
+      <p class="oracle-subtitle">Choisis un chiffre entre 1 et 9.<br>Laisse ton intuition guider ta main.</p>
+
+      <div class="oracle-number-grid" id="oracle-grid">
+        <button class="oracle-num-btn" data-num="1">1</button>
+        <button class="oracle-num-btn" data-num="2">2</button>
+        <button class="oracle-num-btn" data-num="3">3</button>
+        <button class="oracle-num-btn" data-num="4">4</button>
+        <button class="oracle-num-btn" data-num="5">5</button>
+        <button class="oracle-num-btn" data-num="6">6</button>
+        <button class="oracle-num-btn" data-num="7">7</button>
+        <button class="oracle-num-btn" data-num="8">8</button>
+        <button class="oracle-num-btn" data-num="9">9</button>
+      </div>
+
+      <div class="oracle-result" id="oracle-result">
+        <div class="oracle-number-meaning" id="oracle-meaning"></div>
+        <div class="oracle-card">
+          <span class="oracle-quote-mark">"</span>
+          <p class="oracle-message" id="oracle-message"></p>
+          <p class="oracle-signature">— Tata Éléonore</p>
+        </div>
+        <button class="oracle-reset-btn" id="oracle-reset">Tirer à nouveau</button>
+      </div>
+
+      <div class="oracle-premium-cta">
+        <p class="oracle-cta-text">Tu désires aller plus loin ? Un accompagnement personnalisé, une guidance ou un coaching avec Tata Éléonore t'attend.</p>
+        <a class="oracle-cta-btn" href="mailto:contact@tataeleonore.com?subject=Demande%20d%27accompagnement%20Premium">Contacte-moi pour le Premium</a>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -1511,6 +1707,7 @@ function openPrintPage(title, htmlContent){
   </style>
   </head><body>
   <div class="save-hint" style="display:none"></div>
+  <button onclick="window.close()" style="display:block;width:100%;max-width:680px;margin:0 auto 24px;background:#2A1A12;color:#E8C77E;font-family:Georgia,serif;font-size:14px;padding:14px;border:none;border-radius:4px;cursor:pointer;">← Retour à l'application</button>
   <h1>${title}</h1>
   <p class="sub">By Tata Éléonore — Je reprends mon trône</p>
   <hr class="divider">
@@ -1539,6 +1736,127 @@ function exportPDF(){
   openPrintPage("Mon Livre de Gratitude", html);
 }
 document.getElementById("export-pdf").addEventListener("click", exportPDF);
+
+// ═══ ORACLE DU JOUR ═══
+const ORACLE_DATA = {
+  1: {
+    meaning: "1 — Nouveau départ · Pionnier · Volonté",
+    messages: [
+      "Quelque chose de nouveau commence aujourd'hui. Fais-lui confiance et avance sans regarder en arrière.",
+      "Tu es le début de ta propre histoire. Chaque matin est une page blanche que toi seul peux écrire.",
+      "Ce premier pas que tu hésites à faire — c'est lui le plus important. Fais-le maintenant.",
+      "Tu n'as pas besoin que tout soit prêt pour commencer. La préparation parfaite est souvent un mensonge.",
+      "L'énergie du 1 te dit : c'est ton moment. Ne le laisse pas passer par peur de l'inconnu.",
+    ]
+  },
+  2: {
+    meaning: "2 — Équilibre · Relation · Patience",
+    messages: [
+      "Ce que tu cherches dans l'autre existe déjà en toi. Commence par toi-même.",
+      "L'équilibre n'est pas une ligne droite. C'est une danse. Apprends à danser avec ta vie.",
+      "Aujourd'hui, quelqu'un a besoin de toi sans pouvoir le dire. Ouvre les yeux.",
+      "Ce n'est pas le moment de forcer. C'est le moment d'attendre avec confiance.",
+      "Le 2 te rappelle que tu n'es jamais seul·e. Tes ancêtres marchent avec toi.",
+    ]
+  },
+  3: {
+    meaning: "3 — Créativité · Expression · Joie",
+    messages: [
+      "Ce que tu crées aujourd'hui, même en silence, changera quelque chose demain.",
+      "Ta joie est un acte de résistance. Ne laisse personne te la voler.",
+      "Tu as quelque chose à dire au monde. Dis-le avec courage et sans t'excuser.",
+      "L'enfant en toi sait ce qui te rend heureux·se. Écoute-le aujourd'hui.",
+      "Le 3 chante aujourd'hui. Laisse ta vie être une chanson que tu choisirais d'écouter.",
+    ]
+  },
+  4: {
+    meaning: "4 — Fondations · Travail · Stabilité",
+    messages: [
+      "Ce que tu construis dans l'ombre sera vu à la lumière. Continue.",
+      "Les fondations ne sont pas glamour. Mais sans elles, rien ne tient. Pose les tiennes.",
+      "Le travail que tu fais aujourd'hui sans reconnaissance — il est vu. Il est compté.",
+      "La stabilité n'est pas une prison. C'est la racine qui permet à l'arbre de grandir haut.",
+      "Tes ancêtres ont construit avec leurs mains. Tu construis avec ton âme. Les deux sont sacrés.",
+    ]
+  },
+  5: {
+    meaning: "5 — Transformation · Liberté · Mouvement",
+    messages: [
+      "Ce qui se termine aujourd'hui te fait de la place pour ce qui arrive. Fais confiance au vide.",
+      "Tu changes. C'est bon signe. Seul ce qui est vivant se transforme.",
+      "La liberté que tu cherches commence par la permission que tu te donnes.",
+      "Ce n'est pas ta vie qui doit changer. C'est parfois ton regard sur elle.",
+      "Le 5 est le chiffre du souffle. Respire. Laisse la transformation faire son travail.",
+    ]
+  },
+  6: {
+    meaning: "6 — Amour · Famille · Responsabilité",
+    messages: [
+      "Prendre soin de toi n'est pas de l'égoïsme. C'est la condition pour prendre soin des autres.",
+      "L'amour que tu donnes sans compter finira toujours par te revenir. Patience.",
+      "Quelqu'un dans ta famille porte quelque chose de lourd. Ton appel pourrait tout changer.",
+      "Tu es aimé·e plus que tu ne le crois. Ouvre-toi à le recevoir.",
+      "Le 6 te rappelle que le foyer se construit d'abord à l'intérieur de toi.",
+    ]
+  },
+  7: {
+    meaning: "7 — Spiritualité · Intuition · Mystère",
+    messages: [
+      "Ce que tu as ressenti cette nuit mérite ton attention. Ne l'écarte pas trop vite.",
+      "Ton intuition parle plus fort que jamais en ce moment. Apprends à l'entendre.",
+      "Il y a des réponses que seul le silence peut donner. Fais-le aujourd'hui.",
+      "Tes ancêtres communiquent avec toi de manières que ton mental ne comprend pas encore. Fais confiance.",
+      "Le 7 est le nombre du chercheur. Aujourd'hui, cherche ce qui ne se voit pas.",
+    ]
+  },
+  8: {
+    meaning: "8 — Abondance · Puissance · Récolte",
+    messages: [
+      "Tu mérites l'abondance. Pas en théorie. Dans ta vie réelle, maintenant.",
+      "Ce que tu as semé avec foi est en train de mûrir. Ne capitule pas à quelques pas de la récolte.",
+      "Ton rapport à l'argent est un rapport à toi-même. Guéris l'un, tu guéris l'autre.",
+      "La puissance ne crie pas. Elle s'installe. Installe-toi dans la tienne.",
+      "Le 8 couché est l'infini. Ce qui t'appartient par droit divin n'a pas de limite.",
+    ]
+  },
+  9: {
+    meaning: "9 — Accomplissement · Sagesse · Transmission",
+    messages: [
+      "Tu as traversé plus que tu ne le réalises. Aujourd'hui, honore ton propre chemin.",
+      "Ce cycle se termine. Remercie-le, même pour ses douleurs. Elles t'ont façonné·e.",
+      "Tu as quelque chose à transmettre. Ne pars pas sans l'avoir offert au monde.",
+      "La sagesse n'est pas dans les livres. Elle est dans tes cicatrices réconciliées.",
+      "Le 9 est le chiffre de l'ancêtre que tu deviendras. Vis à la hauteur de cet héritage.",
+    ]
+  }
+};
+
+function getOracleMessage(num){
+  const data = ORACLE_DATA[num];
+  const dayIndex = Math.floor(new Date().getTime() / 86400000) % data.messages.length;
+  return { meaning: data.meaning, message: data.messages[dayIndex] };
+}
+
+function initOracle(){
+  document.querySelectorAll(".oracle-num-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const num = Number(btn.dataset.num);
+      document.querySelectorAll(".oracle-num-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      const oracle = getOracleMessage(num);
+      document.getElementById("oracle-meaning").textContent = oracle.meaning;
+      document.getElementById("oracle-message").textContent = oracle.message;
+      const result = document.getElementById("oracle-result");
+      result.classList.remove("show");
+      setTimeout(() => result.classList.add("show"), 50);
+    });
+  });
+  document.getElementById("oracle-reset").addEventListener("click", () => {
+    document.querySelectorAll(".oracle-num-btn").forEach(b => b.classList.remove("selected"));
+    document.getElementById("oracle-result").classList.remove("show");
+  });
+}
+initOracle();
 
 function exportReves(){
   const remplies = dreams.filter(d => d.text && d.text.trim());
