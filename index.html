@@ -1079,7 +1079,7 @@ body{
 
       <div class="oracle-premium-cta">
         <p class="oracle-cta-text">Tu désires aller plus loin ? Un accompagnement personnalisé, une guidance ou un coaching avec Tata Éléonore t'attend.</p>
-        <a class="oracle-cta-btn" href="mailto:contact@tataeleonore.com?subject=Demande%20d%27accompagnement%20Premium">Contacte-moi pour le Premium</a>
+        <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium">Contacte-moi pour le Premium</a>
       </div>
     </div>
   </div>
@@ -1837,24 +1837,68 @@ function getOracleMessage(num){
   return { meaning: data.meaning, message: data.messages[dayIndex] };
 }
 
+const ORACLE_KEY = "eleonore_oracle";
+
+function getOracleTodayData(){
+  try {
+    const saved = JSON.parse(localStorage.getItem(ORACLE_KEY) || "{}");
+    if (saved.date === getTodayKey()) return saved;
+  } catch(e) {}
+  return null;
+}
+
+function saveOracleTodayData(num, message, meaning){
+  localStorage.setItem(ORACLE_KEY, JSON.stringify({
+    date: getTodayKey(), num, message, meaning
+  }));
+}
+
+function showOracleResult(num, meaning, message){
+  document.querySelectorAll(".oracle-num-btn").forEach(b => {
+    b.classList.remove("selected");
+    if (Number(b.dataset.num) === num) b.classList.add("selected");
+    b.disabled = true;
+    b.style.opacity = Number(b.dataset.num) === num ? "1" : "0.4";
+  });
+  document.getElementById("oracle-meaning").textContent = meaning;
+  document.getElementById("oracle-message").textContent = message;
+  document.getElementById("oracle-reset").style.display = "none";
+  const result = document.getElementById("oracle-result");
+  result.classList.remove("show");
+  setTimeout(() => result.classList.add("show"), 50);
+
+  // Message "revenez demain"
+  let returnMsg = document.getElementById("oracle-return-msg");
+  if (!returnMsg) {
+    returnMsg = document.createElement("p");
+    returnMsg.id = "oracle-return-msg";
+    returnMsg.style.cssText = "font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:16px;opacity:.7";
+    result.appendChild(returnMsg);
+  }
+  returnMsg.textContent = "✦ Ton tirage du jour est fait — reviens demain ✦";
+}
+
 function initOracle(){
+  // Vérifie si déjà tiré aujourd'hui
+  const saved = getOracleTodayData();
+  if (saved) {
+    showOracleResult(saved.num, saved.meaning, saved.message);
+    return;
+  }
+
   document.querySelectorAll(".oracle-num-btn").forEach(btn => {
     btn.addEventListener("click", () => {
+      const saved = getOracleTodayData();
+      if (saved) return; // Déjà tiré
+
       const num = Number(btn.dataset.num);
-      document.querySelectorAll(".oracle-num-btn").forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
       const oracle = getOracleMessage(num);
-      document.getElementById("oracle-meaning").textContent = oracle.meaning;
-      document.getElementById("oracle-message").textContent = oracle.message;
-      const result = document.getElementById("oracle-result");
-      result.classList.remove("show");
-      setTimeout(() => result.classList.add("show"), 50);
+      saveOracleTodayData(num, oracle.message, oracle.meaning);
+      showOracleResult(num, oracle.meaning, oracle.message);
     });
   });
-  document.getElementById("oracle-reset").addEventListener("click", () => {
-    document.querySelectorAll(".oracle-num-btn").forEach(b => b.classList.remove("selected"));
-    document.getElementById("oracle-result").classList.remove("show");
-  });
+
+  document.getElementById("oracle-reset").style.display = "none";
 }
 initOracle();
 
