@@ -8,10 +8,12 @@
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RX0R8FVJTX"></script>
 <script>
+try {
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-RX0R8FVJTX');
+} catch(e) {}
 </script>
 
 <link rel="icon" type="image/png" href="favicon.png">
@@ -539,17 +541,22 @@ body{
   position:fixed;inset:0;
   background:#0A0603;
   display:none;
-  align-items:flex-start;
-  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
   z-index:2000;
-  padding:24px;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
+  padding:40px 24px 36px;
 }
 .method-overlay.open{display:flex}
 .method-box{
-  margin:40px 0;
-  padding-bottom:80px;
+  text-align:center;
+  max-width:380px;
+  width:100%;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 }
 #welcome-overlay{
   background:
@@ -660,22 +667,20 @@ body{
 }
 .method-close{
   display:block;
-  margin:48px auto 24px;
-  background:rgba(10,6,3,0.9);
-  border:1px solid rgba(242,230,204,0.3);
-  color:rgba(242,230,204,0.7);
+  width:100%;
+  max-width:380px;
+  background:none;
+  border:1px solid rgba(242,230,204,0.35);
+  color:rgba(242,230,204,0.75);
   font-family:'Cinzel',serif;
-  font-size:9px;
-  letter-spacing:.2em;
+  font-size:10px;
+  letter-spacing:.25em;
   text-transform:uppercase;
-  padding:10px 28px;
+  padding:14px;
   border-radius:2px;
   cursor:pointer;
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
   touch-action:manipulation;
-}
-  border-radius:2px;
-  cursor:pointer;
+  flex-shrink:0;
 }
 
 /* Célébration journée complète */
@@ -890,12 +895,11 @@ body{
 <div class="toast" id="toast">✦ Gravé dans ton royaume ✦</div>
 
 <div class="method-overlay" id="method-overlay">
-  <div class="method-box" id="method-intro">
+  <div class="method-box" id="method-intro" style="display:none">
     <div class="method-step">Avant de commencer</div>
     <p class="method-teaching">Convoque une émotion pour envoyer ton intention à l'univers. Comme un timbre permet à une lettre d'être envoyée, ton intention a besoin d'une émotion pour être reçue.</p>
     <p class="welcome-coaching">Tu peux fermer les yeux pendant la pratique, ou les garder ouverts pour suivre le texte — comme tu préfères.</p>
     <button class="method-start" id="method-start">Commencer</button>
-    <button class="method-close" id="method-close-intro">Fermer</button>
   </div>
   <div class="method-box" id="method-practice" style="display:none">
     <div class="method-step" id="method-step">Respire</div>
@@ -904,9 +908,9 @@ body{
       <div class="method-timer" id="method-timer">1:06</div>
     </div>
     <div class="method-affirmation" id="method-affirmation"></div>
-    <button class="method-close" id="method-close">Fermer</button>
     <audio id="practice-audio" preload="auto" src="66S.mp3"></audio>
   </div>
+  <button class="method-close" id="method-close">Fermer</button>
 </div>
 
 <script>
@@ -1181,7 +1185,7 @@ let methodTimerInterval = null;
 let affirmationInterval = null;
 function openMethod(){
   document.getElementById("method-overlay").classList.add("open");
-  document.getElementById("method-intro").style.display = "block";
+  document.getElementById("method-intro").style.display = "flex";
   document.getElementById("method-practice").style.display = "none";
 }
 function closeMethod(){
@@ -1191,10 +1195,12 @@ function closeMethod(){
   audio.pause();
   audio.currentTime = 0;
   document.getElementById("method-overlay").classList.remove("open");
+  document.getElementById("method-intro").style.display = "none";
+  document.getElementById("method-practice").style.display = "none";
 }
 function startMethod(){
   document.getElementById("method-intro").style.display = "none";
-  document.getElementById("method-practice").style.display = "block";
+  document.getElementById("method-practice").style.display = "flex";
 
   const audio = document.getElementById("practice-audio");
   audio.load();
@@ -1287,11 +1293,7 @@ document.getElementById("open-method").addEventListener("click", () => {
   openMethod();
 });
 document.getElementById("method-start").addEventListener("click", startMethod);
-["method-close-intro", "method-close"].forEach(id => {
-  const btn = document.getElementById(id);
-  btn.addEventListener("click", closeMethod);
-  btn.addEventListener("touchend", (e) => { e.preventDefault(); closeMethod(); });
-});
+document.getElementById("method-close").addEventListener("click", closeMethod);
 
 // 101 rêves
 function updateDreamProgress(){
