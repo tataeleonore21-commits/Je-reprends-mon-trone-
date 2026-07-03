@@ -847,6 +847,7 @@ body{
     <p class="intro-text">Ce que tu rejettes éclaire ce que tu désires. Pose ici ce que tu ne veux plus, son opposé exact, puis l'action concrète qui t'en rapproche un peu plus chaque jour.</p>
     <div id="align-list"></div>
     <button class="save-btn" id="save-alignement">✦ Ancrer cette table ✦</button>
+    <button class="export-btn" id="export-alignement" style="margin-top:12px">Télécharger ma table d'alignement en PDF</button>
   </div>
 
   <div class="view" id="view-reves">
@@ -875,10 +876,11 @@ body{
       </div>
     </div>
     <button class="save-btn" id="save-connaistoi">✦ Ancrer cette vérité ✦</button>
+    <button class="export-btn" id="export-connaistoi" style="margin-top:12px">Télécharger "Connais-toi toi-même" en PDF</button>
   </div>
 
   <div class="view" id="view-histoire">
-    <button class="export-btn" id="export-pdf">Exporter "Mon Livre de Gratitude" en PDF</button>
+    <button class="export-btn" id="export-pdf">Télécharger mon journal complet en PDF</button>
     <div id="history-container"></div>
   </div>
 
@@ -1570,6 +1572,163 @@ function exportPDF(){
   doc.save("Mon-Livre-de-Gratitude.pdf");
 }
 document.getElementById("export-pdf").addEventListener("click", exportPDF);
+
+function exportReves(){
+  if (!window.jspdf) { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 56;
+  let y = margin;
+
+  function ensureSpace(h){ if (y + h > pageHeight - margin) { doc.addPage(); y = margin; } }
+
+  // Titre
+  doc.setFont("times", "bolditalic");
+  doc.setFontSize(26);
+  doc.setTextColor(40, 25, 15);
+  doc.text("Mes 101 Rêves", pageWidth / 2, 110, { align: "center" });
+  doc.setFont("times", "italic");
+  doc.setFontSize(13);
+  doc.setTextColor(120, 60, 50);
+  doc.text("By Tata Éléonore — Je reprends mon trône", pageWidth / 2, 136, { align: "center" });
+  doc.setDrawColor(180, 140, 60);
+  doc.line(pageWidth / 2 - 60, 148, pageWidth / 2 + 60, 148);
+  y = 190;
+
+  const remplies = dreams.filter(d => d.text && d.text.trim());
+  const realisees = remplies.filter(d => d.done);
+  const enCours = remplies.filter(d => !d.done);
+
+  function writeSection(title, list){
+    if (list.length === 0) return;
+    ensureSpace(30);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.setTextColor(170, 130, 50);
+    doc.text(title.toUpperCase(), margin, y);
+    y += 6;
+    doc.setDrawColor(220, 200, 170);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 18;
+    list.forEach((d, i) => {
+      ensureSpace(18);
+      doc.setFont("times", "normal");
+      doc.setFontSize(12);
+      doc.setTextColor(40, 25, 15);
+      const num = String(i + 1).padStart(3, " ");
+      const lines = doc.splitTextToSize(`${num}. ${d.text}`, pageWidth - margin * 2 - 10);
+      lines.forEach(line => {
+        ensureSpace(16);
+        doc.text(line, margin, y);
+        y += 16;
+      });
+    });
+    y += 16;
+  }
+
+  if (enCours.length > 0) writeSection(`Mes rêves (${enCours.length})`, enCours);
+  if (realisees.length > 0) writeSection(`Rêves réalisés ★ (${realisees.length})`, realisees);
+
+  if (remplies.length === 0) {
+    doc.setFont("times", "italic");
+    doc.setFontSize(14);
+    doc.setTextColor(120, 100, 80);
+    doc.text("Tes rêves s'écriront ici, un à un.", pageWidth / 2, 220, { align: "center" });
+  }
+
+  doc.save("Mes-101-Reves.pdf");
+}
+document.getElementById("export-reves").addEventListener("click", exportReves);
+
+function exportAlignement(){
+  if (!window.jspdf) { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 56;
+  let y = margin;
+  function ensureSpace(h){ if (y + h > pageHeight - margin) { doc.addPage(); y = margin; } }
+
+  doc.setFont("times", "bolditalic");
+  doc.setFontSize(26);
+  doc.setTextColor(40, 25, 15);
+  doc.text("Table d'Alignement", pageWidth / 2, 110, { align: "center" });
+  doc.setFont("times", "italic");
+  doc.setFontSize(13);
+  doc.setTextColor(120, 60, 50);
+  doc.text("By Tata Éléonore — Je reprends mon trône", pageWidth / 2, 136, { align: "center" });
+  doc.setDrawColor(180, 140, 60);
+  doc.line(pageWidth / 2 - 60, 148, pageWidth / 2 + 60, 148);
+  y = 190;
+
+  alignment.forEach((a, i) => {
+    if (!a.dontWant && !a.want && !a.action) return;
+    ensureSpace(30);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.setTextColor(170, 130, 50);
+    doc.text(`${i + 1} / 12`, margin, y);
+    y += 16;
+    [["Je ne veux plus", a.dontWant], ["Je veux à la place", a.want], ["L'action pour y arriver", a.action]].forEach(([label, val]) => {
+      if (!val) return;
+      ensureSpace(28);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      doc.setTextColor(120, 60, 50);
+      doc.text(label.toUpperCase(), margin, y);
+      y += 13;
+      doc.setFont("times", "normal");
+      doc.setFontSize(12);
+      doc.setTextColor(40, 25, 15);
+      const lines = doc.splitTextToSize(val, pageWidth - margin * 2);
+      lines.forEach(l => { ensureSpace(16); doc.text(l, margin, y); y += 16; });
+    });
+    y += 12;
+  });
+  doc.save("Table-Alignement.pdf");
+}
+document.getElementById("export-alignement").addEventListener("click", exportAlignement);
+
+function exportConnaistoi(){
+  if (!window.jspdf) { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const margin = 56;
+  let y = margin;
+
+  doc.setFont("times", "bolditalic");
+  doc.setFontSize(26);
+  doc.setTextColor(40, 25, 15);
+  doc.text("Connais-toi toi-même", pageWidth / 2, 110, { align: "center" });
+  doc.setFont("times", "italic");
+  doc.setFontSize(13);
+  doc.setTextColor(120, 60, 50);
+  doc.text("By Tata Éléonore — Je reprends mon trône", pageWidth / 2, 136, { align: "center" });
+  doc.setDrawColor(180, 140, 60);
+  doc.line(pageWidth / 2 - 60, 148, pageWidth / 2 + 60, 148);
+  y = 190;
+
+  [["Ma force", selfKnowledge.qualites], ["Ce que j'ai à développer", selfKnowledge.defauts]].forEach(([label, val]) => {
+    if (!val) return;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.setTextColor(170, 130, 50);
+    doc.text(label.toUpperCase(), margin, y);
+    y += 16;
+    doc.setFont("times", "normal");
+    doc.setFontSize(12);
+    doc.setTextColor(40, 25, 15);
+    const lines = doc.splitTextToSize(val, pageWidth - margin * 2);
+    lines.forEach(l => { y += 16; doc.text(l, margin, y); });
+    y += 32;
+  });
+  doc.save("Connais-toi-toi-meme.pdf");
+}
+document.getElementById("export-connaistoi").addEventListener("click", exportConnaistoi);
 </script>
 
 </body>
