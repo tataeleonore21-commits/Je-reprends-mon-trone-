@@ -1203,8 +1203,7 @@ function startMethod(){
   document.getElementById("method-practice").style.display = "flex";
 
   const audio = document.getElementById("practice-audio");
-  audio.load();
-  audio.play().catch(e => console.log("audio:", e));
+  try { audio.load(); audio.play().catch(() => {}); } catch(e) {}
 
 
   const stepEl = document.getElementById("method-step");
@@ -1511,7 +1510,7 @@ function openPrintPage(title, htmlContent){
     @media print{.save-hint{display:none}}
   </style>
   </head><body>
-  <div class="save-hint">Pour enregistrer en PDF — Sur iPhone : Partager → Enregistrer en PDF · Sur Android : Menu → Imprimer → Enregistrer en PDF · Sur ordinateur : Ctrl+P (ou Cmd+P) → Enregistrer en PDF</div>
+  <div class="save-hint" style="display:none"></div>
   <h1>${title}</h1>
   <p class="sub">By Tata Éléonore — Je reprends mon trône</p>
   <hr class="divider">
