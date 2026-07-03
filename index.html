@@ -1494,12 +1494,12 @@ function exportPDF(){
     showToast("✦ Rien à graver encore ✦");
     return;
   }
-  if (!window.jspdf) {
+  if (typeof window.jsPDF === "undefined") {
     showToast("✦ Le générateur PDF n'a pas pu se charger ✦");
     return;
   }
 
-  const { jsPDF } = window.jspdf;
+  const jsPDF = window.jsPDF;
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -1574,8 +1574,8 @@ function exportPDF(){
 document.getElementById("export-pdf").addEventListener("click", exportPDF);
 
 function exportReves(){
-  if (!window.jspdf) { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
-  const { jsPDF } = window.jspdf;
+  if (typeof window.jsPDF === "undefined") { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
+  const jsPDF = window.jsPDF;
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -1643,8 +1643,8 @@ function exportReves(){
 document.getElementById("export-reves").addEventListener("click", exportReves);
 
 function exportAlignement(){
-  if (!window.jspdf) { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
-  const { jsPDF } = window.jspdf;
+  if (typeof window.jsPDF === "undefined") { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
+  const jsPDF = window.jsPDF;
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -1693,8 +1693,8 @@ function exportAlignement(){
 document.getElementById("export-alignement").addEventListener("click", exportAlignement);
 
 function exportConnaistoi(){
-  if (!window.jspdf) { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
-  const { jsPDF } = window.jspdf;
+  if (typeof window.jsPDF === "undefined") { showToast("✦ Le générateur PDF n'a pas pu se charger ✦"); return; }
+  const jsPDF = window.jsPDF;
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const pageWidth = doc.internal.pageSize.getWidth();
   const margin = 56;
