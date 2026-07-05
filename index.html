@@ -1249,7 +1249,7 @@ body{
 
 </div>
 
-<div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">contact@tataeleonore.com</span><br><button class="replay-welcome-btn" id="replay-welcome">Revoir le message d'accueil</button></div>
+<div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">contact@tataeleonore.com</span><br><button class="replay-welcome-btn" id="replay-welcome">Revoir le message d'accueil</button><br><button class="replay-welcome-btn" id="replay-bilan" style="margin-top:6px">Voir mon bilan de la semaine</button></div>
 
 <div class="bilan-overlay" id="bilan-overlay">
   <div class="bilan-box">
@@ -1499,9 +1499,9 @@ Réponds uniquement avec le paragraphe, sans titre ni introduction.`;
   }
 }
 
-async function showBilanDimanche(){
+async function showBilanDimanche(force = false){
   const bilanSaved = JSON.parse(localStorage.getItem(BILAN_KEY) || "{}");
-  if (bilanSaved.date === getTodayKey()) return; // Déjà vu aujourd'hui
+  if (!force && bilanSaved.date === getTodayKey()) return; // Déjà vu aujourd'hui
 
   const weekData = getWeekData();
   const hasContent = weekData.some(w => w.day.intention || (w.day.gratitudes && w.day.gratitudes.some(g => g)));
