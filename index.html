@@ -1258,31 +1258,20 @@ body{
   <div class="bilan-box">
     <div class="bilan-header">
       <div class="bilan-symbol">☉</div>
-      <h2 class="bilan-title">Bilan de ta semaine</h2>
+      <h2 class="bilan-title">La leçon de ta semaine</h2>
       <div class="bilan-subtitle">Dimanche — Jour du Soleil</div>
     </div>
 
     <div class="bilan-section">
-      <span class="bilan-section-title">Tes intentions cette semaine</span>
-      <div class="bilan-week-items" id="bilan-intentions"></div>
-    </div>
-
-    <div class="bilan-section">
-      <span class="bilan-section-title">Ce pour quoi tu as été reconnaissant·e</span>
-      <div class="bilan-week-items" id="bilan-gratitudes"></div>
-    </div>
-
-    <div class="bilan-section">
-      <span class="bilan-section-title">La leçon de ta semaine</span>
       <div class="bilan-lesson-card">
-        <div class="bilan-lesson-loading" id="bilan-loading">Génération de ta leçon en cours…</div>
+        <div class="bilan-lesson-loading" id="bilan-loading">Lecture de ta semaine en cours…</div>
         <p class="bilan-lesson-text" id="bilan-lesson" style="display:none"></p>
         <p class="bilan-lesson-sig" id="bilan-sig" style="display:none">— Tata Éléonore</p>
       </div>
     </div>
 
     <div class="bilan-actions">
-      <button class="bilan-share-btn" id="bilan-share">Partager ma leçon de la semaine</button>
+      <button class="bilan-share-btn" id="bilan-share">Partager cette leçon</button>
       <button class="bilan-close-btn" id="bilan-close">Fermer et commencer ma journée</button>
     </div>
   </div>
@@ -1468,22 +1457,22 @@ async function generateBilanLesson(weekData){
 
   if (!intentions && !gratitudes) return null;
 
-  const prompt = `Tu es Tata Éléonore, femme de parole et de transmission, Napene, coach certifiée aux sciences traditionnelles africaines. 
-  
-Voici ce qu'une personne a vécu cette semaine dans son journal de gratitude :
+  const prompt = `Tu es Tata Éléonore, femme de parole et de transmission, Napene, coach certifiée aux sciences traditionnelles africaines, autrice. Tu écris un livre de sagesse.
 
-INTENTIONS POSÉES :
+Voici ce qu'une personne a vécu et posé cette semaine dans son journal intime :
+
+INTENTIONS :
 ${intentions || "Aucune intention posée cette semaine."}
 
 GRATITUDES :
 ${gratitudes || "Aucune gratitude posée cette semaine."}
 
-Écris un paragraphe inspirant de 4 à 6 lignes maximum — une leçon de vie personnelle tirée de ce qu'elle a vécu. 
-Ton style : chaleureux, spirituel, ancré dans la sagesse africaine et universelle. 
-Parle-lui directement, avec le "tu". 
-Commence par une phrase forte qui résume la leçon. 
-Ne mentionne pas les détails littéralement — sublime-les, transforme-les en sagesse.
-Réponds uniquement avec le paragraphe, sans titre ni introduction.`;
+À partir de ces mots — chaque intention, chaque gratitude, chaque souffle posé — écris un paragraphe de 8 à 12 lignes comme une page de livre de développement spirituel.
+
+Ce paragraphe est une leçon de vie profonde, une analyse subtile et poétique de ce que ces mots révèlent sur le chemin de cette personne. 
+Tu ne répètes pas ce qu'elle a écrit. Tu vas au-delà — tu lis entre les lignes, tu nommes ce qui se transforme en elle, ce qu'elle est en train de comprendre sans peut-être le savoir encore.
+Ton style : littéraire, ancré, chaleureux. Des phrases longues et belles. Aucune liste, aucun titre. Un seul souffle, du début à la fin.
+Commence directement par la leçon, sans introduction ni formule d'accroche.`;
 
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -1510,24 +1499,10 @@ async function showBilanDimanche(force = false){
   const hasContent = weekData.some(w => w.day.intention || (w.day.gratitudes && w.day.gratitudes.some(g => g)));
   if (!hasContent) return; // Rien à résumer
 
-  // Remplis les sections intentions et gratitudes
-  const intentionsEl = document.getElementById("bilan-intentions");
-  const gratitudesEl = document.getElementById("bilan-gratitudes");
-
-  const intentionItems = weekData.filter(w => w.day.intention);
-  const gratitudeItems = weekData.flatMap(w =>
-    (w.day.gratitudes || []).filter(g => g).map(g => ({ date: w.key, text: g }))
-  ).slice(0, 8);
-
-  intentionsEl.innerHTML = intentionItems.length > 0
-    ? intentionItems.map(w => `<div class="bilan-item"><span class="bilan-item-date">${formatDisplayDate(w.key).split(' ').slice(0,2).join(' ')}</span>${escapeHtml(w.day.intention)}</div>`).join("")
-    : `<div class="bilan-item" style="opacity:.5;font-style:italic">Aucune intention cette semaine</div>`;
-
-  gratitudesEl.innerHTML = gratitudeItems.length > 0
-    ? gratitudeItems.map(g => `<div class="bilan-item">${escapeHtml(g.text)}</div>`).join("")
-    : `<div class="bilan-item" style="opacity:.5;font-style:italic">Aucune gratitude cette semaine</div>`;
-
-  // Ouvre la carte
+  // Ouvre la carte directement
+  document.getElementById("bilan-loading").style.display = "block";
+  document.getElementById("bilan-lesson").style.display = "none";
+  document.getElementById("bilan-sig").style.display = "none";
   document.getElementById("bilan-overlay").classList.add("open");
 
   // Génère la leçon
