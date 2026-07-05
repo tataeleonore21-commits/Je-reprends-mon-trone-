@@ -96,6 +96,21 @@ body{
 }
 .crown-header{text-align:center;padding:48px 20px 36px;position:relative;overflow:hidden}
 .crown-svg{display:block;margin:0 auto 20px;animation:crownFloat 4s ease-in-out infinite}
+
+/* Scintillement */
+.sparkle-particle{
+  position:fixed;
+  pointer-events:none;
+  z-index:9999;
+  font-size:14px;
+  animation:sparkleFly 1.8s ease-out forwards;
+  user-select:none;
+}
+@keyframes sparkleFly{
+  0%{opacity:0;transform:translateY(0) scale(0.5) rotate(0deg)}
+  20%{opacity:1;transform:translateY(-20px) scale(1.2) rotate(30deg)}
+  100%{opacity:0;transform:translateY(-80px) scale(0.6) rotate(180deg)}
+}
 @keyframes crownFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .brand-line{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.55em;text-transform:uppercase;color:var(--gold-deep);opacity:.85;margin-bottom:14px}
 .app-title{font-family:'Playfair Display',serif;font-size:clamp(32px,9vw,62px);font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:.01em}
@@ -1116,7 +1131,7 @@ body{
 .planet-name{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:19px;color:var(--ink);margin-bottom:16px}
 .planet-actions{display:flex;flex-direction:column;gap:7px;text-align:left;max-width:440px;margin:0 auto}
 .planet-action-item{font-family:'EB Garamond',serif;font-weight:600;font-size:15px;color:var(--ink-soft);display:flex;gap:8px;align-items:flex-start;line-height:1.4}
-.planet-action-item::before{content:'✦';color:var(--gold);flex-shrink:0}
+.planet-action-item::before{content:'★';color:var(--gold);flex-shrink:0}
 </style>
 </head>
 <body>
@@ -1132,7 +1147,7 @@ body{
         <p class="welcome-whoami-name">Tata Éléonore</p>
         <p class="welcome-whoami-tagline">Femme de parole et de transmission · Napene · Coach · Autrice</p>
         <p class="welcome-whoami-text">Éléonore chemine entre ancestralité et spiritualité. Coach certifiée et initiée aux sciences traditionnelles africaines, elle accompagne les personnes en demande à retrouver leur puissance intérieure, à travers la mémoire des lignées, la parole sacrée et l'éveil de leur vraie nature.</p>
-        <a class="welcome-whoami-contact" href="mailto:tataeleonore21@gmail.com">contact@tataeleonore.com</a>
+        <a class="welcome-whoami-contact" href="mailto:tataeleonore21@gmail.com">tataeleonore21@gmail.com</a>
       </div>
     </div>
   </div>
@@ -1140,9 +1155,9 @@ body{
 
 <div class="celebration-overlay" id="celebration-overlay">
   <div class="celebration-box">
-    <div class="celebration-icon">✦</div>
+    <div class="celebration-icon">★</div>
     <div class="celebration-text">Journée complète</div>
-    <div class="celebration-sub">Intention et gratitude sont ancrées ✦</div>
+    <div class="celebration-sub">Intention et gratitude sont ancrées ★</div>
   </div>
 </div>
 
@@ -1160,12 +1175,13 @@ body{
   <div class="brand-line">By Tata Éléonore</div>
   <h1 class="app-title">Je reprends<em>mon trône</em></h1>
   <div class="app-subtitle">Journal de gratitude &amp; d'éveil</div>
-  <div class="divider"><div class="divider-line"></div><div class="divider-gem">✦</div><div class="divider-line"></div></div>
+  <div style="color:var(--gold);font-size:16px;margin-top:10px">★</div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-gem">★</div><div class="divider-line"></div></div>
 </div>
 
 <div class="quote-card">
   <div class="quote-inner">
-    <span class="quote-mark">"</span>
+    
     <p class="quote-text" id="quote-text"></p>
     <p class="quote-author" id="quote-author"></p>
   </div>
@@ -1192,7 +1208,7 @@ body{
   <span class="tab-group-label">Mémoire</span>
   <button class="tab-btn" data-tab="histoire">Historique</button>
   <span class="tab-group-label">Premium</span>
-  <button class="tab-btn tab-btn-premium" data-tab="premium">✦ Oracle</button>
+  <button class="tab-btn tab-btn-premium" data-tab="premium">★ Oracle</button>
 </div>
 
 <div class="content">
@@ -1211,13 +1227,13 @@ body{
       <div class="section-header"><span class="section-label">5 choses pour lesquelles tu es reconnaissant·e aujourd'hui</span></div>
       <div class="gratitude-list" id="gratitude-list"></div>
     </div>
-    <button class="save-btn" id="save-soir">✦ Clore cette journée avec grâce ✦</button>
+    <button class="save-btn" id="save-soir">★ Clore cette journée avec grâce ★</button>
   </div>
 
   <div class="view" id="view-alignement">
     <p class="intro-text">Ce que tu rejettes éclaire ce que tu désires. Pose ici ce que tu ne veux plus, son opposé exact, puis l'action concrète qui t'en rapproche un peu plus chaque jour.</p>
     <div id="align-list"></div>
-    <button class="save-btn" id="save-alignement">✦ Ancrer cette table ✦</button>
+    <button class="save-btn" id="save-alignement">★ Ancrer cette table ★</button>
     <button class="export-btn" id="export-alignement" style="margin-top:12px">Télécharger ma table d'alignement en PDF</button>
   </div>
 
@@ -1226,16 +1242,16 @@ body{
     <div class="dream-progress" id="dream-progress">0 / 101 rêves inscrits</div>
     <div class="dream-list" id="dream-list"></div>
     <div class="dream-gallery">
-      <div class="dream-gallery-title">✦ Galerie des rêves accomplis ✦</div>
+      <div class="dream-gallery-title">★ Galerie des rêves accomplis ★</div>
       <div class="dream-gallery-grid" id="dream-gallery"></div>
     </div>
-    <button class="save-btn" id="save-reves">✦ Graver mes rêves ✦</button>
+    <button class="save-btn" id="save-reves">★ Graver mes rêves ★</button>
     <button class="export-btn" id="export-reves" style="margin-top:12px">Télécharger mes 101 rêves en PDF</button>
   </div>
 
   <div class="view" id="view-connaistoi">
     <p class="intro-text">Se connaître, c'est le premier pas vers toute transformation. Note ici ce que tu sais de toi, sans filtre et sans jugement.</p>
-    <p class="self-note">✦ Pas un rituel quotidien — reviens-y simplement quand tu sens que tu as changé.</p>
+    <p class="self-note">★ Pas un rituel quotidien — reviens-y simplement quand tu sens que tu as changé.</p>
     <div class="self-grid">
       <div class="section-block">
         <div class="section-header"><span class="section-label">Ma force</span></div>
@@ -1246,7 +1262,7 @@ body{
         <textarea class="field-input self-textarea" id="defauts" placeholder="Ce sur quoi je travaille, avec douceur et honnêteté…"></textarea>
       </div>
     </div>
-    <button class="save-btn" id="save-connaistoi">✦ Ancrer cette vérité ✦</button>
+    <button class="save-btn" id="save-connaistoi">★ Ancrer cette vérité ★</button>
     <button class="export-btn" id="export-connaistoi" style="margin-top:12px">Télécharger "Connais-toi toi-même" en PDF</button>
   </div>
 
@@ -1257,7 +1273,7 @@ body{
 
   <div class="view" id="view-premium">
     <div class="oracle-container">
-      <div class="oracle-lock">✦</div>
+      <div class="oracle-lock">★</div>
       <div class="oracle-premium-badge">Espace Premium</div>
       <h2 class="oracle-title">L'Oracle du Jour</h2>
       <p class="oracle-subtitle">Choisis un chiffre entre 1 et 9.<br>Laisse ton intuition guider ta main.</p>
@@ -1275,9 +1291,9 @@ body{
       </div>
 
       <div class="oracle-result" id="oracle-result">
-        <div class="oracle-number-meaning" id="oracle-meaning"></div>
+        <div class="oracle-number-meaning" id="oracle-meaning" style="display:none"></div>
         <div class="oracle-card">
-          <span class="oracle-quote-mark">"</span>
+          
           <p class="oracle-message" id="oracle-message"></p>
           <p class="oracle-signature">— Tata Éléonore</p>
         </div>
@@ -1293,7 +1309,7 @@ body{
 
 </div>
 
-<div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">contact@tataeleonore.com</span><br>
+<div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">tataeleonore21@gmail.com</span><br>
 <button class="replay-welcome-btn" id="replay-welcome">Revoir le message d'accueil</button><br>
 <button class="replay-welcome-btn" id="replay-bilan" style="margin-top:6px">Voir mon bilan de la semaine</button>
 </div>
@@ -1338,7 +1354,7 @@ body{
   </div>
 </div>
 
-<div class="toast" id="toast">✦ Gravé dans ton royaume ✦</div>
+<div class="toast" id="toast">★ Gravé dans ton royaume ★</div>
 
 <div class="method-overlay" id="method-overlay">
   <div class="method-box" id="method-intro" style="display:none">
@@ -1602,7 +1618,7 @@ document.getElementById("bilan-share").addEventListener("click", () => {
   if (navigator.share) {
     navigator.share({ title: "Ma leçon de la semaine", text });
   } else {
-    navigator.clipboard.writeText(text).then(() => showToast("✦ Copié dans ton presse-papier ✦"));
+    navigator.clipboard.writeText(text).then(() => showToast("★ Copié dans ton presse-papier ★"));
   }
 });
 
@@ -1699,6 +1715,23 @@ function renderTodayProgress(){
 }
 renderStats();
 
+// ✨ Scintillement ambiant
+const SPARKLE_CHARS = ['★', '★', '✨', '·', '★', '★'];
+function createSparkle(){
+  const el = document.createElement('span');
+  el.className = 'sparkle-particle';
+  el.textContent = SPARKLE_CHARS[Math.floor(Math.random() * SPARKLE_CHARS.length)];
+  el.style.left = (10 + Math.random() * 80) + 'vw';
+  el.style.top = (10 + Math.random() * 80) + 'vh';
+  el.style.color = Math.random() > 0.5 ? 'var(--gold)' : 'var(--gold-deep)';
+  el.style.fontSize = (10 + Math.random() * 10) + 'px';
+  el.style.animationDuration = (1.2 + Math.random() * 1.2) + 's';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2400);
+}
+setInterval(() => { createSparkle(); setTimeout(createSparkle, 600); }, 3000);
+setTimeout(() => { for(let i=0; i<4; i++) setTimeout(createSparkle, i*300); }, 800);
+
 // Tabs
 document.querySelectorAll(".tab-btn").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -1753,7 +1786,7 @@ function showCelebration(){
   overlay.classList.add("open");
   setTimeout(() => overlay.classList.remove("open"), 2600);
 }
-document.getElementById("save-soir").addEventListener("click", () => { saveJSON(STORAGE_KEY, days); renderStats(); showToast("✦ Gravé dans ton royaume ✦"); checkDayCompletion(); });
+document.getElementById("save-soir").addEventListener("click", () => { saveJSON(STORAGE_KEY, days); renderStats(); showToast("★ Gravé dans ton royaume ★"); checkDayCompletion(); });
 
 // Méthode de respiration / visualisation (1 min 06)
 let methodTimerInterval = null;
@@ -1847,7 +1880,7 @@ function startMethod(){
     if (remaining <= 0) {
       clearInterval(methodTimerInterval);
       clearInterval(affirmationInterval);
-      stepEl.textContent = "✦ Intention ancrée ✦";
+      stepEl.textContent = "★ Intention ancrée ★";
       subEl.textContent = "";
       timerEl.textContent = "0:00";
       affirmationEl.classList.remove("show");
@@ -1880,7 +1913,7 @@ function renderDreamGallery(){
   const gallery = document.getElementById("dream-gallery");
   const accomplished = dreams.filter(d => d.done && d.text && d.text.trim());
   if (accomplished.length === 0) {
-    gallery.innerHTML = `<div class="dream-gallery-empty">Ton premier rêve accompli apparaîtra ici ✦</div>`;
+    gallery.innerHTML = `<div class="dream-gallery-empty">Ton premier rêve accompli apparaîtra ici ★</div>`;
     return;
   }
   gallery.innerHTML = accomplished.map(d => `<span class="dream-chip">★ ${escapeHtml(d.text)}</span>`).join("");
@@ -1932,7 +1965,7 @@ function renderDreams(){
       if (dreams[idx].done) {
         check.classList.add("celebrate");
         setTimeout(() => check.classList.remove("celebrate"), 500);
-        showToast("✦ Un rêve réalisé, ton royaume s'agrandit ✦");
+        showToast("★ Un rêve réalisé, ton royaume s'agrandit ★");
       }
       updateDreamProgress();
       saveJSON(DREAMS_KEY, dreams);
@@ -1942,14 +1975,14 @@ function renderDreams(){
   updateDreamProgress();
 }
 renderDreams();
-document.getElementById("save-reves").addEventListener("click", () => { saveJSON(DREAMS_KEY, dreams); showToast("✦ Tes rêves sont gravés ✦"); });
+document.getElementById("save-reves").addEventListener("click", () => { saveJSON(DREAMS_KEY, dreams); showToast("★ Tes rêves sont gravés ★"); });
 
 // Connais-toi toi-même
 document.getElementById("qualites").value = selfKnowledge.qualites;
 document.getElementById("defauts").value = selfKnowledge.defauts;
 document.getElementById("qualites").addEventListener("input", e => { selfKnowledge.qualites = e.target.value; });
 document.getElementById("defauts").addEventListener("input", e => { selfKnowledge.defauts = e.target.value; });
-document.getElementById("save-connaistoi").addEventListener("click", () => { saveJSON(SELF_KEY, selfKnowledge); showToast("✦ Cette vérité est ancrée ✦"); });
+document.getElementById("save-connaistoi").addEventListener("click", () => { saveJSON(SELF_KEY, selfKnowledge); showToast("★ Cette vérité est ancrée ★"); });
 
 // Table d'alignement
 function renderAlignment(){
@@ -1986,7 +2019,7 @@ function renderAlignment(){
   });
 }
 renderAlignment();
-document.getElementById("save-alignement").addEventListener("click", () => { saveJSON(ALIGN_KEY, alignment); showToast("✦ Ta table d'alignement est ancrée ✦"); });
+document.getElementById("save-alignement").addEventListener("click", () => { saveJSON(ALIGN_KEY, alignment); showToast("★ Ta table d'alignement est ancrée ★"); });
 
 function historyBodyHTML(key, entry){
   return `
@@ -2002,7 +2035,7 @@ function historyBodyHTML(key, entry){
           </div>`).join("")}
       </div>
     </div>
-    <button class="save-btn hist-save-btn" data-key="${key}" style="margin-top:18px;font-size:9px;padding:12px">✦ Enregistrer les modifications ✦</button>
+    <button class="save-btn hist-save-btn" data-key="${key}" style="margin-top:18px;font-size:9px;padding:12px">★ Enregistrer les modifications ★</button>
   `;
 }
 function escapeHtml(str){
@@ -2023,7 +2056,7 @@ function renderHistory(){
     return `
       <div class="history-day">
         <div class="history-day-header" data-key="${key}">
-          <span class="history-day-date">${isToday ? "✦ " : ""}${formatDisplayDate(key)}${isToday ? " — Aujourd'hui" : ""}</span>
+          <span class="history-day-date">${isToday ? "★ " : ""}${formatDisplayDate(key)}${isToday ? " — Aujourd'hui" : ""}</span>
           <span class="history-day-toggle">▼</span>
         </div>
         <div class="history-day-body" data-body="${key}">${historyBodyHTML(key, days[key])}</div>
@@ -2056,7 +2089,7 @@ function renderHistory(){
       saveJSON(STORAGE_KEY, days);
       renderStats();
       if (key === todayKey) fillFields();
-      showToast("✦ Jour modifié et gravé ✦");
+      showToast("★ Jour modifié et gravé ★");
     });
   });
 }
@@ -2064,7 +2097,7 @@ function renderHistory(){
 // Export PDF — "Mon Livre de Gratitude"
 function openPrintPage(title, htmlContent){
   const win = window.open("", "_blank");
-  if (!win) { showToast("✦ Autorise les pop-ups pour exporter ✦"); return; }
+  if (!win) { showToast("★ Autorise les pop-ups pour exporter ★"); return; }
   win.document.write(`<!DOCTYPE html><html lang="fr"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -2100,7 +2133,7 @@ function exportPDF(){
     const e = days[k];
     return e && (e.intention || (e.gratitudes && e.gratitudes.some(g => g)));
   }).sort();
-  if (keys.length === 0) { showToast("✦ Rien à graver encore ✦"); return; }
+  if (keys.length === 0) { showToast("★ Rien à graver encore ★"); return; }
   const html = keys.map(key => {
     const e = days[key];
     let s = `<p class="day-date">${formatDisplayDate(key)}</p>`;
@@ -2254,7 +2287,7 @@ function showOracleResult(num, meaning, message){
     returnMsg.style.cssText = "font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:16px;opacity:.7";
     result.appendChild(returnMsg);
   }
-  returnMsg.textContent = "✦ Ton tirage du jour est fait — reviens demain ✦";
+  returnMsg.textContent = "★ Ton tirage du jour est fait — reviens demain ★";
 }
 
 function initOracle(){
@@ -2283,7 +2316,7 @@ initOracle();
 
 function exportReves(){
   const remplies = dreams.filter(d => d.text && d.text.trim());
-  if (remplies.length === 0) { showToast("✦ Aucun rêve inscrit encore ✦"); return; }
+  if (remplies.length === 0) { showToast("★ Aucun rêve inscrit encore ★"); return; }
   const html = remplies.map((d, i) =>
     `<div class="dream-item${d.done ? " dream-done" : ""}">
       ${i+1}. ${escapeHtml(d.text)}${d.done ? " ★" : ""}
@@ -2295,7 +2328,7 @@ document.getElementById("export-reves").addEventListener("click", exportReves);
 
 function exportAlignement(){
   const lignes = alignment.filter(a => a.dontWant || a.want || a.action);
-  if (lignes.length === 0) { showToast("✦ Table vide encore ✦"); return; }
+  if (lignes.length === 0) { showToast("★ Table vide encore ★"); return; }
   const html = lignes.map((a, i) => `
     <div style="margin-bottom:16px">
       <p style="font-weight:bold;color:#7A5A1E;font-size:12px">${i+1} / 12</p>
@@ -2308,7 +2341,7 @@ function exportAlignement(){
 document.getElementById("export-alignement").addEventListener("click", exportAlignement);
 
 function exportConnaistoi(){
-  if (!selfKnowledge.qualites && !selfKnowledge.defauts) { showToast("✦ Rien à exporter encore ✦"); return; }
+  if (!selfKnowledge.qualites && !selfKnowledge.defauts) { showToast("★ Rien à exporter encore ★"); return; }
   const html = `
     ${selfKnowledge.qualites ? `<span class="section-label">Ma force</span><p class="section-text">${escapeHtml(selfKnowledge.qualites)}</p><br>` : ""}
     ${selfKnowledge.defauts ? `<span class="section-label">Ce que j'ai à développer</span><p class="section-text">${escapeHtml(selfKnowledge.defauts)}</p>` : ""}`;
