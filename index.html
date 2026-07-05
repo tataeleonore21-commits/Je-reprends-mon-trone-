@@ -1074,23 +1074,6 @@ body{
     <p class="method-teaching">Chaque mot que tu poses ici est une pierre de ton royaume.<br><span class="signature-script">Tata Éléonore</span></p>
     <button class="method-start" id="welcome-close">Je reprends mon trône</button>
     <p class="welcome-coaching">Si tu désires aller plus loin, contacte-moi.<br><span class="welcome-contact">contact@tataeleonore.com</span></p>
-
-    <div class="whoami-section">
-      <button class="whoami-toggle" id="whoami-toggle">Qui suis-je ?</button>
-      <div class="whoami-body" id="whoami-body">
-        <div class="whoami-name">Tata Éléonore</div>
-        <div class="whoami-tagline">Femme de parole et de transmission</div>
-        <div class="whoami-tags">
-          <span class="whoami-tag">Napene</span>
-          <span class="whoami-tag">Infirmière</span>
-          <span class="whoami-tag">Coach</span>
-          <span class="whoami-tag">Autrice</span>
-        </div>
-        <p class="whoami-text">Éléonore chemine entre ancestralité et spiritualité. Infirmière et cadre de santé en bloc opératoire pendant plus de 40 ans, elle a exploré le corps humain dans ses moindres détails — pour comprendre, finalement, que nous ne sommes pas ce corps. Que nous sommes vastes, infinis, et que c'est dans cette vastitude que résident la connaissance et la guérison.</p>
-        <p class="whoami-text">Coach certifiée et initiée aux sciences traditionnelles africaines, elle accompagne les personnes en demande à retrouver leur puissance intérieure, à travers la mémoire des lignées, la parole sacrée et l'éveil de leur vraie nature.</p>
-        <p class="whoami-text">Napene — prêtresse divinatoire et thérapeutique — Tata Éléonore est l'aboutissement vivant de ce qu'elle transmet : une femme enracinée dans sa tradition, gardienne de la langue, de la culture et de l'âme manjaku.</p>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -1249,7 +1232,27 @@ body{
 
 </div>
 
-<div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">contact@tataeleonore.com</span><br><button class="replay-welcome-btn" id="replay-welcome">Revoir le message d'accueil</button><br><button class="replay-welcome-btn" id="replay-bilan" style="margin-top:6px">Voir mon bilan de la semaine</button></div>
+<div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">contact@tataeleonore.com</span><br>
+<button class="replay-welcome-btn" id="replay-welcome">Revoir le message d'accueil</button><br>
+<button class="replay-welcome-btn" id="replay-bilan" style="margin-top:6px">Voir mon bilan de la semaine</button>
+</div>
+
+<div class="whoami-section">
+  <button class="whoami-toggle" id="whoami-toggle">Qui suis-je ?</button>
+  <div class="whoami-body" id="whoami-body">
+    <div class="whoami-name">Tata Éléonore</div>
+    <div class="whoami-tagline">Femme de parole et de transmission</div>
+    <div class="whoami-tags">
+      <span class="whoami-tag">Napene</span>
+      <span class="whoami-tag">Infirmière</span>
+      <span class="whoami-tag">Coach</span>
+      <span class="whoami-tag">Autrice</span>
+    </div>
+    <p class="whoami-text">Éléonore chemine entre ancestralité et spiritualité. Infirmière et cadre de santé en bloc opératoire pendant plus de 40 ans, elle a exploré le corps humain dans ses moindres détails — pour comprendre, finalement, que nous ne sommes pas ce corps. Que nous sommes vastes, infinis, et que c'est dans cette vastitude que résident la connaissance et la guérison.</p>
+    <p class="whoami-text">Coach certifiée et initiée aux sciences traditionnelles africaines, elle accompagne les personnes en demande à retrouver leur puissance intérieure, à travers la mémoire des lignées, la parole sacrée et l'éveil de leur vraie nature.</p>
+    <p class="whoami-text">Napene — prêtresse divinatoire et thérapeutique — Tata Éléonore est l'aboutissement vivant de ce qu'elle transmet : une femme enracinée dans sa tradition, gardienne de la langue, de la culture et de l'âme manjaku.</p>
+  </div>
+</div>
 
 <div class="bilan-overlay" id="bilan-overlay">
   <div class="bilan-box">
@@ -1562,6 +1565,14 @@ document.getElementById("bilan-share").addEventListener("click", () => {
   } else {
     navigator.clipboard.writeText(text).then(() => showToast("✦ Copié dans ton presse-papier ✦"));
   }
+});
+
+document.getElementById("replay-bilan").addEventListener("click", () => {
+  // Reset lesson display for fresh generation
+  document.getElementById("bilan-loading").style.display = "block";
+  document.getElementById("bilan-lesson").style.display = "none";
+  document.getElementById("bilan-sig").style.display = "none";
+  showBilanDimanche(true);
 });
 
 // Lance le bilan si c'est dimanche
