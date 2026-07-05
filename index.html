@@ -105,7 +105,7 @@ body{
 .divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
 .divider-gem{color:var(--gold);font-size:10px}
 .quote-card{margin:0 auto 36px;max-width:640px;padding:0 20px}
-.quote-inner{background:linear-gradient(135deg,rgba(169,128,47,.06),rgba(125,52,65,.04));border:1px solid var(--border);border-top:2px solid var(--gold);padding:28px 32px;text-align:center;position:relative;border-radius:2px}
+.quote-inner{background:linear-gradient(135deg,rgba(169,128,47,.06),rgba(125,52,65,.04));border:1px solid var(--border);border-top:2px solid var(--gold);padding:28px 32px;text-align:center;position:relative;border-radius:14px}
 .quote-mark{font-family:'Playfair Display',serif;font-size:72px;color:var(--gold);opacity:.25;position:absolute;top:-16px;left:16px;line-height:1}
 .quote-text{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:clamp(16px,3.5vw,20px);line-height:1.65;color:var(--ink);margin-bottom:12px}
 .quote-author{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);opacity:.85}
@@ -122,7 +122,7 @@ body{
   margin:10px 0 2px;
 }
 .tab-group-label:first-child{margin-top:0}
-.tab-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--muted);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.25em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:all .25s;border-radius:1px}
+.tab-btn{background:var(--bg-card);border:1px solid var(--border);color:var(--muted);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.25em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:all .25s;border-radius:12px}
 .tab-btn:hover{color:var(--gold-deep);border-color:var(--gold)}
 .tab-btn.active{background:linear-gradient(135deg,rgba(169,128,47,.16),rgba(169,128,47,.06));border-color:var(--gold);color:var(--gold-deep);font-weight:600}
 .tab-btn-premium{
@@ -176,7 +176,7 @@ body{
 .oracle-num-btn{
   background:var(--bg-card);
   border:1px solid var(--border);
-  border-radius:2px;
+  border-radius:14px;
   padding:18px 8px;
   cursor:pointer;
   transition:all .25s;
@@ -208,7 +208,7 @@ body{
   background:linear-gradient(135deg,rgba(169,128,47,.08),rgba(169,128,47,.02));
   border:1px solid var(--gold);
   border-top:2px solid var(--gold);
-  border-radius:2px;
+  border-radius:14px;
   padding:32px 24px;
   margin-bottom:24px;
   position:relative;
@@ -247,14 +247,14 @@ body{
   letter-spacing:.2em;
   text-transform:uppercase;
   padding:8px 20px;
-  border-radius:2px;
+  border-radius:14px;
   cursor:pointer;
   margin-top:8px;
 }
 .oracle-premium-cta{
   background:linear-gradient(135deg,rgba(169,128,47,.15),rgba(169,128,47,.05));
   border:1px solid var(--gold);
-  border-radius:2px;
+  border-radius:14px;
   padding:24px;
   margin-top:32px;
   text-align:center;
@@ -280,7 +280,7 @@ body{
   text-transform:uppercase;
   padding:14px;
   cursor:pointer;
-  border-radius:2px;
+  border-radius:14px;
   text-decoration:none;
 }
 .content{max-width:660px;margin:0 auto;padding:0 20px 80px}
@@ -303,18 +303,18 @@ body{
   border-left:2px solid var(--gold-tint);
   padding-left:16px;
 }
-.field-input{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;color:var(--ink);font-family:'EB Garamond',serif;font-size:18px;font-weight:600;padding:14px 18px;outline:none;transition:border-color .25s,box-shadow .25s;resize:vertical;line-height:1.65;min-height:56px}
+.field-input{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;color:var(--ink);font-family:'EB Garamond',serif;font-size:18px;font-weight:600;padding:14px 18px;outline:none;transition:border-color .25s,box-shadow .25s;resize:vertical;line-height:1.65;min-height:56px}
 .field-input::placeholder{color:rgba(232,217,188,0.4);font-style:italic}
 .field-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(169,128,47,0.08)}
 .gratitude-list{display:flex;flex-direction:column;gap:10px}
-.gratitude-item{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:12px 16px;transition:border-color .25s}
+.gratitude-item{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;transition:border-color .25s}
 .gratitude-item:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(169,128,47,0.08)}
 .gratitude-num{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:var(--gold);opacity:.65;min-width:20px;text-align:center}
 .gratitude-input{flex:1;background:none;border:none;color:var(--ink);font-family:'EB Garamond',serif;font-size:18px;font-weight:600;outline:none;line-height:1.5}
 .gratitude-input::placeholder{color:rgba(232,217,188,0.4);font-style:italic}
-.save-btn{display:block;width:100%;margin-top:40px;background:linear-gradient(135deg,rgba(169,128,47,.18),rgba(169,128,47,.07));border:1px solid var(--gold);color:var(--gold-deep);font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:.45em;text-transform:uppercase;padding:16px;cursor:pointer;transition:all .3s;border-radius:1px}
+.save-btn{display:block;width:100%;margin-top:40px;background:linear-gradient(135deg,rgba(169,128,47,.18),rgba(169,128,47,.07));border:1px solid var(--gold);color:var(--gold-deep);font-family:'Cinzel',serif;font-size:11px;font-weight:600;letter-spacing:.45em;text-transform:uppercase;padding:16px;cursor:pointer;transition:all .3s;border-radius:12px}
 .save-btn:hover{background:rgba(169,128,47,.25);letter-spacing:.55em}
-.history-day{border:1px solid var(--border);border-left:2px solid var(--rose);background:var(--bg-card);border-radius:2px;margin-bottom:20px;overflow:hidden;animation:fadeUp .35s ease both}
+.history-day{border:1px solid var(--border);border-left:2px solid var(--rose);background:var(--bg-card);border-radius:14px;margin-bottom:20px;overflow:hidden;animation:fadeUp .35s ease both}
 .history-day-header{padding:16px 20px;background:rgba(125,52,65,.05);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .2s}
 .history-day-header:hover{background:rgba(125,52,65,.09)}
 .history-day-date{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep)}
@@ -327,7 +327,7 @@ body{
 .history-gratitude-item{display:flex;gap:10px;margin-bottom:4px}
 .history-gnum{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:var(--gold);opacity:.55;min-width:16px}
 .empty-state{text-align:center;padding:60px 20px;font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--muted);opacity:.75}
-.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--toast-bg);border:1px solid var(--gold);color:var(--toast-text);font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;padding:12px 28px;border-radius:2px;transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:999;text-align:center;white-space:nowrap}
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--toast-bg);border:1px solid var(--gold);color:var(--toast-text);font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;padding:12px 28px;border-radius:14px;transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:999;text-align:center;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .signature{text-align:center;padding:32px 20px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--muted);opacity:.7}
 .footer-contact{
@@ -376,7 +376,7 @@ body{
   text-transform:uppercase;
   padding:13px;
   cursor:pointer;
-  border-radius:2px;
+  border-radius:14px;
   transition:all .25s;
 }
 .whoami-toggle:hover{background:var(--gold-tint)}
@@ -386,7 +386,7 @@ body{
   padding:24px;
   background:var(--bg-card);
   border:1px solid var(--border);
-  border-radius:2px;
+  border-radius:14px;
   text-align:center;
 }
 .whoami-body.open{display:block;animation:fadeUp .4s ease both}
@@ -442,7 +442,7 @@ body{
   opacity:.85;
 }
 .dream-list{display:flex;flex-direction:column;gap:14px}
-.dream-group{border:1px solid var(--border);border-radius:2px;overflow:hidden}
+.dream-group{border:1px solid var(--border);border-radius:14px;overflow:hidden}
 .dream-group-header{
   padding:13px 18px;
   background:var(--card-tint);
@@ -456,7 +456,7 @@ body{
 }
 .dream-group-body{display:none;flex-direction:column;gap:8px;padding:10px}
 .dream-group-body.open{display:flex}
-.dream-item{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:10px 16px;transition:border-color .2s,background .3s}
+.dream-item{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:10px 16px;transition:border-color .2s,background .3s}
 .dream-item:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(169,128,47,0.08)}
 .dream-item.done{background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));border-color:var(--gold)}
 .dream-num{font-family:'Cinzel',serif;font-size:11px;color:var(--gold);opacity:.6;min-width:22px;text-align:right}
@@ -547,7 +547,7 @@ body{
   background:var(--bg-card);
   border:1px solid var(--border);
   border-left:2px solid var(--rose);
-  border-radius:2px;
+  border-radius:14px;
   padding:18px 20px;
   margin-bottom:14px;
 }
@@ -574,7 +574,7 @@ body{
   width:100%;
   background:var(--card-tint);
   border:1px solid var(--border);
-  border-radius:2px;
+  border-radius:14px;
   color:var(--ink);
   font-family:'EB Garamond',serif;
   font-size:15px;
@@ -602,7 +602,7 @@ body{
   text-align:center;
   background:var(--bg-card);
   border:1px solid var(--border);
-  border-radius:2px;
+  border-radius:14px;
   padding:16px 8px;
 }
 .stat-num{
@@ -684,7 +684,7 @@ body{
   padding:14px;
   cursor:pointer;
   transition:all .25s;
-  border-radius:2px;
+  border-radius:14px;
 }
 .export-btn:hover{background:var(--card-tint);border-style:solid}
 
@@ -703,7 +703,7 @@ body{
   padding:13px;
   cursor:pointer;
   transition:all .25s;
-  border-radius:2px;
+  border-radius:14px;
 }
 .method-btn:hover{background:var(--gold-tint);border-color:var(--gold)}
 .method-overlay{
@@ -818,6 +818,59 @@ body{
   letter-spacing:.1em;
   color:#D9A94A;
 }
+.welcome-whoami{
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid rgba(242,230,204,0.15);
+  text-align:center;
+}
+.welcome-whoami-toggle{
+  background:none;
+  border:1px solid rgba(242,230,204,0.3);
+  color:rgba(242,230,204,0.75);
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  padding:8px 20px;
+  border-radius:20px;
+  cursor:pointer;
+  margin-bottom:14px;
+}
+.welcome-whoami-body{
+  display:none;
+  animation:fadeUp .3s ease both;
+}
+.welcome-whoami-body.open{display:block}
+.welcome-whoami-name{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:16px;
+  color:#F2E6CC;
+  margin-bottom:4px;
+}
+.welcome-whoami-tagline{
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#D9A94A;
+  margin-bottom:12px;
+}
+.welcome-whoami-text{
+  font-family:'EB Garamond',serif;
+  font-size:14px;
+  line-height:1.65;
+  color:rgba(242,230,204,0.75);
+  margin-bottom:12px;
+}
+.welcome-whoami-contact{
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  letter-spacing:.1em;
+  color:#D9A94A;
+  text-decoration:none;
+}
 .method-start{
   display:block;
   width:100%;
@@ -832,7 +885,7 @@ body{
   text-transform:uppercase;
   padding:14px;
   cursor:pointer;
-  border-radius:2px;
+  border-radius:14px;
 }
 .method-close{
   display:block;
@@ -846,7 +899,7 @@ body{
   letter-spacing:.25em;
   text-transform:uppercase;
   padding:14px;
-  border-radius:2px;
+  border-radius:14px;
   cursor:pointer;
   touch-action:manipulation;
   flex-shrink:0;
@@ -920,7 +973,7 @@ body{
 .bilan-week-items{
   background:var(--bg-card);
   border:1px solid var(--border);
-  border-radius:2px;
+  border-radius:14px;
   padding:14px 16px;
   max-height:130px;
   overflow-y:auto;
@@ -945,7 +998,7 @@ body{
   background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));
   border:1px solid var(--gold);
   border-top:2px solid var(--gold);
-  border-radius:2px;
+  border-radius:14px;
   padding:28px 20px;
   position:relative;
   min-height:120px;
@@ -996,7 +1049,7 @@ body{
   text-transform:uppercase;
   padding:14px;
   cursor:pointer;
-  border-radius:2px;
+  border-radius:14px;
   touch-action:manipulation;
 }
 .bilan-close-btn{
@@ -1011,7 +1064,7 @@ body{
   text-transform:uppercase;
   padding:12px;
   cursor:pointer;
-  border-radius:2px;
+  border-radius:14px;
   touch-action:manipulation;
 }
 .celebration-overlay.open{display:flex}
@@ -1054,7 +1107,7 @@ body{
 .planet-inner{
   background:linear-gradient(135deg,rgba(125,52,65,.05),rgba(169,128,47,.05));
   border:1px solid var(--border);
-  border-radius:2px;
+  border-radius:14px;
   padding:26px 28px;
   text-align:center;
 }
@@ -1073,7 +1126,15 @@ body{
     <div class="method-step">Bienvenue dans ton royaume</div>
     <p class="method-teaching">Chaque mot que tu poses ici est une pierre de ton royaume.<br><span class="signature-script">Tata Éléonore</span></p>
     <button class="method-start" id="welcome-close">Je reprends mon trône</button>
-    <p class="welcome-coaching">Si tu désires aller plus loin, contacte-moi.<br><span class="welcome-contact">contact@tataeleonore.com</span></p>
+    <div class="welcome-whoami">
+      <button class="welcome-whoami-toggle" id="welcome-whoami-toggle">Qui suis-je ?</button>
+      <div class="welcome-whoami-body" id="welcome-whoami-body">
+        <p class="welcome-whoami-name">Tata Éléonore</p>
+        <p class="welcome-whoami-tagline">Femme de parole et de transmission · Napene · Coach · Autrice</p>
+        <p class="welcome-whoami-text">Éléonore chemine entre ancestralité et spiritualité. Coach certifiée et initiée aux sciences traditionnelles africaines, elle accompagne les personnes en demande à retrouver leur puissance intérieure, à travers la mémoire des lignées, la parole sacrée et l'éveil de leur vraie nature.</p>
+        <a class="welcome-whoami-contact" href="mailto:tataeleonore21@gmail.com">contact@tataeleonore.com</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1428,6 +1489,9 @@ document.getElementById("welcome-close").addEventListener("click", () => {
 });
 document.getElementById("replay-welcome").addEventListener("click", () => {
   document.getElementById("welcome-overlay").classList.add("open");
+});
+document.getElementById("welcome-whoami-toggle").addEventListener("click", () => {
+  document.getElementById("welcome-whoami-body").classList.toggle("open");
 });
 
 // ═══ BILAN DU DIMANCHE ═══
@@ -2008,7 +2072,7 @@ function openPrintPage(title, htmlContent){
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Georgia,serif;color:#2A1A12;max-width:680px;margin:0 auto;padding:32px 24px;line-height:1.65;background:#FBF7F0}
-    .save-hint{background:#2A1A12;color:#E8C77E;font-family:Arial,sans-serif;font-size:13px;padding:12px 16px;text-align:center;border-radius:4px;margin-bottom:28px}
+    .save-hint{background:#2A1A12;color:#E8C77E;font-family:Arial,sans-serif;font-size:13px;padding:12px 16px;text-align:center;border-radius:14px;margin-bottom:28px}
     h1{font-size:28px;text-align:center;color:#2A1A12;margin-bottom:6px}
     .sub{text-align:center;font-style:italic;color:#7A5A1E;margin-bottom:32px;font-size:13px}
     .divider{border:none;border-top:1px solid #D4AF6A;margin:20px 0}
@@ -2022,7 +2086,7 @@ function openPrintPage(title, htmlContent){
   </style>
   </head><body>
   <div class="save-hint" style="display:none"></div>
-  <button onclick="window.close()" style="display:block;width:100%;max-width:680px;margin:0 auto 24px;background:#2A1A12;color:#E8C77E;font-family:Georgia,serif;font-size:14px;padding:14px;border:none;border-radius:4px;cursor:pointer;">← Retour à l'application</button>
+  <button onclick="window.close()" style="display:block;width:100%;max-width:680px;margin:0 auto 24px;background:#2A1A12;color:#E8C77E;font-family:Georgia,serif;font-size:14px;padding:14px;border:none;border-radius:14px;cursor:pointer;">← Retour à l'application</button>
   <h1>${title}</h1>
   <p class="sub">By Tata Éléonore — Je reprends mon trône</p>
   <hr class="divider">
