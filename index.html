@@ -432,6 +432,119 @@ body{padding-bottom:80px}
   margin-top:16px;
   margin-bottom:4px;
 }
+.emotion-chart-container{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px 12px 12px;
+  margin-bottom:12px;
+  width:100%;
+}
+#emotion-chart{width:100% !important}
+#miroir-chart{width:100% !important}
+.miroir-legend-item{
+  display:flex;align-items:center;gap:6px;
+  font-family:'Cinzel',serif;font-size:8px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.miroir-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.miroir-insight-box{
+  background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));
+  border:1px solid var(--gold);
+  border-left:3px solid var(--gold);
+  border-radius:14px;
+  padding:16px 18px;
+  margin-top:8px;
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:15px;
+  line-height:1.7;
+  color:var(--ink);
+}
+.defi-card{
+  background:linear-gradient(135deg,rgba(169,128,47,.12),rgba(169,128,47,.03));
+  border:1px solid var(--gold);
+  border-top:2px solid var(--gold);
+  border-radius:16px;
+  padding:24px 20px;
+  margin-bottom:16px;
+}
+.defi-week-label{
+  font-family:'Cinzel',serif;font-size:9px;
+  letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold-deep);margin-bottom:12px;display:block;
+}
+.defi-title{
+  font-family:'Playfair Display',serif;
+  font-weight:700;font-size:20px;
+  color:var(--ink);margin-bottom:10px;
+}
+.defi-desc{
+  font-family:'EB Garamond',serif;
+  font-size:16px;line-height:1.7;
+  color:var(--ink-soft);margin-bottom:16px;
+}
+.defi-action-label{
+  font-family:'Cinzel',serif;font-size:9px;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:8px;display:block;
+}
+.defi-action{
+  font-family:'EB Garamond',serif;
+  font-weight:600;font-size:16px;
+  color:var(--ink);line-height:1.5;
+  padding:10px 14px;
+  background:linear-gradient(135deg,rgba(169,128,47,.08),rgba(169,128,47,.02));
+  border-left:2px solid var(--gold);
+  border-radius:0 10px 10px 0;
+  margin-bottom:16px;
+}
+.defi-start-btn{
+  display:block;width:100%;
+  background:linear-gradient(135deg,rgba(169,128,47,.2),rgba(169,128,47,.07));
+  border:1px solid var(--gold);
+  color:var(--gold-deep);
+  font-family:'Cinzel',serif;font-size:10px;
+  font-weight:600;letter-spacing:.25em;text-transform:uppercase;
+  padding:13px;border-radius:12px;cursor:pointer;
+  touch-action:manipulation;
+}
+.defi-result-box{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:12px;
+}
+.emotion-chart-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:8px;
+}
+.emotion-stat-card{
+  text-align:center;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px 6px;
+}
+.emotion-stat-num{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:22px;
+  color:var(--gold-deep);
+  display:block;
+}
+.emotion-stat-label{
+  font-family:'Cinzel',serif;
+  font-size:7px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:3px;
+  display:block;
+}
 .emotion-today-result{
   background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));
   border:1px solid var(--gold);
@@ -725,7 +838,43 @@ body{padding-bottom:80px}
 .empty-state{text-align:center;padding:60px 20px;font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--muted);opacity:.75}
 .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--toast-bg);border:1px solid var(--gold);color:var(--toast-text);font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;padding:12px 28px;border-radius:14px;transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:999;text-align:center;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.signature{text-align:center;padding:32px 20px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--muted);opacity:.7}
+.signature{text-align:center;padding:40px 20px 20px}
+.footer-mantra{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:18px;
+  color:var(--gold-deep);
+  line-height:1.7;
+  margin-bottom:8px;
+  opacity:.9;
+}
+.mantra-banner{
+  text-align:center;
+  padding:20px 20px 12px;
+  margin-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.mantra-line{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:16px;
+  line-height:1.8;
+  color:var(--gold-deep);
+  margin-bottom:4px;
+}
+.page-mantra{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-weight:700;
+  font-size:clamp(22px,5vw,28px);
+  line-height:1.6;
+  color:var(--gold-deep);
+  text-align:center;
+  padding:28px 16px 24px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:24px;
+  letter-spacing:.01em;
+}
 .footer-contact{
   display:inline-block;
   margin-top:8px;
@@ -1588,28 +1737,42 @@ body{padding-bottom:80px}
 
 <div class="content">
 
+
   <div class="view active" id="view-matin">
+    <p class="page-mantra">Chaque matin, pose une intention puissante.</p>
     <div class="section-block">
-      <div class="section-header"><span class="section-label">Mon intention du jour</span></div>
       <textarea class="field-input" id="intention" rows="3" placeholder="Aujourd'hui, je choisis de…"></textarea>
       <button class="method-btn" id="open-method">Ancrer cette intention en 66 secondes</button>
     </div>
   </div>
 
   <div class="view" id="view-soir">
-    <p class="intro-text">Une gratitude, c'est large : un miracle remarqué aujourd'hui, une synchronicité reconnue, quelque chose appris ou compris, un endroit découvert pour la première fois, un défi traversé, une personne croisée au bon moment, un mot qui t'a touchée… Et on démarre.</p>
+    <p class="page-mantra">Chaque soir, écris 5 choses pour lesquelles tu es reconnaissant·e.</p>
     <div class="section-block">
-      <div class="section-header"><span class="section-label">5 choses pour lesquelles tu es reconnaissant·e aujourd'hui</span></div>
       <div class="gratitude-list" id="gratitude-list"></div>
     </div>
     <button class="save-btn" id="save-soir">★ Clore cette journée avec grâce ★</button>
   </div>
 
   <div class="view" id="view-alignement">
-    <p class="intro-text">Ce que tu rejettes éclaire ce que tu désires. Pose ici ce que tu ne veux plus, son opposé exact, puis l'action concrète qui t'en rapproche un peu plus chaque jour.</p>
-    <div id="align-list"></div>
-    <button class="save-btn" id="save-alignement">★ Ancrer cette table ★</button>
-    <button class="export-btn" id="export-alignement" style="margin-top:12px">Télécharger ma table d'alignement en PDF</button>
+    <div class="premium-lock-box">
+      <div class="premium-lock-icon">🔒</div>
+      <h2 class="premium-lock-title">Table d'Alignement</h2>
+      <p class="premium-lock-sub">Espace Premium</p>
+      <div class="premium-lock-features">
+        <div class="premium-feature">★ Oracle du Jour — Guidance quotidien</div>
+        <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
+        <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
+        <div class="premium-feature">★ Table d'Alignement — 12 lignes de transformation profonde</div>
+        <div class="premium-feature">★ Connais-toi toi-même — ton portrait intérieur sans filtre</div>
+        <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
+        <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
+      </div>
+      <div class="premium-price-block">
+        <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'espace Premium à vie</a>
+        <p class="premium-price-note">Paiement sécurisé par Stripe</p>
+      </div>
+    </div>
   </div>
 
   <div class="view" id="view-reves">
@@ -1625,20 +1788,24 @@ body{padding-bottom:80px}
   </div>
 
   <div class="view" id="view-connaistoi">
-    <p class="intro-text">Se connaître, c'est le premier pas vers toute transformation. Note ici ce que tu sais de toi, sans filtre et sans jugement.</p>
-    <p class="self-note">★ Pas un rituel quotidien — reviens-y simplement quand tu sens que tu as changé.</p>
-    <div class="self-grid">
-      <div class="section-block">
-        <div class="section-header"><span class="section-label">Ma force</span></div>
-        <textarea class="field-input self-textarea" id="qualites" placeholder="Ce qui fait ma force, ma lumière, ma singularité…"></textarea>
+    <div class="premium-lock-box">
+      <div class="premium-lock-icon">🔒</div>
+      <h2 class="premium-lock-title">Connais-toi toi-même</h2>
+      <p class="premium-lock-sub">Espace Premium</p>
+      <div class="premium-lock-features">
+        <div class="premium-feature">★ Oracle du Jour — Guidance quotidien</div>
+        <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
+        <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
+        <div class="premium-feature">★ Table d'Alignement — 12 lignes de transformation profonde</div>
+        <div class="premium-feature">★ Connais-toi toi-même — ton portrait intérieur sans filtre</div>
+        <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
+        <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
       </div>
-      <div class="section-block" style="animation-delay:.05s">
-        <div class="section-header"><span class="section-label">Ce que j'ai à développer</span></div>
-        <textarea class="field-input self-textarea" id="defauts" placeholder="Ce sur quoi je travaille, avec douceur et honnêteté…"></textarea>
+      <div class="premium-price-block">
+        <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'espace Premium à vie</a>
+        <p class="premium-price-note">Paiement sécurisé par Stripe</p>
       </div>
     </div>
-    <button class="save-btn" id="save-connaistoi">★ Ancrer cette vérité ★</button>
-    <button class="export-btn" id="export-connaistoi" style="margin-top:12px">Télécharger "Connais-toi toi-même" en PDF</button>
   </div>
 
   <div class="view" id="view-histoire">
@@ -1655,9 +1822,13 @@ body{padding-bottom:80px}
         <h2 class="premium-lock-title">Espace Premium</h2>
         <p class="premium-lock-sub">By Tata Éléonore</p>
         <div class="premium-lock-features">
-          <div class="premium-feature">★ Oracle du Jour — tirage numérologique quotidien</div>
-          <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie</div>
-          <div class="premium-feature">★ Bande des Fréquences Émotionnelles — comprends où tu en es et monte en vibration</div>
+          <div class="premium-feature">★ Oracle du Jour — Guidance quotidien</div>
+          <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
+          <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
+          <div class="premium-feature">★ Table d'Alignement — 12 lignes de transformation profonde</div>
+          <div class="premium-feature">★ Connais-toi toi-même — ton portrait intérieur sans filtre</div>
+          <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
+          <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
         </div>
         <div class="premium-price-block">
           <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'espace Premium à vie</a>
@@ -1713,6 +1884,66 @@ body{padding-bottom:80px}
 
         <div class="oracle-divider">★</div>
 
+        <!-- 4. SUIVI ÉMOTIONNEL -->
+        <div class="premium-section-title">★ Mon évolution émotionnelle</div>
+        <p class="oracle-cta-text" style="margin-bottom:20px">Vois ta progression sur les 30 derniers jours. Chaque jour noté est une preuve que tu montes.</p>
+        <div class="emotion-chart-container">
+          <canvas id="emotion-chart" height="180"></canvas>
+        </div>
+        <div class="emotion-chart-stats" id="emotion-chart-stats"></div>
+        <button class="bilan-share-btn" id="emotion-share-btn" style="margin-top:16px">Partager ma progression ★</button>
+
+        <div class="oracle-divider">★</div>
+
+        <!-- 5. MIROIR DU JOUR -->
+        <div class="premium-section-title">★ Le Miroir du Jour</div>
+        <p class="oracle-cta-text" style="margin-bottom:20px">Intention · Émotion · Gratitude — trois courbes qui révèlent ta cohérence intérieure.</p>
+        <div class="emotion-chart-container">
+          <canvas id="miroir-chart" height="200"></canvas>
+        </div>
+        <div id="miroir-legend" style="display:flex;gap:16px;justify-content:center;margin:12px 0;flex-wrap:wrap"></div>
+        <div id="miroir-insight" class="miroir-insight-box" style="display:none"></div>
+        <button class="bilan-share-btn" id="miroir-share-btn" style="margin-top:12px">Partager mon miroir ★</button>
+
+        <div class="oracle-divider">★</div>
+
+        <!-- 6. DÉFI DE LA SEMAINE -->
+        <div class="premium-section-title">★ Défi de la Semaine</div>
+        <div class="defi-card" id="defi-card"></div>
+        <div class="defi-result-box" id="defi-result-box" style="display:none">
+          <textarea class="field-input" id="defi-result" placeholder="Note ici ce que tu as vécu, ressenti, découvert…" rows="4"></textarea>
+          <button class="save-btn" id="defi-save" style="margin-top:10px">★ Ancrer mon résultat</button>
+        </div>
+
+        <div class="oracle-divider">★</div>
+
+        <!-- 7. TABLE D'ALIGNEMENT -->
+        <div class="premium-section-title">★ Table d'Alignement</div>
+        <p class="oracle-cta-text" style="margin-bottom:16px">Ce que tu rejettes éclaire ce que tu désires. Pose ce que tu ne veux plus, son opposé, puis l'action concrète.</p>
+        <div id="align-list"></div>
+        <button class="save-btn" id="save-alignement" style="margin-top:12px">★ Ancrer cette table ★</button>
+        <button class="export-btn" id="export-alignement" style="margin-top:10px">Télécharger ma table en PDF</button>
+
+        <div class="oracle-divider">★</div>
+
+        <!-- 8. CONNAIS-TOI TOI-MÊME -->
+        <div class="premium-section-title">★ Connais-toi toi-même</div>
+        <p class="oracle-cta-text" style="margin-bottom:16px">Se connaître, c'est le premier pas vers toute transformation. Sans filtre, sans jugement.</p>
+        <div class="self-grid">
+          <div class="section-block">
+            <div class="section-header"><span class="section-label">Ma force</span></div>
+            <textarea class="field-input self-textarea" id="qualites" placeholder="Ce qui fait ma force, ma lumière, ma singularité…"></textarea>
+          </div>
+          <div class="section-block">
+            <div class="section-header"><span class="section-label">Ce que j'ai à développer</span></div>
+            <textarea class="field-input self-textarea" id="defauts" placeholder="Ce sur quoi je travaille, avec douceur et honnêteté…"></textarea>
+          </div>
+        </div>
+        <button class="save-btn" id="save-connaistoi" style="margin-top:12px">★ Ancrer cette vérité ★</button>
+        <button class="export-btn" id="export-connaistoi" style="margin-top:10px">Télécharger mon portrait en PDF</button>
+
+        <div class="oracle-divider">★</div>
+
         <div class="oracle-premium-cta">
           <p class="oracle-cta-text">Tu désires un accompagnement personnalisé ? Contacte Tata Éléonore.</p>
           <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium">Me contacter</a>
@@ -1724,10 +1955,8 @@ body{padding-bottom:80px}
 
 </div>
 
-<div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">tataeleonore21@gmail.com</span><br>
-<a href="mailto:tataeleonore21@gmail.com" style="display:inline-block;margin-top:8px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);border:1px solid var(--border);padding:7px 18px;border-radius:20px;text-decoration:none">Me contacter</a><br>
-<button class="replay-welcome-btn" id="replay-welcome">Revoir le message d'accueil</button><br>
-<button class="replay-welcome-btn" id="replay-bilan" style="margin-top:6px">Voir mon bilan de la semaine</button>
+<div class="signature">
+  <a href="mailto:tataeleonore21@gmail.com" style="display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);border:1px solid var(--border);padding:7px 18px;border-radius:20px;text-decoration:none">Me contacter</a>
 </div>
 
 <div class="whoami-section">
@@ -1773,31 +2002,23 @@ body{padding-bottom:80px}
 <nav class="bottom-nav" id="bottom-nav">
   <button class="bottom-nav-btn active" data-tab="matin">
     <span class="bottom-nav-icon">☽</span>
-    <span class="bottom-nav-label">Matin</span>
+    <span class="bottom-nav-label">Intention</span>
   </button>
   <button class="bottom-nav-btn" data-tab="soir">
     <span class="bottom-nav-icon">★</span>
-    <span class="bottom-nav-label">Soir</span>
-  </button>
-  <button class="bottom-nav-btn" data-tab="alignement">
-    <span class="bottom-nav-icon">◈</span>
-    <span class="bottom-nav-label">Alignement</span>
+    <span class="bottom-nav-label">Gratitude</span>
   </button>
   <button class="bottom-nav-btn" data-tab="reves">
     <span class="bottom-nav-icon">◎</span>
     <span class="bottom-nav-label">Rêves</span>
   </button>
-  <button class="bottom-nav-btn" data-tab="connaistoi">
-    <span class="bottom-nav-icon">◐</span>
-    <span class="bottom-nav-label">Moi</span>
-  </button>
   <button class="bottom-nav-btn" data-tab="histoire">
     <span class="bottom-nav-icon">◷</span>
-    <span class="bottom-nav-label">Historique</span>
+    <span class="bottom-nav-label">Journal</span>
   </button>
   <button class="bottom-nav-btn bottom-nav-premium" data-tab="premium">
     <span class="bottom-nav-icon">★</span>
-    <span class="bottom-nav-label">Oracle</span>
+    <span class="bottom-nav-label">Premium</span>
   </button>
 </nav>
 
@@ -1805,9 +2026,8 @@ body{padding-bottom:80px}
 
 <div class="method-overlay" id="method-overlay">
   <div class="method-box" id="method-intro" style="display:none">
-    <div class="method-step">Avant de commencer</div>
-    <p class="method-teaching">Convoque une émotion pour envoyer ton intention à l'univers. Comme un timbre permet à une lettre d'être envoyée, ton intention a besoin d'une émotion pour être reçue.</p>
-    <p class="welcome-coaching">Tu peux fermer les yeux pendant la pratique, ou les garder ouverts pour suivre le texte — comme tu préfères.</p>
+    <div class="method-step">Ancre ton intention</div>
+    <p class="method-teaching">Convoque une émotion. Ressens-la. Envoie ton intention.</p>
     <button class="method-start" id="method-start">Commencer</button>
   </div>
   <div class="method-box" id="method-practice" style="display:none">
@@ -1950,7 +2170,7 @@ document.getElementById("welcome-close").addEventListener("click", () => {
   localStorage.setItem(WELCOME_KEY, "1");
   document.getElementById("welcome-overlay").classList.remove("open");
 });
-document.getElementById("replay-welcome").addEventListener("click", () => {
+(document.getElementById("replay-welcome") || document.createElement("div")).addEventListener("click", () => {
   document.getElementById("welcome-overlay").classList.add("open");
 });
 document.getElementById("welcome-whoami-toggle").addEventListener("click", () => {
@@ -2077,7 +2297,7 @@ document.getElementById("bilan-share").addEventListener("click", () => {
   }
 });
 
-document.getElementById("replay-bilan").addEventListener("click", () => {
+(document.getElementById("replay-bilan") || document.createElement("div")).addEventListener("click", () => {
   // Reset lesson display for fresh generation
   document.getElementById("bilan-loading").style.display = "block";
   document.getElementById("bilan-lesson").style.display = "none";
@@ -2814,6 +3034,11 @@ function initPremiumView(){
       initWheel();
       drawWheel();
       initEmotions();
+      renderEmotionChart();
+      renderMiroir();
+      renderDefi();
+      initAlignement();
+      initConnaistoi();
     }, 200);
   } else {
     locked.style.display = "block";
@@ -2838,6 +3063,7 @@ const EMOTION_DATA = [
 ];
 
 const EMOTION_KEY = "eleonore_emotion";
+const EMOTION_HISTORY_KEY = "eleonore_emotion_history";
 
 function initEmotions(){
   const list = document.getElementById("emotion-list");
@@ -2896,6 +3122,10 @@ function initEmotions(){
         score: emotion.score,
         name: emotion.name
       }));
+      // Sauvegarde dans l'historique
+      const history = loadJSON(EMOTION_HISTORY_KEY, {});
+      history[getTodayKey()] = { score: emotion.score, name: emotion.name };
+      saveJSON(EMOTION_HISTORY_KEY, history);
       todayDisplay.innerHTML = `<div class="emotion-today-result">
         <div class="emotion-today-label">★ Ma fréquence d'aujourd'hui</div>
         <div class="emotion-today-name">${emotion.score} — ${emotion.name}</div>
@@ -2906,8 +3136,357 @@ function initEmotions(){
         c.querySelector(".emotion-toggle").textContent = "▼";
       });
       todayDisplay.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      renderEmotionChart();
     });
   });
+  renderEmotionChart();
+}
+
+function renderEmotionChart(){
+  const canvas = document.getElementById("emotion-chart");
+  const statsEl = document.getElementById("emotion-chart-stats");
+  if (!canvas || !statsEl) return;
+
+  const history = loadJSON(EMOTION_HISTORY_KEY, {});
+  const keys = Object.keys(history).sort().slice(-30);
+
+  if (keys.length === 0) {
+    statsEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:var(--muted);padding:10px">Ton graphique apparaîtra après ton premier enregistrement.</div>`;
+    canvas.style.display = "none";
+    return;
+  }
+
+  canvas.style.display = "block";
+  const ctx = canvas.getContext("2d");
+  const w = canvas.offsetWidth || 300;
+  canvas.width = w;
+
+  const scores = keys.map(k => history[k].score);
+  const avg = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2);
+  const min = Math.min(...scores);
+  const max = Math.max(...scores);
+  const trend = scores.length > 1 ? (scores[scores.length-1] - scores[0]).toFixed(2) : 0;
+
+  // Stats
+  statsEl.innerHTML = `
+    <div class="emotion-stat-card"><span class="emotion-stat-num">${avg}</span><span class="emotion-stat-label">Moyenne</span></div>
+    <div class="emotion-stat-card"><span class="emotion-stat-num">${max}</span><span class="emotion-stat-label">Plus haute</span></div>
+    <div class="emotion-stat-card"><span class="emotion-stat-num">${Number(trend) >= 0 ? '+' : ''}${trend}</span><span class="emotion-stat-label">Évolution</span></div>
+  `;
+
+  // Graphique
+  ctx.clearRect(0, 0, w, 180);
+  const pad = { top: 20, right: 16, bottom: 30, left: 36 };
+  const gw = w - pad.left - pad.right;
+  const gh = 180 - pad.top - pad.bottom;
+
+  // Grille
+  [0, 1, 2, 3, 4].forEach(v => {
+    const y = pad.top + gh - (v / 4) * gh;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + gw, y);
+    ctx.strokeStyle = "rgba(169,128,47,0.15)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = "rgba(169,128,47,0.6)";
+    ctx.font = "10px Arial";
+    ctx.textAlign = "right";
+    ctx.fillText(v, pad.left - 4, y + 3);
+  });
+
+  // Ligne
+  ctx.beginPath();
+  scores.forEach((score, i) => {
+    const x = pad.left + (i / Math.max(scores.length - 1, 1)) * gw;
+    const y = pad.top + gh - (score / 4) * gh;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = "#D4A24A";
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = "round";
+  ctx.stroke();
+
+  // Zone remplie
+  ctx.lineTo(pad.left + gw, pad.top + gh);
+  ctx.lineTo(pad.left, pad.top + gh);
+  ctx.closePath();
+  ctx.fillStyle = "rgba(169,128,47,0.12)";
+  ctx.fill();
+
+  // Points
+  scores.forEach((score, i) => {
+    const x = pad.left + (i / Math.max(scores.length - 1, 1)) * gw;
+    const y = pad.top + gh - (score / 4) * gh;
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = "#D4A24A";
+    ctx.fill();
+  });
+
+  // Dates axe X
+  ctx.fillStyle = "rgba(169,128,47,0.5)";
+  ctx.font = "9px Arial";
+  ctx.textAlign = "center";
+  if (keys.length > 0) {
+    ctx.fillText(keys[0].slice(5), pad.left, 180 - 6);
+    if (keys.length > 1) ctx.fillText(keys[keys.length-1].slice(5), pad.left + gw, 180 - 6);
+  }
+
+  // Bouton partage
+  const shareBtn = document.getElementById("emotion-share-btn");
+  if (shareBtn) {
+    shareBtn.onclick = () => {
+      const trendLabel = Number(trend) >= 0 ? `+${trend} en ${keys.length} jours` : `${trend} en ${keys.length} jours`;
+      const text = `Ma progression émotionnelle — Je reprends mon trône\n\nMoyenne : ${avg}/4.0\nPlus haute fréquence : ${max}/4.0\nÉvolution : ${trendLabel}\n\ntataeleonore.com`;
+      if (navigator.share) {
+        navigator.share({ title: "Ma progression émotionnelle", text });
+      } else {
+        navigator.clipboard.writeText(text).then(() => showToast("★ Copié dans ton presse-papier ★"));
+      }
+    };
+  }
+}
+
+// ═══ MIROIR DU JOUR ═══
+function renderMiroir(){
+  const canvas = document.getElementById("miroir-chart");
+  const legendEl = document.getElementById("miroir-legend");
+  const insightEl = document.getElementById("miroir-insight");
+  if (!canvas || !legendEl) return;
+
+  // Récupère les 30 derniers jours avec données
+  const allKeys = Object.keys(days).sort().slice(-30);
+  const emotionHistory = loadJSON(EMOTION_HISTORY_KEY, {});
+
+  const labels = [];
+  const intentionScores = []; // 0 ou 1 (intention posée ou non)
+  const emotionScores = [];
+  const gratitudeScores = [];
+
+  allKeys.forEach(key => {
+    const d = days[key];
+    const hasIntention = d && d.intention ? 1 : 0;
+    const gratCount = d && d.gratitudes ? d.gratitudes.filter(g => g).length : 0;
+    const gratScore = gratCount / 5 * 4; // normalise sur 4
+    const emoScore = emotionHistory[key] ? emotionHistory[key].score : null;
+    if (hasIntention || gratCount > 0 || emoScore) {
+      labels.push(key.slice(5));
+      intentionScores.push(hasIntention * 4);
+      emotionScores.push(emoScore || 0);
+      gratitudeScores.push(gratScore);
+    }
+  });
+
+  if (labels.length === 0) {
+    canvas.style.display = "none";
+    legendEl.innerHTML = `<p style="font-family:'EB Garamond',serif;font-style:italic;font-size:14px;color:var(--muted);text-align:center">Ton miroir apparaîtra au fil de tes journées.</p>`;
+    return;
+  }
+
+  canvas.style.display = "block";
+  const w = canvas.offsetWidth || 300;
+  canvas.width = w;
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, w, 200);
+
+  const pad = { top: 20, right: 16, bottom: 30, left: 30 };
+  const gw = w - pad.left - pad.right;
+  const gh = 200 - pad.top - pad.bottom;
+  const n = labels.length;
+
+  // Grille
+  [0,1,2,3,4].forEach(v => {
+    const y = pad.top + gh - (v/4)*gh;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + gw, y);
+    ctx.strokeStyle = "rgba(169,128,47,0.12)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = "rgba(169,128,47,0.5)";
+    ctx.font = "9px Arial";
+    ctx.textAlign = "right";
+    ctx.fillText(v, pad.left - 3, y + 3);
+  });
+
+  function drawLine(scores, color){
+    ctx.beginPath();
+    scores.forEach((s, i) => {
+      const x = pad.left + (i / Math.max(n-1,1)) * gw;
+      const y = pad.top + gh - (s/4) * gh;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.lineJoin = "round";
+    ctx.stroke();
+    scores.forEach((s, i) => {
+      const x = pad.left + (i / Math.max(n-1,1)) * gw;
+      const y = pad.top + gh - (s/4) * gh;
+      ctx.beginPath();
+      ctx.arc(x, y, 3.5, 0, Math.PI*2);
+      ctx.fillStyle = color;
+      ctx.fill();
+    });
+  }
+
+  drawLine(intentionScores, "#D4A24A");
+  drawLine(emotionScores, "#A888C0");
+  drawLine(gratitudeScores, "#88C0A8");
+
+  // Dates
+  ctx.fillStyle = "rgba(169,128,47,0.5)";
+  ctx.font = "9px Arial";
+  ctx.textAlign = "center";
+  if (labels.length > 0) {
+    ctx.fillText(labels[0], pad.left, 200 - 6);
+    if (labels.length > 1) ctx.fillText(labels[labels.length-1], pad.left + gw, 200 - 6);
+  }
+
+  // Légende
+  legendEl.innerHTML = [
+    { color:"#D4A24A", label:"Intention" },
+    { color:"#A888C0", label:"Émotion" },
+    { color:"#88C0A8", label:"Gratitude" }
+  ].map(l => `<div class="miroir-legend-item"><span class="miroir-legend-dot" style="background:${l.color}"></span>${l.label}</div>`).join("");
+
+  // Insight automatique
+  if (labels.length >= 7) {
+    const avgEmo = emotionScores.filter(s=>s>0).reduce((a,b)=>a+b,0) / (emotionScores.filter(s=>s>0).length || 1);
+    const avgGrat = gratitudeScores.reduce((a,b)=>a+b,0) / gratitudeScores.length;
+    const intentionDays = intentionScores.filter(s=>s>0).length;
+    let insight = "";
+    if (avgEmo >= 3 && avgGrat >= 3) {
+      insight = `Quand tu poses tes intentions et que ta fréquence est haute, tes gratitudes du soir le reflètent. Ces données ne mentent pas — tu es en train de créer quelque chose.`;
+    } else if (intentionDays >= 5) {
+      insight = `Tu poses tes intentions avec régularité — ${intentionDays} jours sur ${labels.length}. Cette constance est une forme de puissance. Observe comment tes émotions et gratitudes évoluent quand tu maintiens ce rythme.`;
+    } else {
+      insight = `Commence à noter ta fréquence émotionnelle chaque jour. Dans quelques semaines, ton miroir te révèlera des corrélations que tu n'aurais jamais remarquées seul·e.`;
+    }
+    insightEl.textContent = insight;
+    insightEl.style.display = "block";
+  }
+
+  // Partage
+  const shareBtn = document.getElementById("miroir-share-btn");
+  if (shareBtn) {
+    shareBtn.onclick = () => {
+      const text = `Mon Miroir du Jour — Je reprends mon trône\n\nJe suis en train de découvrir les liens entre mes intentions, mes émotions et mes gratitudes. Chaque jour que je pose crée une preuve visible de ma transformation.\n\ntataeleonore.com`;
+      if (navigator.share) navigator.share({ title: "Mon Miroir du Jour", text });
+      else navigator.clipboard.writeText(text).then(() => showToast("★ Copié dans ton presse-papier ★"));
+    };
+  }
+}
+
+// ═══ DÉFI DE LA SEMAINE ═══
+const DEFIS = [
+  { title: "Le défi de la gratitude radicale", desc: "Cette semaine, trouve 3 choses pour lesquelles tu es reconnaissant·e dans chaque difficulté que tu traverses. Pas malgré elle — à cause d'elle.", action: "Chaque soir, avant tes 5 gratitudes, note une chose difficile et ce qu'elle t'a appris." },
+  { title: "Le défi du silence intentionnel", desc: "Chaque matin cette semaine, avant de regarder ton téléphone, accorde-toi 5 minutes de silence. Juste toi, ta respiration, et l'espace vide qui précède le jour.", action: "Pose ton téléphone à l'envers chaque soir avant de dormir. Avant de le retourner le matin, pose ton intention." },
+  { title: "Le défi du miroir", desc: "Chaque jour cette semaine, regarde-toi dans les yeux dans un miroir et dis-toi une phrase d'amour ou de reconnaissance. Sans ironie, sans pudeur.", action: "Choisis ta phrase ce soir. Répète-la chaque matin pendant 7 jours. Note ce qui change." },
+  { title: "Le défi du geste ancêtral", desc: "Cette semaine, fais quelque chose que tes ancêtres faisaient — cuisiner un plat traditionnel, parler leur langue, honorer leur mémoire, transmettre une histoire.", action: "Identifie un geste, une recette, un mot dans la langue de ta lignée. Fais-le. Écris comment tu t'es senti·e." },
+  { title: "Le défi de la fréquence consciente", desc: "Chaque jour, note ta fréquence émotionnelle le matin ET le soir. Observe ce qui fait monter ou descendre ta vibration. Ne juge pas — observe.", action: "Matin : note ta fréquence avant de commencer ta journée. Soir : note-la après. Cherche ce qui a fait la différence." },
+  { title: "Le défi du non", desc: "Cette semaine, dis non à une chose qui ne te nourrit pas. Avec douceur mais fermement. Observe ce que ça libère en toi.", action: "Identifie dès aujourd'hui la chose à laquelle tu vas dire non. Prépare ta phrase. Lance-toi." },
+  { title: "Le défi de l'intention ancrée", desc: "Cette semaine, écris ta même intention chaque matin pendant 7 jours de suite. Observe comment elle évolue, se précise, se renforce.", action: "Choisis une intention qui t'appelle. Écris-la chaque matin dans l'onglet Matin. Le 7e jour, lis les 7 versions." },
+  { title: "Le défi de la transmission", desc: "Cette semaine, transmets quelque chose à quelqu'un. Un enseignement, une histoire, une compétence, un livre. La transmission est une forme de guérison.", action: "Qui pourrait bénéficier de quelque chose que tu sais ? Contacte cette personne cette semaine." },
+];
+
+const DEFI_KEY = "eleonore_defi";
+
+function renderDefi(){
+  const card = document.getElementById("defi-card");
+  const resultBox = document.getElementById("defi-result-box");
+  if (!card) return;
+
+  const weekNum = Math.floor(new Date().getTime() / (7 * 24 * 60 * 60 * 1000));
+  const defi = DEFIS[weekNum % DEFIS.length];
+  const saved = loadJSON(DEFI_KEY, {});
+  const weekKey = `week-${weekNum}`;
+
+  card.innerHTML = `
+    <span class="defi-week-label">Défi de la semaine</span>
+    <div class="defi-title">${defi.title}</div>
+    <p class="defi-desc">${defi.desc}</p>
+    <span class="defi-action-label">Ton action concrète</span>
+    <div class="defi-action">${defi.action}</div>
+    ${saved[weekKey] ? `<p style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-align:center">★ Défi relevé cette semaine ★</p>` : `<button class="defi-start-btn" id="defi-start-btn">Je relève ce défi ★</button>`}
+  `;
+
+  if (saved[weekKey] && resultBox) {
+    resultBox.style.display = "block";
+    document.getElementById("defi-result").value = saved[weekKey].result || "";
+  }
+
+  const startBtn = document.getElementById("defi-start-btn");
+  if (startBtn) {
+    startBtn.addEventListener("click", () => {
+      resultBox.style.display = "block";
+      startBtn.style.display = "none";
+      document.getElementById("defi-result").focus();
+    });
+  }
+
+  const saveBtn = document.getElementById("defi-save");
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      const result = document.getElementById("defi-result").value;
+      saved[weekKey] = { result, date: getTodayKey() };
+      saveJSON(DEFI_KEY, saved);
+      showToast("★ Ton défi est ancré ★");
+    });
+  }
+}
+
+// ═══ ALIGNEMENT dans le Premium ═══
+function initAlignement(){
+  const alignList = document.getElementById("align-list");
+  if (!alignList || alignList.dataset.initialized) return;
+  alignList.dataset.initialized = "1";
+  renderAlignment();
+
+  const saveBtn = document.getElementById("save-alignement");
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      const inputs = alignList.querySelectorAll(".align-input");
+      inputs.forEach((inp, idx) => {
+        const row = Math.floor(idx / 3);
+        const col = idx % 3;
+        if (!alignment[row]) alignment[row] = {};
+        if (col === 0) alignment[row].dontWant = inp.value;
+        if (col === 1) alignment[row].want = inp.value;
+        if (col === 2) alignment[row].action = inp.value;
+      });
+      saveJSON("eleonore_alignement", alignment);
+      showToast("★ Table ancrée ★");
+    });
+  }
+
+  const exportBtn = document.getElementById("export-alignement");
+  if (exportBtn) exportBtn.addEventListener("click", exportAlignement);
+}
+
+// ═══ CONNAIS-TOI dans le Premium ═══
+function initConnaistoi(){
+  const qualEl = document.getElementById("qualites");
+  const defEl = document.getElementById("defauts");
+  if (!qualEl || qualEl.dataset.initialized) return;
+  qualEl.dataset.initialized = "1";
+
+  qualEl.value = selfKnowledge.qualites || "";
+  defEl.value = selfKnowledge.defauts || "";
+
+  const saveBtn = document.getElementById("save-connaistoi");
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      selfKnowledge.qualites = qualEl.value;
+      selfKnowledge.defauts = defEl.value;
+      saveJSON("eleonore_connaistoi", selfKnowledge);
+      showToast("★ Vérité ancrée ★");
+    });
+  }
+
+  const exportBtn = document.getElementById("export-connaistoi");
+  if (exportBtn) exportBtn.addEventListener("click", exportConnaistoi);
 }
 
 function initOracle(){
