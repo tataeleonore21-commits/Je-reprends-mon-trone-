@@ -323,37 +323,97 @@ body{padding-bottom:80px}
 }
 
 /* Fréquences émotionnelles */
-.emotion-list{display:flex;flex-direction:column;gap:8px}
-.emotion-btn{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.emotion-list{display:flex;flex-direction:column;gap:12px}
+.emotion-card{
   background:var(--bg-card);
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px 16px;
+  border-radius:16px;
+  overflow:hidden;
+  transition:all .25s;
+}
+.emotion-card-header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:16px 18px;
   cursor:pointer;
-  transition:all .2s;
-  text-align:left;
   touch-action:manipulation;
 }
-.emotion-btn:hover,.emotion-btn.active{
-  border-color:var(--gold);
-  background:linear-gradient(135deg,rgba(169,128,47,.12),rgba(169,128,47,.03));
+.emotion-card.active{border-color:var(--gold)}
+.emotion-card.active .emotion-card-header{
+  background:linear-gradient(135deg,rgba(169,128,47,.15),rgba(169,128,47,.04));
 }
 .emotion-score{
   font-family:'Playfair Display',serif;
   font-weight:700;
-  font-size:18px;
+  font-size:22px;
   color:var(--gold-deep);
-  min-width:36px;
+  min-width:42px;
   text-align:center;
+  flex-shrink:0;
 }
 .emotion-name{
   font-family:'EB Garamond',serif;
   font-weight:600;
-  font-size:16px;
+  font-size:17px;
   color:var(--ink);
+  flex:1;
+}
+.emotion-toggle{
+  font-size:12px;
+  color:var(--muted);
+  flex-shrink:0;
+}
+.emotion-card-body{
+  display:none;
+  padding:0 18px 18px;
+  border-top:1px solid var(--border);
+}
+.emotion-card.active .emotion-card-body{display:block}
+.emotion-body-comment{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:16px;
+  line-height:1.7;
+  color:var(--ink);
+  margin:14px 0 16px;
+}
+.emotion-conseil-label{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:8px;
+  display:block;
+}
+.emotion-conseil-text{
+  font-family:'EB Garamond',serif;
+  font-size:15px;
+  font-weight:600;
+  line-height:1.6;
+  color:var(--ink-soft);
+  padding:12px 14px;
+  background:linear-gradient(135deg,rgba(169,128,47,.08),rgba(169,128,47,.02));
+  border-left:2px solid var(--gold);
+  border-radius:0 10px 10px 0;
+}
+.emotion-today-btn{
+  display:block;
+  width:100%;
+  margin-top:14px;
+  background:linear-gradient(135deg,rgba(169,128,47,.2),rgba(169,128,47,.07));
+  border:1px solid var(--gold);
+  color:var(--gold-deep);
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  padding:11px;
+  border-radius:12px;
+  cursor:pointer;
+  touch-action:manipulation;
 }
 .emotion-level-badge{
   font-family:'Cinzel',serif;
@@ -371,6 +431,28 @@ body{padding-bottom:80px}
   color:var(--rose);
   margin-top:16px;
   margin-bottom:4px;
+}
+.emotion-today-result{
+  background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));
+  border:1px solid var(--gold);
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:16px;
+  text-align:center;
+}
+.emotion-today-label{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.emotion-today-name{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:20px;
+  color:var(--gold-deep);
 }
 .oracle-return-msg{
   text-align:center;
@@ -1624,17 +1706,10 @@ body{padding-bottom:80px}
 
         <!-- 3. BANDE DES FRÉQUENCES ÉMOTIONNELLES -->
         <div class="premium-section-title">★ Mes Fréquences Émotionnelles</div>
-        <p class="oracle-cta-text" style="margin-bottom:24px">Où en es-tu aujourd'hui ? Clique sur ta fréquence du moment.</p>
+        <p class="oracle-cta-text" style="margin-bottom:16px">Où en es-tu aujourd'hui ? Ouvre ton niveau et clique "C'est ma fréquence du jour" pour te situer et recevoir ton conseil.</p>
+        <div id="emotion-today-display"></div>
         <div class="emotion-list" id="emotion-list"></div>
-        <div class="emotion-result" id="emotion-result" style="display:none">
-          <div class="oracle-card" style="margin-top:20px">
-            <div class="emotion-level-badge" id="emotion-level-badge"></div>
-            <p class="oracle-message" id="emotion-comment"></p>
-            <div class="emotion-conseil-title">Mon conseil</div>
-            <p class="oracle-message" id="emotion-conseil" style="margin-top:8px;font-style:normal;font-size:15px"></p>
-            <p class="oracle-signature">— Tata Éléonore</p>
-          </div>
-        </div>
+        <div id="emotion-result" style="display:none"></div>
 
         <div class="oracle-divider">★</div>
 
@@ -2757,25 +2832,75 @@ const EMOTION_DATA = [
   { score: 0.05, name: "Apathie", comment: "Tu es dans le silence le plus profond de l'âme. Plus d'élan, plus de désir, plus de douleur — juste le vide. Ce n'est pas la fin. C'est le fond. Et du fond, il n'y a qu'une direction possible.", conseil: "Commence par respirer. Un seul souffle conscient. Puis un autre. Ne cherche pas à tout changer aujourd'hui — cherche juste une toute petite sensation. Reviens à ton corps. Il sait le chemin." },
 ];
 
+const EMOTION_KEY = "eleonore_emotion";
+
 function initEmotions(){
   const list = document.getElementById("emotion-list");
   if (!list) return;
+
+  // Afficher la fréquence du jour si déjà choisie
+  const todayEmotion = JSON.parse(localStorage.getItem(EMOTION_KEY) || "{}");
+  const todayDisplay = document.getElementById("emotion-today-display");
+  if (todayEmotion.date === getTodayKey() && todayEmotion.name) {
+    todayDisplay.innerHTML = `<div class="emotion-today-result">
+      <div class="emotion-today-label">★ Ma fréquence d'aujourd'hui</div>
+      <div class="emotion-today-name">${todayEmotion.score} — ${todayEmotion.name}</div>
+    </div>`;
+  }
+
+  // Créer les cartes expansibles
   list.innerHTML = EMOTION_DATA.map((e, i) => `
-    <button class="emotion-btn" data-index="${i}">
-      <span class="emotion-score">${e.score}</span>
-      <span class="emotion-name">${e.name}</span>
-    </button>`).join("");
-  list.querySelectorAll(".emotion-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      list.querySelectorAll(".emotion-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      const e = EMOTION_DATA[Number(btn.dataset.index)];
-      document.getElementById("emotion-level-badge").textContent = `${e.score} — ${e.name}`;
-      document.getElementById("emotion-comment").textContent = e.comment;
-      document.getElementById("emotion-conseil").textContent = e.conseil;
-      const result = document.getElementById("emotion-result");
-      result.style.display = "block";
-      result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    <div class="emotion-card" data-index="${i}">
+      <div class="emotion-card-header">
+        <span class="emotion-score">${e.score}</span>
+        <span class="emotion-name">${e.name}</span>
+        <span class="emotion-toggle">▼</span>
+      </div>
+      <div class="emotion-card-body">
+        <p class="emotion-body-comment">${e.comment}</p>
+        <span class="emotion-conseil-label">Le conseil de Tata Éléonore</span>
+        <p class="emotion-conseil-text">${e.conseil}</p>
+        <button class="emotion-today-btn" data-index="${i}">★ C'est ma fréquence du jour</button>
+      </div>
+    </div>`).join("");
+
+  // Toggle ouverture des cartes
+  list.querySelectorAll(".emotion-card-header").forEach(header => {
+    header.addEventListener("click", () => {
+      const card = header.closest(".emotion-card");
+      const isOpen = card.classList.contains("active");
+      list.querySelectorAll(".emotion-card").forEach(c => {
+        c.classList.remove("active");
+        c.querySelector(".emotion-toggle").textContent = "▼";
+      });
+      if (!isOpen) {
+        card.classList.add("active");
+        header.querySelector(".emotion-toggle").textContent = "▲";
+        card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
+  });
+
+  // Bouton "C'est ma fréquence du jour"
+  list.querySelectorAll(".emotion-today-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const emotion = EMOTION_DATA[Number(btn.dataset.index)];
+      localStorage.setItem(EMOTION_KEY, JSON.stringify({
+        date: getTodayKey(),
+        score: emotion.score,
+        name: emotion.name
+      }));
+      todayDisplay.innerHTML = `<div class="emotion-today-result">
+        <div class="emotion-today-label">★ Ma fréquence d'aujourd'hui</div>
+        <div class="emotion-today-name">${emotion.score} — ${emotion.name}</div>
+      </div>`;
+      showToast("★ Ta fréquence du jour est ancrée ★");
+      list.querySelectorAll(".emotion-card").forEach(c => {
+        c.classList.remove("active");
+        c.querySelector(".emotion-toggle").textContent = "▼";
+      });
+      todayDisplay.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
   });
 }
