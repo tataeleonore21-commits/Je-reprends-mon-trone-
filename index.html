@@ -1805,7 +1805,7 @@ body{padding-bottom:80px}
         <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
         <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
         <div class="premium-feature">★ Table d'Alignement — 12 lignes de transformation profonde</div>
-        <div class="premium-feature">★ Connais-toi toi-même — ton portrait intérieur sans filtre</div>
+        <div class="premium-feature">★ Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
         <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
         <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
       </div>
@@ -1838,7 +1838,7 @@ body{padding-bottom:80px}
         <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
         <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
         <div class="premium-feature">★ Table d'Alignement — 12 lignes de transformation profonde</div>
-        <div class="premium-feature">★ Connais-toi toi-même — ton portrait intérieur sans filtre</div>
+        <div class="premium-feature">★ Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
         <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
         <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
       </div>
@@ -1867,7 +1867,7 @@ body{padding-bottom:80px}
           <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
           <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
           <div class="premium-feature">★ Table d'Alignement — 12 lignes de transformation profonde</div>
-          <div class="premium-feature">★ Connais-toi toi-même — ton portrait intérieur sans filtre</div>
+          <div class="premium-feature">★ Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
           <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
           <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
         </div>
@@ -1970,18 +1970,14 @@ body{padding-bottom:80px}
 
         <!-- 8. CONNAIS-TOI TOI-MÊME -->
         <div class="premium-section-title">★ Connais-toi toi-même</div>
-        <p class="oracle-cta-text" style="margin-bottom:16px">Se connaître, c'est le premier pas vers toute transformation. Sans filtre, sans jugement.</p>
+        <p class="oracle-cta-text" style="margin-bottom:16px">Quelles sont les 3 forces dont tu as besoin cette semaine pour passer à l'action et réaliser tes rêves ?</p>
         <div class="self-grid">
           <div class="section-block">
-            <div class="section-header"><span class="section-label">Ma force</span></div>
-            <textarea class="field-input self-textarea" id="qualites" placeholder="Ce qui fait ma force, ma lumière, ma singularité…"></textarea>
-          </div>
-          <div class="section-block">
-            <div class="section-header"><span class="section-label">Ce que j'ai à développer</span></div>
-            <textarea class="field-input self-textarea" id="defauts" placeholder="Ce sur quoi je travaille, avec douceur et honnêteté…"></textarea>
+            <div class="section-header"><span class="section-label">Mes 3 forces de la semaine</span></div>
+            <textarea class="field-input self-textarea" id="qualites" placeholder="Ex : La patience, la ténacité, la foi…"></textarea>
           </div>
         </div>
-        <button class="save-btn" id="save-connaistoi" style="margin-top:12px">★ Ancrer cette vérité ★</button>
+        <button class="save-btn" id="save-connaistoi" style="margin-top:12px">★ Ancrer ces forces ★</button>
         <button class="export-btn" id="export-connaistoi" style="margin-top:10px">Télécharger mon portrait en PDF</button>
 
         <div class="oracle-divider">★</div>
@@ -3118,6 +3114,7 @@ function initEmotions(){
     todayDisplay.innerHTML = `<div class="emotion-today-result">
       <div class="emotion-today-label">★ Ma fréquence d'aujourd'hui</div>
       <div class="emotion-today-name">${todayEmotion.score} — ${todayEmotion.name}</div>
+      <p style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:8px">Clique sur ta carte ci-dessous pour relire le conseil</p>
     </div>`;
   }
 
@@ -3186,6 +3183,25 @@ function initEmotions(){
       renderEmotionChart();
     });
   });
+
+  // Si déjà tiré aujourd'hui — ouvrir automatiquement la carte et montrer le conseil
+  if (todayEmotion.date === getTodayKey() && todayEmotion.name) {
+    const todayIndex = EMOTION_DATA.findIndex(e => e.score === todayEmotion.score);
+    if (todayIndex >= 0) {
+      setTimeout(() => {
+        const todayCard = list.querySelector(`.emotion-card[data-index="${todayIndex}"]`);
+        if (todayCard) {
+          todayCard.classList.add("active");
+          todayCard.querySelector(".emotion-toggle").textContent = "▲";
+          const btn = todayCard.querySelector(".emotion-today-btn");
+          if (btn) { btn.textContent = "★ Fréquence ancrée"; btn.style.opacity = ".5"; }
+          const conseil = todayCard.querySelector(".emotion-conseil-reveal");
+          if (conseil) conseil.style.display = "block";
+        }
+      }, 100);
+    }
+  }
+
   renderEmotionChart();
 }
 
