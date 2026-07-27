@@ -1481,8 +1481,8 @@ body{padding-bottom:80px}
       </div>
 
       <div class="oracle-premium-cta" style="margin-top:16px">
-        <p class="oracle-cta-text">Tu désires aller plus loin ? Coaching · Guidance · Accompagnement personnalisé avec Tata Éléonore.</p>
-        <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium">Me contacter</a>
+        <p class="oracle-cta-text">Tu désires un accompagnement personnalisé pour analyser ta roue et avancer ? Contacte Tata Éléonore.</p>
+        <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium%20-%20Roue%20de%20Vie">Me contacter</a>
       </div>
 
     </div>
@@ -1491,6 +1491,7 @@ body{padding-bottom:80px}
 </div>
 
 <div class="signature">Tata Éléonore — Coaching · Guidance · Accompagnement<br><span class="footer-contact">tataeleonore21@gmail.com</span><br>
+<a href="mailto:tataeleonore21@gmail.com" style="display:inline-block;margin-top:8px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);border:1px solid var(--border);padding:7px 18px;border-radius:20px;text-decoration:none">Me contacter</a><br>
 <button class="replay-welcome-btn" id="replay-welcome">Revoir le message d'accueil</button><br>
 <button class="replay-welcome-btn" id="replay-bilan" style="margin-top:6px">Voir mon bilan de la semaine</button>
 </div>
@@ -2618,7 +2619,10 @@ function initWheel(){
   });
   drawWheel();
 
-  document.getElementById("wheel-save").addEventListener("click", () => {
+  const saveBtn = document.getElementById("wheel-save");
+  const newSaveBtn = saveBtn.cloneNode(true);
+  saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
+  newSaveBtn.addEventListener("click", () => {
     saveJSON(WHEEL_KEY, wheelValues);
     showToast("★ Ta roue de vie est sauvegardée ★");
   });
@@ -2702,8 +2706,14 @@ function drawWheel(){
 
 // Init la roue quand on clique sur l'onglet Oracle
 document.querySelector('.bottom-nav-btn[data-tab="premium"]').addEventListener("click", () => {
-  setTimeout(initWheel, 100);
+  setTimeout(() => {
+    initWheel();
+    drawWheel();
+  }, 150);
 });
+
+// Init si on arrive directement sur l'onglet premium
+if (defaultTab === 'premium') setTimeout(() => { initWheel(); drawWheel(); }, 300);
 
 function exportReves(){
   const remplies = dreams.filter(d => d.text && d.text.trim());
