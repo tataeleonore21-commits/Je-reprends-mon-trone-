@@ -442,6 +442,47 @@ body{padding-bottom:80px}
 }
 #emotion-chart{width:100% !important}
 #miroir-chart{width:100% !important}
+.wheel-priority-box{
+  background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));
+  border:1px solid var(--gold);
+  border-radius:14px;
+  padding:16px 18px;
+  margin:16px 0;
+}
+.wheel-priority-title{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:12px;
+}
+.wheel-priority-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:8px 0;
+  border-bottom:1px solid rgba(169,128,47,.1);
+}
+.wheel-priority-item:last-child{border-bottom:none}
+.wheel-priority-num{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:18px;
+  color:var(--gold-deep);
+  min-width:24px;
+}
+.wheel-priority-name{
+  font-family:'EB Garamond',serif;
+  font-size:16px;
+  color:var(--ink);
+  flex:1;
+}
+.wheel-priority-score{
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  color:var(--muted);
+}
 .miroir-legend-item{
   display:flex;align-items:center;gap:6px;
   font-family:'Cinzel',serif;font-size:8px;
@@ -1868,9 +1909,10 @@ body{padding-bottom:80px}
 
         <!-- 2. ROUE DE VIE -->
         <div class="premium-section-title">★ Ma Roue de Vie</div>
-        <p class="oracle-cta-text" style="margin-bottom:20px">Note chaque domaine de ta vie de 0 à 10.</p>
+        <p class="oracle-cta-text" style="margin-bottom:20px">Note chaque domaine de ta vie de 0 à 10 et vois les 3 domaines à améliorer en priorité.</p>
         <div class="wheel-domains" id="wheel-domains"></div>
         <canvas id="wheel-canvas" width="280" height="280" style="display:block;margin:24px auto"></canvas>
+        <div id="wheel-priority" class="wheel-priority-box" style="display:none"></div>
         <button class="bilan-share-btn" id="wheel-save">Sauvegarder ma roue</button>
 
         <div class="oracle-divider">★</div>
@@ -1885,7 +1927,7 @@ body{padding-bottom:80px}
         <div class="oracle-divider">★</div>
 
         <!-- 4. SUIVI ÉMOTIONNEL -->
-        <div class="premium-section-title">★ Mon évolution émotionnelle</div>
+        <div class="premium-section-title">★ Mon Évolution Émotionnelle</div>
         <p class="oracle-cta-text" style="margin-bottom:20px">Vois ta progression sur les 30 derniers jours. Chaque jour noté est une preuve que tu montes.</p>
         <div class="emotion-chart-container">
           <canvas id="emotion-chart" height="180"></canvas>
@@ -1897,7 +1939,7 @@ body{padding-bottom:80px}
 
         <!-- 5. MIROIR DU JOUR -->
         <div class="premium-section-title">★ Le Miroir du Jour</div>
-        <p class="oracle-cta-text" style="margin-bottom:20px">Intention · Émotion · Gratitude — trois courbes qui révèlent ta cohérence intérieure.</p>
+        <p class="oracle-cta-text" style="margin-bottom:20px">Intention · Émotion · Gratitude — trois courbes qui révèlent ta cohérence intérieure. Les jours où les trois sont hautes ensemble — quelque chose se crée en toi.</p>
         <div class="emotion-chart-container">
           <canvas id="miroir-chart" height="200"></canvas>
         </div>
@@ -1919,7 +1961,7 @@ body{padding-bottom:80px}
 
         <!-- 7. TABLE D'ALIGNEMENT -->
         <div class="premium-section-title">★ Table d'Alignement</div>
-        <p class="oracle-cta-text" style="margin-bottom:16px">Ce que tu rejettes éclaire ce que tu désires. Pose ce que tu ne veux plus, son opposé, puis l'action concrète.</p>
+        <p class="oracle-cta-text" style="margin-bottom:16px">Note 3 choses que tu ne veux plus cette semaine, note son opposé (ce que tu veux), puis l'action concrète à mettre en place.</p>
         <div id="align-list"></div>
         <button class="save-btn" id="save-alignement" style="margin-top:12px">★ Ancrer cette table ★</button>
         <button class="export-btn" id="export-alignement" style="margin-top:10px">Télécharger ma table en PDF</button>
@@ -2104,7 +2146,7 @@ const STORAGE_KEY = "eleonore_days";
 const DREAMS_KEY = "eleonore_reves";
 const SELF_KEY = "eleonore_connaistoi";
 const ALIGN_KEY = "eleonore_alignement";
-const ALIGN_COUNT = 12;
+const ALIGN_COUNT = 3;
 const DREAM_COUNT = 101;
 
 // Correspondance planétaire des jours (index = Date.getDay(), 0 = Dimanche)
@@ -3089,9 +3131,11 @@ function initEmotions(){
       </div>
       <div class="emotion-card-body">
         <p class="emotion-body-comment">${e.comment}</p>
-        <span class="emotion-conseil-label">Le conseil de Tata Éléonore</span>
-        <p class="emotion-conseil-text">${e.conseil}</p>
         <button class="emotion-today-btn" data-index="${i}">★ C'est ma fréquence du jour</button>
+        <div class="emotion-conseil-reveal" data-index="${i}" style="display:none">
+          <span class="emotion-conseil-label">Le conseil de Tata Éléonore</span>
+          <p class="emotion-conseil-text">${e.conseil}</p>
+        </div>
       </div>
     </div>`).join("");
 
@@ -3122,7 +3166,6 @@ function initEmotions(){
         score: emotion.score,
         name: emotion.name
       }));
-      // Sauvegarde dans l'historique
       const history = loadJSON(EMOTION_HISTORY_KEY, {});
       history[getTodayKey()] = { score: emotion.score, name: emotion.name };
       saveJSON(EMOTION_HISTORY_KEY, history);
@@ -3130,12 +3173,16 @@ function initEmotions(){
         <div class="emotion-today-label">★ Ma fréquence d'aujourd'hui</div>
         <div class="emotion-today-name">${emotion.score} — ${emotion.name}</div>
       </div>`;
+      // Affiche le conseil dans la carte
+      const conseilReveal = btn.parentNode.querySelector(".emotion-conseil-reveal");
+      if (conseilReveal) {
+        conseilReveal.style.display = "block";
+        setTimeout(() => conseilReveal.scrollIntoView({ behavior: "smooth", block: "nearest" }), 100);
+      }
+      btn.textContent = "★ Fréquence ancrée";
+      btn.style.opacity = ".5";
       showToast("★ Ta fréquence du jour est ancrée ★");
-      list.querySelectorAll(".emotion-card").forEach(c => {
-        c.classList.remove("active");
-        c.querySelector(".emotion-toggle").textContent = "▼";
-      });
-      todayDisplay.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      todayDisplay.scrollIntoView({ behavior: "smooth", block: "start" });
       renderEmotionChart();
     });
   });
@@ -3550,6 +3597,15 @@ function initWheel(){
   saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
   newSaveBtn.addEventListener("click", () => {
     saveJSON(WHEEL_KEY, wheelValues);
+    // Affiche les 3 domaines les plus bas
+    const priorityEl = document.getElementById("wheel-priority");
+    if (priorityEl) {
+      const sorted = WHEEL_DOMAINS.map((name, i) => ({ name, score: wheelValues[i] }))
+        .sort((a, b) => a.score - b.score).slice(0, 3);
+      priorityEl.innerHTML = `<div class="wheel-priority-title">★ Tes 3 priorités</div>` +
+        sorted.map((d, i) => `<div class="wheel-priority-item"><span class="wheel-priority-num">${i+1}</span><span class="wheel-priority-name">${d.name}</span><span class="wheel-priority-score">${d.score}/10</span></div>`).join("");
+      priorityEl.style.display = "block";
+    }
     showToast("★ Ta roue de vie est sauvegardée ★");
   });
 }
