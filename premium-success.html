@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accès Premium débloqué — Tata Éléonore</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  background:#1C0A04;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:40px 24px;
+  font-family:'Cinzel',serif;
+  text-align:center;
+}
+.crown{font-size:48px;margin-bottom:20px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  color:#E8C77E;
+  margin-bottom:12px;
+}
+.subtitle{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:16px;
+  color:rgba(232,199,126,0.75);
+  margin-bottom:36px;
+  line-height:1.6;
+}
+.btn{
+  display:block;
+  background:linear-gradient(135deg,rgba(212,162,74,.25),rgba(212,162,74,.1));
+  border:1px solid #D4A24A;
+  color:#E8C77E;
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  padding:16px 32px;
+  border-radius:14px;
+  text-decoration:none;
+  cursor:pointer;
+}
+.sparkle{
+  position:fixed;
+  pointer-events:none;
+  font-size:16px;
+  animation:rise 2s ease-out forwards;
+}
+@keyframes rise{
+  0%{opacity:0;transform:translateY(0) scale(.5)}
+  30%{opacity:1}
+  100%{opacity:0;transform:translateY(-120px) scale(1)}
+}
+</style>
+</head>
+<body>
+<script>
+// Déverrouillage automatique du Premium
+localStorage.setItem('eleonore_premium', 'true');
+
+// Scintillement de célébration
+const chars = ['★','✨','★','·','★'];
+for(let i=0; i<12; i++){
+  setTimeout(() => {
+    const el = document.createElement('span');
+    el.className = 'sparkle';
+    el.textContent = chars[Math.floor(Math.random()*chars.length)];
+    el.style.left = (5 + Math.random()*90) + 'vw';
+    el.style.top = (10 + Math.random()*80) + 'vh';
+    el.style.color = '#D4A24A';
+    el.style.fontSize = (12 + Math.random()*14) + 'px';
+    el.style.animationDuration = (1.5 + Math.random()*1.5) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }, i * 200);
+}
+
+// Redirection automatique après 4 secondes
+setTimeout(() => { window.location.href = '/'; }, 4000);
+</script>
+
+<div class="crown">👑</div>
+<h1>Ton espace Premium est débloqué !</h1>
+<p class="subtitle">Bienvenue dans l'espace de transformation.<br>Oracle · Roue de vie · Fréquences émotionnelles<br><br>Tu vas être redirigé·e dans quelques secondes…</p>
+<a class="btn" href="/">Entrer dans mon espace ★</a>
+
+</body>
+</html>

@@ -243,8 +243,134 @@ body{padding-bottom:80px}
   text-align:center;
   color:var(--gold);
   font-size:18px;
-  margin:28px 0;
+  margin:32px 0;
   opacity:.5;
+}
+
+/* Premium verrouillé */
+.premium-lock-box{
+  text-align:center;
+  padding:40px 24px;
+  background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));
+  border:1px solid var(--gold);
+  border-radius:20px;
+  margin-bottom:24px;
+}
+.premium-lock-icon{font-size:48px;margin-bottom:16px}
+.premium-lock-title{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:26px;
+  color:var(--gold-deep);
+  margin-bottom:4px;
+}
+.premium-lock-sub{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:28px;
+}
+.premium-lock-features{
+  text-align:left;
+  margin-bottom:28px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.premium-feature{
+  font-family:'EB Garamond',serif;
+  font-size:16px;
+  color:var(--ink-soft);
+  line-height:1.5;
+  padding-left:4px;
+}
+.premium-price-block{margin-top:8px}
+.premium-pay-btn{
+  display:block;
+  width:100%;
+  background:linear-gradient(135deg,rgba(169,128,47,.3),rgba(169,128,47,.12));
+  border:1px solid var(--gold);
+  color:var(--gold-deep);
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  padding:16px;
+  border-radius:14px;
+  text-decoration:none;
+  text-align:center;
+  cursor:pointer;
+  margin-bottom:10px;
+}
+.premium-price-note{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.15em;
+  color:var(--muted);
+  opacity:.6;
+}
+.premium-section-title{
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  text-align:center;
+  margin-bottom:16px;
+}
+
+/* Fréquences émotionnelles */
+.emotion-list{display:flex;flex-direction:column;gap:8px}
+.emotion-btn{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:all .2s;
+  text-align:left;
+  touch-action:manipulation;
+}
+.emotion-btn:hover,.emotion-btn.active{
+  border-color:var(--gold);
+  background:linear-gradient(135deg,rgba(169,128,47,.12),rgba(169,128,47,.03));
+}
+.emotion-score{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:18px;
+  color:var(--gold-deep);
+  min-width:36px;
+  text-align:center;
+}
+.emotion-name{
+  font-family:'EB Garamond',serif;
+  font-weight:600;
+  font-size:16px;
+  color:var(--ink);
+}
+.emotion-level-badge{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:12px;
+}
+.emotion-conseil-title{
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--rose);
+  margin-top:16px;
+  margin-bottom:4px;
 }
 .oracle-return-msg{
   text-align:center;
@@ -1439,52 +1565,85 @@ body{padding-bottom:80px}
   </div>
 
   <div class="view" id="view-premium">
-    <div class="oracle-container">
 
-      <div class="oracle-ritual-header">
-        <div class="oracle-stars-row">★ &nbsp; ★ &nbsp; ★</div>
-        <div class="oracle-premium-badge">Espace Premium</div>
-        <h2 class="oracle-title">L'Oracle du Jour</h2>
-        <p class="oracle-ritual-text">Prends un moment.<br>Pose une main sur ton cœur.<br>Respire.<br>Puis laisse un chiffre monter en toi.</p>
-        <p class="oracle-subtitle">Choisis entre 1 et 9 — ton intuition sait.</p>
-      </div>
-
-      <div class="oracle-number-grid" id="oracle-grid">
-        <button class="oracle-num-btn" data-num="1">1</button>
-        <button class="oracle-num-btn" data-num="2">2</button>
-        <button class="oracle-num-btn" data-num="3">3</button>
-        <button class="oracle-num-btn" data-num="4">4</button>
-        <button class="oracle-num-btn" data-num="5">5</button>
-        <button class="oracle-num-btn" data-num="6">6</button>
-        <button class="oracle-num-btn" data-num="7">7</button>
-        <button class="oracle-num-btn" data-num="8">8</button>
-        <button class="oracle-num-btn" data-num="9">9</button>
-      </div>
-
-      <div class="oracle-result" id="oracle-result">
-        <div class="oracle-number-meaning" id="oracle-meaning" style="display:none"></div>
-        <div class="oracle-card">
-          <p class="oracle-message" id="oracle-message"></p>
-          <p class="oracle-signature">— Tata Éléonore</p>
+    <!-- ÉCRAN VERROUILLÉ -->
+    <div id="premium-locked" style="display:none">
+      <div class="premium-lock-box">
+        <div class="premium-lock-icon">🔒</div>
+        <h2 class="premium-lock-title">Espace Premium</h2>
+        <p class="premium-lock-sub">By Tata Éléonore</p>
+        <div class="premium-lock-features">
+          <div class="premium-feature">★ Oracle du Jour — tirage numérologique quotidien</div>
+          <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie</div>
+          <div class="premium-feature">★ Bande des Fréquences Émotionnelles — comprends où tu en es et monte en vibration</div>
         </div>
-        <p class="oracle-return-msg">★ Ton tirage du jour est posé — reviens demain ★</p>
+        <div class="premium-price-block">
+          <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'espace Premium</a>
+          <p class="premium-price-note">Paiement sécurisé par Stripe</p>
+        </div>
       </div>
+    </div>
 
-      <div class="oracle-divider">★</div>
+    <!-- CONTENU DÉBLOQUÉ -->
+    <div id="premium-unlocked" style="display:none">
+      <div class="oracle-container">
 
-      <div class="oracle-premium-cta" style="margin-top:0">
-        <div class="wheel-title">Ma Roue de Vie</div>
-        <p class="oracle-cta-text" style="margin-bottom:20px">Note chaque domaine de ta vie de 0 à 10. Vois où tu en es vraiment.</p>
+        <!-- 1. ORACLE -->
+        <div class="premium-section-title">★ Oracle du Jour</div>
+        <p class="oracle-subtitle" style="margin-bottom:24px">Choisis un chiffre entre 1 et 9 — ton intuition sait.</p>
+        <div class="oracle-number-grid" id="oracle-grid">
+          <button class="oracle-num-btn" data-num="1">1</button>
+          <button class="oracle-num-btn" data-num="2">2</button>
+          <button class="oracle-num-btn" data-num="3">3</button>
+          <button class="oracle-num-btn" data-num="4">4</button>
+          <button class="oracle-num-btn" data-num="5">5</button>
+          <button class="oracle-num-btn" data-num="6">6</button>
+          <button class="oracle-num-btn" data-num="7">7</button>
+          <button class="oracle-num-btn" data-num="8">8</button>
+          <button class="oracle-num-btn" data-num="9">9</button>
+        </div>
+        <div class="oracle-result" id="oracle-result">
+          <div class="oracle-number-meaning" id="oracle-meaning" style="display:none"></div>
+          <div class="oracle-card">
+            <p class="oracle-message" id="oracle-message"></p>
+            <p class="oracle-signature">— Tata Éléonore</p>
+          </div>
+          <p class="oracle-return-msg">★ Ton tirage du jour est posé — reviens demain ★</p>
+        </div>
+
+        <div class="oracle-divider">★</div>
+
+        <!-- 2. ROUE DE VIE -->
+        <div class="premium-section-title">★ Ma Roue de Vie</div>
+        <p class="oracle-cta-text" style="margin-bottom:20px">Note chaque domaine de ta vie de 0 à 10.</p>
         <div class="wheel-domains" id="wheel-domains"></div>
         <canvas id="wheel-canvas" width="280" height="280" style="display:block;margin:24px auto"></canvas>
-        <button class="bilan-share-btn" id="wheel-save" style="margin-top:0">Sauvegarder ma roue</button>
-      </div>
+        <button class="bilan-share-btn" id="wheel-save">Sauvegarder ma roue</button>
 
-      <div class="oracle-premium-cta" style="margin-top:16px">
-        <p class="oracle-cta-text">Tu désires un accompagnement personnalisé pour analyser ta roue et avancer ? Contacte Tata Éléonore.</p>
-        <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium%20-%20Roue%20de%20Vie">Me contacter</a>
-      </div>
+        <div class="oracle-divider">★</div>
 
+        <!-- 3. BANDE DES FRÉQUENCES ÉMOTIONNELLES -->
+        <div class="premium-section-title">★ Mes Fréquences Émotionnelles</div>
+        <p class="oracle-cta-text" style="margin-bottom:24px">Où en es-tu aujourd'hui ? Clique sur ta fréquence du moment.</p>
+        <div class="emotion-list" id="emotion-list"></div>
+        <div class="emotion-result" id="emotion-result" style="display:none">
+          <div class="oracle-card" style="margin-top:20px">
+            <div class="emotion-level-badge" id="emotion-level-badge"></div>
+            <p class="oracle-message" id="emotion-comment"></p>
+            <div class="emotion-conseil-title">Mon conseil</div>
+            <p class="oracle-message" id="emotion-conseil" style="margin-top:8px;font-style:normal;font-size:15px"></p>
+            <p class="oracle-signature">— Tata Éléonore</p>
+          </div>
+        </div>
+
+        <div class="oracle-divider">★</div>
+
+        <div class="oracle-premium-cta">
+          <p class="oracle-cta-text">Tu désires un accompagnement personnalisé ? Contacte Tata Éléonore.</p>
+          <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium">Me contacter</a>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -2562,6 +2721,65 @@ function showOracleResult(num, meaning, message){
   returnMsg.textContent = "★ Ton tirage du jour est fait — reviens demain ★";
 }
 
+// ═══ PREMIUM ═══
+const PREMIUM_KEY = "eleonore_premium";
+
+function checkPremium(){
+  return localStorage.getItem(PREMIUM_KEY) === "true";
+}
+
+function initPremiumView(){
+  const locked = document.getElementById("premium-locked");
+  const unlocked = document.getElementById("premium-unlocked");
+  if (checkPremium()) {
+    locked.style.display = "none";
+    unlocked.style.display = "block";
+    setTimeout(() => { initWheel(); initOracle(); initEmotions(); }, 150);
+  } else {
+    locked.style.display = "block";
+    unlocked.style.display = "none";
+  }
+}
+
+// Données des fréquences émotionnelles
+const EMOTION_DATA = [
+  { score: 4.0, name: "Enthousiasme", comment: "Tu es à ton maximum vibratoire. Tout ce que tu touches en ce moment a la capacité de se transformer. C'est le moment d'agir, de créer, de lancer. Ne sous-estime pas cette énergie — capitalise dessus.", conseil: "Pose une intention audacieuse aujourd'hui. Lance ce projet que tu remets à plus tard. L'univers est aligné avec toi." },
+  { score: 3.5, name: "Bonheur · Gaieté", comment: "Tu rayonnes. Les gens le sentent sans que tu aies besoin de le dire. Cette légèreté que tu portes n'est pas superficielle — elle est le fruit de quelque chose que tu as traversé et déposé.", conseil: "Partage cette joie. Appelle quelqu'un que tu aimes. Ta fréquence est contagieuse — utilise-la pour élever ceux qui t'entourent." },
+  { score: 3.0, name: "Conservatisme · Zone de confort", comment: "Tu es stable. Ni trop haut, ni trop bas. Mais quelque chose en toi sait qu'il y a plus. La zone de confort est un endroit doux — et dangereux si on s'y installe trop longtemps.", conseil: "Fais une chose aujourd'hui qui te sort légèrement de ta routine. Pas un grand saut — juste un pas de côté." },
+  { score: 2.5, name: "Ennui", comment: "L'ennui est le signal que ton âme réclame quelque chose de plus grand. Ce n'est pas le vide — c'est un appel déguisé en fatigue.", conseil: "Demande-toi : qu'est-ce qui manque vraiment à mon âme ? Pas ce que tu veux acheter — ce dont ton âme a faim." },
+  { score: 2.2, name: "Borne", comment: "Tu te sens limité·e. Par les autres, par les circonstances, par toi-même. Cette sensation d'être contenu·e dans un espace trop petit pour ce que tu es vraiment.", conseil: "Identifie une seule limite que tu t'imposes toi-même. Demande-toi : est-ce vraiment vrai, ou est-ce une vieille histoire que tu portes ?" },
+  { score: 2.0, name: "Antagonisme", comment: "Tu es en résistance contre quelque chose ou quelqu'un. Tout te semble à contresens. Ce niveau dépense ton énergie à combattre plutôt qu'à construire.", conseil: "Ce que tu combats te coûte plus que ce que ça vaut. Identifie une seule chose contre laquelle tu cesses de résister aujourd'hui — pas pour abandonner, pour économiser ton énergie." },
+  { score: 1.8, name: "Pitié", comment: "Tu te diminues, tu te compares, ou tu portes la douleur des autres comme si elle était la tienne. La pitié — envers soi ou envers les autres — est une forme d'amour qui s'est perdu en chemin.", conseil: "Remplace la pitié par la compassion. La pitié regarde de haut. La compassion se tient à côté. Tiens-toi à côté de toi-même aujourd'hui." },
+  { score: 1.5, name: "Colère", comment: "Ta colère est là pour une raison. Elle protège quelque chose d'important en toi. Mais si elle dure, elle brûle ce qu'elle était censée défendre.", conseil: "Nomme ce que ta colère protège vraiment. C'est souvent une blessure, un besoin non comblé, une limite franchie. Défends ce besoin avec ta voix — pas avec la flamme." },
+  { score: 1.1, name: "Hypocrisie · Hostilité cachée", comment: "Ce que tu ressens ne correspond pas à ce que tu montres. Cette dissonance te coûte une énergie considérable — et elle empoisonne tes relations sans qu'on sache pourquoi.", conseil: "Trouve un espace sûr pour être honnête — avec toi d'abord. Un journal, une prière, une personne de confiance. La vérité intérieure est le seul chemin qui remonte." },
+  { score: 1.0, name: "Peur", comment: "La peur te paralyse ou te fait fuir. Elle rétrécit ton monde jusqu'à ce qu'il ne reste plus que ce qu'elle t'autorise à voir. Elle ment souvent — mais elle crie si fort qu'on finit par la croire.", conseil: "Nomme ta peur précisément. Une peur nommée perd la moitié de son pouvoir. Puis demande-toi : quelle est la pire chose qui puisse arriver vraiment — et peux-tu y survivre ?" },
+  { score: 0.5, name: "Chagrin", comment: "Tu portes une douleur réelle. Quelque chose ou quelqu'un t'a manqué, t'a quitté, t'a blessé. Le chagrin est la preuve que tu as aimé. Ne l'écourte pas — il a besoin de temps.", conseil: "Autorise-toi à pleurer. Sans te juger, sans te presser. Pose une main sur ton cœur et dis-lui : je t'entends. Je suis là. Ça aussi, ça passera." },
+  { score: 0.05, name: "Apathie", comment: "Tu es dans le silence le plus profond de l'âme. Plus d'élan, plus de désir, plus de douleur — juste le vide. Ce n'est pas la fin. C'est le fond. Et du fond, il n'y a qu'une direction possible.", conseil: "Commence par respirer. Un seul souffle conscient. Puis un autre. Ne cherche pas à tout changer aujourd'hui — cherche juste une toute petite sensation. Reviens à ton corps. Il sait le chemin." },
+];
+
+function initEmotions(){
+  const list = document.getElementById("emotion-list");
+  if (!list) return;
+  list.innerHTML = EMOTION_DATA.map((e, i) => `
+    <button class="emotion-btn" data-index="${i}">
+      <span class="emotion-score">${e.score}</span>
+      <span class="emotion-name">${e.name}</span>
+    </button>`).join("");
+  list.querySelectorAll(".emotion-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      list.querySelectorAll(".emotion-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const e = EMOTION_DATA[Number(btn.dataset.index)];
+      document.getElementById("emotion-level-badge").textContent = `${e.score} — ${e.name}`;
+      document.getElementById("emotion-comment").textContent = e.comment;
+      document.getElementById("emotion-conseil").textContent = e.conseil;
+      const result = document.getElementById("emotion-result");
+      result.style.display = "block";
+      result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  });
+}
+
 function initOracle(){
   // Vérifie si déjà tiré aujourd'hui
   const saved = getOracleTodayData();
@@ -2584,7 +2802,6 @@ function initOracle(){
 
   document.getElementById("oracle-reset").style.display = "none";
 }
-initOracle();
 
 // ═══ ROUE DE VIE ═══
 const WHEEL_KEY = "eleonore_wheel";
@@ -2706,14 +2923,18 @@ function drawWheel(){
 
 // Init la roue quand on clique sur l'onglet Oracle
 document.querySelector('.bottom-nav-btn[data-tab="premium"]').addEventListener("click", () => {
-  setTimeout(() => {
-    initWheel();
-    drawWheel();
-  }, 150);
+  setTimeout(initPremiumView, 150);
 });
 
-// Init si on arrive directement sur l'onglet premium
-if (defaultTab === 'premium') setTimeout(() => { initWheel(); drawWheel(); }, 300);
+// Init au chargement si premium déjà débloqué
+setTimeout(() => {
+  initWheel();
+  if (checkPremium()) initPremiumView();
+  else {
+    document.getElementById("premium-locked").style.display = "block";
+    document.getElementById("premium-unlocked").style.display = "none";
+  }
+}, 500);
 
 function exportReves(){
   const remplies = dreams.filter(d => d.text && d.text.trim());
