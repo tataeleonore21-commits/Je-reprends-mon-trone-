@@ -2780,13 +2780,13 @@ function showOracleResult(num, meaning, message){
   });
   document.getElementById("oracle-meaning").textContent = meaning;
   document.getElementById("oracle-message").textContent = message;
-  document.getElementById("oracle-reset").style.display = "none";
+  const oracleReset = document.getElementById("oracle-reset") || {style:{}}; if(oracleReset) oracleReset.style.display = "none";
   const result = document.getElementById("oracle-result");
   result.classList.remove("show");
   setTimeout(() => result.classList.add("show"), 50);
 
   // Message "revenez demain"
-  let returnMsg = document.getElementById("oracle-return-msg");
+  let returnMsg = document.getElementById("oracle-return-msg") || {};
   if (!returnMsg) {
     returnMsg = document.createElement("p");
     returnMsg.id = "oracle-return-msg";
@@ -2930,7 +2930,7 @@ function initOracle(){
     });
   });
 
-  document.getElementById("oracle-reset").style.display = "none";
+  const oracleReset = document.getElementById("oracle-reset") || {style:{}}; if(oracleReset) oracleReset.style.display = "none";
 }
 
 // ═══ ROUE DE VIE ═══
