@@ -179,7 +179,7 @@ body{
 }
 .bottom-nav-btn.active .bottom-nav-label{color:var(--gold-deep)}
 .bottom-nav-premium .bottom-nav-icon,
-.bottom-nav-premium .bottom-nav-label{color:var(--gold)}
+.bottom-nav-premium .bottom-nav-label{color:var(--muted)}
 .bottom-nav-premium.active .bottom-nav-icon,
 .bottom-nav-premium.active .bottom-nav-label{color:var(--gold-deep)}
 
@@ -211,6 +211,50 @@ body{padding-bottom:80px}
 .oracle-container{
   text-align:center;
   padding:0 0 40px;
+}
+.oracle-ritual-header{
+  text-align:center;
+  margin-bottom:32px;
+  padding:28px 20px;
+  background:linear-gradient(135deg,rgba(169,128,47,.08),rgba(169,128,47,.02));
+  border:1px solid var(--border);
+  border-radius:18px;
+}
+.oracle-stars-row{
+  font-size:14px;
+  color:var(--gold);
+  letter-spacing:4px;
+  margin-bottom:14px;
+  animation:starsPulse 3s ease-in-out infinite;
+}
+@keyframes starsPulse{
+  0%,100%{opacity:.6}
+  50%{opacity:1}
+}
+.oracle-ritual-text{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:16px;
+  line-height:2;
+  color:var(--ink-soft);
+  margin:16px 0;
+}
+.oracle-divider{
+  text-align:center;
+  color:var(--gold);
+  font-size:18px;
+  margin:28px 0;
+  opacity:.5;
+}
+.oracle-return-msg{
+  text-align:center;
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:16px;
+  opacity:.7;
 }
 .oracle-lock{
   font-size:32px;
@@ -1313,7 +1357,7 @@ body{padding-bottom:80px}
   <h1 class="app-title">Je reprends<em>mon trône</em></h1>
   <div class="app-subtitle">Journal de gratitude &amp; d'éveil</div>
   <div style="color:var(--gold);font-size:16px;margin-top:10px">★</div>
-  <div class="divider"><div class="divider-line"></div><div class="divider-gem">★</div><div class="divider-line"></div></div>
+  <div class="divider"><div class="divider-line"></div><div class="divider-line"></div></div>
 </div>
 
 <div class="quote-card">
@@ -1396,10 +1440,14 @@ body{padding-bottom:80px}
 
   <div class="view" id="view-premium">
     <div class="oracle-container">
-      <div class="oracle-lock">★</div>
-      <div class="oracle-premium-badge">Espace Premium</div>
-      <h2 class="oracle-title">L'Oracle du Jour</h2>
-      <p class="oracle-subtitle">Choisis un chiffre entre 1 et 9.<br>Laisse ton intuition guider ta main.</p>
+
+      <div class="oracle-ritual-header">
+        <div class="oracle-stars-row">★ &nbsp; ★ &nbsp; ★</div>
+        <div class="oracle-premium-badge">Espace Premium</div>
+        <h2 class="oracle-title">L'Oracle du Jour</h2>
+        <p class="oracle-ritual-text">Prends un moment.<br>Pose une main sur ton cœur.<br>Respire.<br>Puis laisse un chiffre monter en toi.</p>
+        <p class="oracle-subtitle">Choisis entre 1 et 9 — ton intuition sait.</p>
+      </div>
 
       <div class="oracle-number-grid" id="oracle-grid">
         <button class="oracle-num-btn" data-num="1">1</button>
@@ -1416,38 +1464,27 @@ body{padding-bottom:80px}
       <div class="oracle-result" id="oracle-result">
         <div class="oracle-number-meaning" id="oracle-meaning" style="display:none"></div>
         <div class="oracle-card">
-          
           <p class="oracle-message" id="oracle-message"></p>
           <p class="oracle-signature">— Tata Éléonore</p>
         </div>
-        <button class="oracle-reset-btn" id="oracle-reset">Tirer à nouveau</button>
+        <p class="oracle-return-msg">★ Ton tirage du jour est posé — reviens demain ★</p>
       </div>
 
-      <div class="oracle-premium-cta" style="margin-top:40px">
+      <div class="oracle-divider">★</div>
+
+      <div class="oracle-premium-cta" style="margin-top:0">
         <div class="wheel-title">Ma Roue de Vie</div>
         <p class="oracle-cta-text" style="margin-bottom:20px">Note chaque domaine de ta vie de 0 à 10. Vois où tu en es vraiment.</p>
         <div class="wheel-domains" id="wheel-domains"></div>
         <canvas id="wheel-canvas" width="280" height="280" style="display:block;margin:24px auto"></canvas>
         <button class="bilan-share-btn" id="wheel-save" style="margin-top:0">Sauvegarder ma roue</button>
-        <button class="bilan-share-btn" id="wheel-analyze" style="margin-top:10px;background:linear-gradient(135deg,rgba(169,128,47,.35),rgba(169,128,47,.15))">★ Obtenir mon analyse personnalisée</button>
-
-        <div id="wheel-analysis-result" style="display:none;margin-top:24px">
-          <div class="bilan-lesson-card">
-            <div class="bilan-lesson-loading" id="wheel-analysis-loading">Tata Éléonore lit ta roue…</div>
-            <p class="bilan-lesson-text" id="wheel-analysis-text" style="display:none"></p>
-            <p class="bilan-lesson-sig" id="wheel-analysis-sig" style="display:none">— Tata Éléonore</p>
-          </div>
-          <div class="wheel-cta-block" id="wheel-cta-block" style="display:none">
-            <p class="oracle-cta-text" style="margin:20px 0 12px">Pour aller plus loin avec cette analyse — un accompagnement personnalisé, un coaching ou une guidance avec Tata Éléonore t'attend.</p>
-            <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium%20-%20Roue%20de%20Vie">Je veux un accompagnement</a>
-          </div>
-        </div>
       </div>
 
-      <div class="oracle-premium-cta">
-        <p class="oracle-cta-text">Tu désires aller plus loin ? Un accompagnement personnalisé, une guidance ou un coaching avec Tata Éléonore t'attend.</p>
-        <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium">Contacte-moi pour le Premium</a>
+      <div class="oracle-premium-cta" style="margin-top:16px">
+        <p class="oracle-cta-text">Tu désires aller plus loin ? Coaching · Guidance · Accompagnement personnalisé avec Tata Éléonore.</p>
+        <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium">Me contacter</a>
       </div>
+
     </div>
   </div>
 
@@ -2388,91 +2425,91 @@ const ORACLE_DATA = {
   1: {
     meaning: "1 — Nouveau départ · Pionnier · Volonté",
     messages: [
-      "Quelque chose de nouveau commence aujourd'hui. Fais-lui confiance et avance sans regarder en arrière.",
-      "Tu es le début de ta propre histoire. Chaque matin est une page blanche que toi seul peux écrire.",
-      "Ce premier pas que tu hésites à faire — c'est lui le plus important. Fais-le maintenant.",
-      "Tu n'as pas besoin que tout soit prêt pour commencer. La préparation parfaite est souvent un mensonge.",
-      "L'énergie du 1 te dit : c'est ton moment. Ne le laisse pas passer par peur de l'inconnu.",
+      "Ce que tu commences aujourd'hui porte en lui la puissance de tout ce que tu as traversé. Ne minimise pas ce premier pas — il est le plus courageux de tous.",
+      "L'univers attend que tu te déclares. Pas demain, pas quand tu seras prêt·e. Maintenant. Déclare-toi.",
+      "Tu n'as pas besoin d'être prêt·e. Tu as besoin d'avancer. La préparation parfaite n'existe pas — elle est souvent le masque de la peur.",
+      "Quelque chose de nouveau cherche à naître à travers toi. Cesse de te demander si tu es capable. Ouvre simplement la porte.",
+      "La peur et le désir portent souvent le même visage. Ce que tu ressens là — c'est du désir. Avance quand même.",
     ]
   },
   2: {
     meaning: "2 — Équilibre · Relation · Patience",
     messages: [
-      "Ce que tu cherches dans l'autre existe déjà en toi. Commence par toi-même.",
-      "L'équilibre n'est pas une ligne droite. C'est une danse. Apprends à danser avec ta vie.",
-      "Aujourd'hui, quelqu'un a besoin de toi sans pouvoir le dire. Ouvre les yeux.",
-      "Ce n'est pas le moment de forcer. C'est le moment d'attendre avec confiance.",
-      "Le 2 te rappelle que tu n'es jamais seul·e. Tes ancêtres marchent avec toi.",
+      "Ce que tu donnes aux autres, commence aujourd'hui par te le donner à toi-même. La générosité commence là.",
+      "Là où il y a tension dans ta vie, il y a une invitation à l'équilibre. Elle t'attend. Écoute-la avant qu'elle crie.",
+      "Ta paix intérieure n'appartient à personne d'autre qu'à toi. Ni à ses humeurs, ni à ses peurs, ni à ses attentes. Protège-la.",
+      "Deux forces s'affrontent en toi. La sagesse, ce n'est pas de choisir l'une contre l'autre — c'est de les réconcilier.",
+      "Ralentis. Ce que tu cherches en courant depuis des semaines, tu le trouveras en respirant une seule fois vraiment.",
     ]
   },
   3: {
     meaning: "3 — Créativité · Expression · Joie",
     messages: [
-      "Ce que tu crées aujourd'hui, même en silence, changera quelque chose demain.",
-      "Ta joie est un acte de résistance. Ne laisse personne te la voler.",
-      "Tu as quelque chose à dire au monde. Dis-le avec courage et sans t'excuser.",
-      "L'enfant en toi sait ce qui te rend heureux·se. Écoute-le aujourd'hui.",
-      "Le 3 chante aujourd'hui. Laisse ta vie être une chanson que tu choisirais d'écouter.",
+      "Ce que tu crées aujourd'hui — même en silence, même seul·e — changera quelque chose dans le monde. Crée quand même.",
+      "Ta joie est un acte de résistance et de transmission. Ne laisse personne te la voler, même au nom de la sagesse.",
+      "Tu as quelque chose à dire. Au monde, à quelqu'un, à toi-même. Dis-le aujourd'hui — avec courage et sans t'excuser d'être là.",
+      "L'enfant en toi sait exactement ce qui te rend vivant·e. Tu le fais taire depuis trop longtemps. Écoute-le aujourd'hui.",
+      "Il y a une chanson en toi qui attend d'être chantée. Peu importe si ta voix tremble — chante.",
     ]
   },
   4: {
     meaning: "4 — Fondations · Travail · Stabilité",
     messages: [
-      "Ce que tu construis dans l'ombre sera vu à la lumière. Continue.",
-      "Les fondations ne sont pas glamour. Mais sans elles, rien ne tient. Pose les tiennes.",
-      "Le travail que tu fais aujourd'hui sans reconnaissance — il est vu. Il est compté.",
-      "La stabilité n'est pas une prison. C'est la racine qui permet à l'arbre de grandir haut.",
-      "Tes ancêtres ont construit avec leurs mains. Tu construis avec ton âme. Les deux sont sacrés.",
+      "Ce que tu construis dans l'ombre, dans le silence, dans l'effort invisible — ce sont ces pierres-là qui tiennent le plus longtemps.",
+      "Les fondations ne sont pas glamour. Personne ne les voit. Mais sans elles, rien de grand ne tient. Pose les tiennes avec soin.",
+      "Le travail que tu fais aujourd'hui sans reconnaissance, sans applaudissements — il est vu. Il est compté. Par ce qui compte vraiment.",
+      "La stabilité que tu bâtis n'est pas une prison. C'est la racine qui permettra à ton arbre de grandir aussi haut que tu le mérites.",
+      "Tes ancêtres ont construit avec leurs mains. Tu construis avec ton âme, ta vision, ta volonté. Les deux actes sont sacrés.",
     ]
   },
   5: {
     meaning: "5 — Transformation · Liberté · Mouvement",
     messages: [
-      "Ce qui se termine aujourd'hui te fait de la place pour ce qui arrive. Fais confiance au vide.",
-      "Tu changes. C'est bon signe. Seul ce qui est vivant se transforme.",
-      "La liberté que tu cherches commence par la permission que tu te donnes.",
-      "Ce n'est pas ta vie qui doit changer. C'est parfois ton regard sur elle.",
-      "Le 5 est le chiffre du souffle. Respire. Laisse la transformation faire son travail.",
+      "Ce qui se termine en toi aujourd'hui ne disparaît pas — il se transforme. Fais confiance au vide qu'il laisse derrière lui.",
+      "Tu changes. C'est un signe de vie, pas une trahison. Seul ce qui est vivant a la grâce de se transformer.",
+      "La liberté que tu cherches ne viendra pas de l'extérieur. Elle commence par la permission que tu te donnes toi-même.",
+      "Ce n'est pas ta vie qui doit changer en premier. C'est ton regard sur elle. Commence par là — tout le reste suivra.",
+      "Le souffle est le premier mouvement de la liberté. Respire profondément. Laisse la transformation faire son travail à travers toi.",
     ]
   },
   6: {
     meaning: "6 — Amour · Famille · Responsabilité",
     messages: [
-      "Prendre soin de toi n'est pas de l'égoïsme. C'est la condition pour prendre soin des autres.",
-      "L'amour que tu donnes sans compter finira toujours par te revenir. Patience.",
-      "Quelqu'un dans ta famille porte quelque chose de lourd. Ton appel pourrait tout changer.",
-      "Tu es aimé·e plus que tu ne le crois. Ouvre-toi à le recevoir.",
-      "Le 6 te rappelle que le foyer se construit d'abord à l'intérieur de toi.",
+      "Prendre soin de toi n'est pas de l'égoïsme — c'est la condition fondamentale pour prendre soin de ceux que tu aimes vraiment.",
+      "L'amour que tu donnes sans compter depuis des années finira toujours par te revenir. Parfois il prend juste du temps à trouver le chemin.",
+      "Il y a quelqu'un dans ta vie qui porte quelque chose de très lourd en ce moment — et qui ne sait pas le dire. Ton regard pourrait tout changer.",
+      "Tu es aimé·e bien plus profondément que tu ne te permets de le croire. Aujourd'hui, entraîne-toi à le recevoir.",
+      "Le foyer que tu cherches ne se construit pas avec des murs. Il se construit d'abord à l'intérieur de toi, pierre par pierre.",
     ]
   },
   7: {
     meaning: "7 — Spiritualité · Intuition · Mystère",
     messages: [
-      "Ce que tu as ressenti cette nuit mérite ton attention. Ne l'écarte pas trop vite.",
-      "Ton intuition parle plus fort que jamais en ce moment. Apprends à l'entendre.",
-      "Il y a des réponses que seul le silence peut donner. Fais-le aujourd'hui.",
-      "Tes ancêtres communiquent avec toi de manières que ton mental ne comprend pas encore. Fais confiance.",
-      "Le 7 est le nombre du chercheur. Aujourd'hui, cherche ce qui ne se voit pas.",
+      "Ce matin, quelque chose d'invisible t'a parlé dans ton sommeil, dans ton corps, dans un signe que tu as failli ignorer. Tu sais de quoi il s'agit.",
+      "La réponse que tu cherches n'est pas dans le bruit de ta vie. Elle est dans le silence exact que tu évites depuis des semaines.",
+      "Tes ancêtres ont traversé l'impossible pour que tu sois là, vivant·e, debout, en train de lire ces mots. Honore ça aujourd'hui.",
+      "Tu es une âme ancienne dans un corps neuf. Ce que tu ressens comme une étrangeté, c'est peut-être ta mémoire qui parle. Écoute-la.",
+      "Ce que tu appelles coïncidence, tes ancêtres l'appellent guidance. Rien n'arrive par hasard dans une vie consciente.",
     ]
   },
   8: {
     meaning: "8 — Abondance · Puissance · Récolte",
     messages: [
-      "Tu mérites l'abondance. Pas en théorie. Dans ta vie réelle, maintenant.",
-      "Ce que tu as semé avec foi est en train de mûrir. Ne capitule pas à quelques pas de la récolte.",
-      "Ton rapport à l'argent est un rapport à toi-même. Guéris l'un, tu guéris l'autre.",
-      "La puissance ne crie pas. Elle s'installe. Installe-toi dans la tienne.",
-      "Le 8 couché est l'infini. Ce qui t'appartient par droit divin n'a pas de limite.",
+      "Tu mérites l'abondance. Pas en théorie, pas un jour, pas quand tu l'auras mérité davantage. Dans ta vie réelle. Maintenant.",
+      "Ce que tu as semé avec foi et patience est en train de mûrir. Ne capitule pas à quelques pas de la récolte — elle arrive.",
+      "Ton rapport à l'argent est un miroir de ton rapport à toi-même. Guéris ce que tu penses mériter, et tu changeras ce que tu reçois.",
+      "La vraie puissance ne crie pas. Elle ne se justifie pas. Elle s'installe — tranquillement, solidement. Installe-toi dans la tienne.",
+      "Le 8 couché est le signe de l'infini. Ce qui t'appartient par droit de naissance, par droit d'âme, n'a aucune limite. Réclame-le.",
     ]
   },
   9: {
     meaning: "9 — Accomplissement · Sagesse · Transmission",
     messages: [
-      "Tu as traversé plus que tu ne le réalises. Aujourd'hui, honore ton propre chemin.",
-      "Ce cycle se termine. Remercie-le, même pour ses douleurs. Elles t'ont façonné·e.",
-      "Tu as quelque chose à transmettre. Ne pars pas sans l'avoir offert au monde.",
-      "La sagesse n'est pas dans les livres. Elle est dans tes cicatrices réconciliées.",
-      "Le 9 est le chiffre de l'ancêtre que tu deviendras. Vis à la hauteur de cet héritage.",
+      "Tu as traversé bien plus que tu ne te permets de le reconnaître. Aujourd'hui, arrête-toi. Regarde le chemin parcouru. Honore-le.",
+      "Ce cycle qui se termine en toi mérite d'être remercié — même pour ses douleurs, surtout pour elles. Elles t'ont forgé·e.",
+      "Tu as quelque chose à transmettre. Une histoire, une sagesse, une lumière. Ne pars pas de cette terre sans l'avoir offert au monde.",
+      "La sagesse n'est pas dans les livres que tu as lus. Elle est dans les épreuves que tu as traversées et réconciliées avec amour.",
+      "Le 9 est le chiffre de l'ancêtre que tu deviendras pour les générations qui suivront. Vis aujourd'hui à la hauteur de cet héritage.",
     ]
   }
 };
@@ -2584,62 +2621,6 @@ function initWheel(){
   document.getElementById("wheel-save").addEventListener("click", () => {
     saveJSON(WHEEL_KEY, wheelValues);
     showToast("★ Ta roue de vie est sauvegardée ★");
-  });
-
-  document.getElementById("wheel-analyze").addEventListener("click", async () => {
-    const resultDiv = document.getElementById("wheel-analysis-result");
-    const loadingEl = document.getElementById("wheel-analysis-loading");
-    const textEl = document.getElementById("wheel-analysis-text");
-    const sigEl = document.getElementById("wheel-analysis-sig");
-    const ctaBlock = document.getElementById("wheel-cta-block");
-
-    resultDiv.style.display = "block";
-    loadingEl.style.display = "block";
-    textEl.style.display = "none";
-    sigEl.style.display = "none";
-    ctaBlock.style.display = "none";
-
-    // Construire le résumé de la roue
-    const wheelSummary = WHEEL_DOMAINS.map((d, i) => `${d} : ${wheelValues[i]}/10`).join("\n");
-    const lowest = WHEEL_DOMAINS.reduce((a, b, i) => wheelValues[i] < wheelValues[WHEEL_DOMAINS.indexOf(a)] ? b : a);
-    const highest = WHEEL_DOMAINS.reduce((a, b, i) => wheelValues[i] > wheelValues[WHEEL_DOMAINS.indexOf(a)] ? b : a);
-
-    const prompt = `Tu es Tata Éléonore, femme de parole et de transmission, Napene, coach certifiée aux sciences traditionnelles africaines, autrice. Tu écris un livre de sagesse.
-
-Une personne vient de compléter sa Roue de Vie. Voici ses résultats :
-
-${wheelSummary}
-
-Écris une analyse profonde et personnalisée de 10 à 14 lignes, comme une page de livre de coaching spirituel.
-
-Analyse les déséquilibres révélés par cette roue. Dis-lui ce que ses scores révèlent sur elle, ce qui l'empêche d'avancer, les liens cachés entre les domaines. Propose 2 ou 3 directions concrètes et profondes pour retrouver l'équilibre.
-Ton style : littéraire, chaleureux, ancré dans la sagesse africaine et universelle. Parle-lui directement avec le "tu". Aucune liste, aucun titre. Un seul souffle du début à la fin. Commence directement par l'analyse sans introduction.`;
-
-    try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-6",
-          max_tokens: 1000,
-          messages: [{ role: "user", content: prompt }]
-        })
-      });
-      const data = await response.json();
-      const analysis = data.content?.[0]?.text;
-
-      loadingEl.style.display = "none";
-      textEl.textContent = analysis || "Prends le temps de regarder ta roue avec bienveillance. Chaque domaine que tu as noté raconte quelque chose. Là où tu te sens le plus limité·e, c'est souvent là que la prochaine transformation t'attend.";
-      textEl.style.display = "block";
-      sigEl.style.display = "block";
-      ctaBlock.style.display = "block";
-    } catch(e) {
-      loadingEl.style.display = "none";
-      textEl.textContent = "Prends le temps de regarder ta roue avec bienveillance. Chaque domaine que tu as noté raconte quelque chose. Là où tu te sens le plus limité·e, c'est souvent là que la prochaine transformation t'attend.";
-      textEl.style.display = "block";
-      sigEl.style.display = "block";
-      ctaBlock.style.display = "block";
-    }
   });
 }
 
