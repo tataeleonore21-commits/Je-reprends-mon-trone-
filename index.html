@@ -2702,9 +2702,9 @@ document.getElementById("save-reves").addEventListener("click", () => { saveJSON
 
 // Connais-toi toi-même
 document.getElementById("qualites").value = selfKnowledge.qualites;
-document.getElementById("defauts").value = selfKnowledge.defauts;
+const defEl0 = document.getElementById("defauts"); if(defEl0) defEl0.value = selfKnowledge.defauts;
 document.getElementById("qualites").addEventListener("input", e => { selfKnowledge.qualites = e.target.value; });
-document.getElementById("defauts").addEventListener("input", e => { selfKnowledge.defauts = e.target.value; });
+const defEl1 = document.getElementById("defauts"); if(defEl1) defEl1.addEventListener("input", e => { selfKnowledge.defauts = e.target.value; });
 document.getElementById("save-connaistoi").addEventListener("click", () => { saveJSON(SELF_KEY, selfKnowledge); showToast("★ Cette vérité est ancrée ★"); });
 
 // Table d'alignement
