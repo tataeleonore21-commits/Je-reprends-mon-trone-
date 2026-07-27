@@ -1429,6 +1429,19 @@ body{padding-bottom:80px}
         <div class="wheel-domains" id="wheel-domains"></div>
         <canvas id="wheel-canvas" width="280" height="280" style="display:block;margin:24px auto"></canvas>
         <button class="bilan-share-btn" id="wheel-save" style="margin-top:0">Sauvegarder ma roue</button>
+        <button class="bilan-share-btn" id="wheel-analyze" style="margin-top:10px;background:linear-gradient(135deg,rgba(169,128,47,.35),rgba(169,128,47,.15))">★ Obtenir mon analyse personnalisée</button>
+
+        <div id="wheel-analysis-result" style="display:none;margin-top:24px">
+          <div class="bilan-lesson-card">
+            <div class="bilan-lesson-loading" id="wheel-analysis-loading">Tata Éléonore lit ta roue…</div>
+            <p class="bilan-lesson-text" id="wheel-analysis-text" style="display:none"></p>
+            <p class="bilan-lesson-sig" id="wheel-analysis-sig" style="display:none">— Tata Éléonore</p>
+          </div>
+          <div class="wheel-cta-block" id="wheel-cta-block" style="display:none">
+            <p class="oracle-cta-text" style="margin:20px 0 12px">Pour aller plus loin avec cette analyse — un accompagnement personnalisé, un coaching ou une guidance avec Tata Éléonore t'attend.</p>
+            <a class="oracle-cta-btn" href="mailto:tataeleonore21@gmail.com?subject=Demande%20d%27accompagnement%20Premium%20-%20Roue%20de%20Vie">Je veux un accompagnement</a>
+          </div>
+        </div>
       </div>
 
       <div class="oracle-premium-cta">
@@ -2571,6 +2584,62 @@ function initWheel(){
   document.getElementById("wheel-save").addEventListener("click", () => {
     saveJSON(WHEEL_KEY, wheelValues);
     showToast("★ Ta roue de vie est sauvegardée ★");
+  });
+
+  document.getElementById("wheel-analyze").addEventListener("click", async () => {
+    const resultDiv = document.getElementById("wheel-analysis-result");
+    const loadingEl = document.getElementById("wheel-analysis-loading");
+    const textEl = document.getElementById("wheel-analysis-text");
+    const sigEl = document.getElementById("wheel-analysis-sig");
+    const ctaBlock = document.getElementById("wheel-cta-block");
+
+    resultDiv.style.display = "block";
+    loadingEl.style.display = "block";
+    textEl.style.display = "none";
+    sigEl.style.display = "none";
+    ctaBlock.style.display = "none";
+
+    // Construire le résumé de la roue
+    const wheelSummary = WHEEL_DOMAINS.map((d, i) => `${d} : ${wheelValues[i]}/10`).join("\n");
+    const lowest = WHEEL_DOMAINS.reduce((a, b, i) => wheelValues[i] < wheelValues[WHEEL_DOMAINS.indexOf(a)] ? b : a);
+    const highest = WHEEL_DOMAINS.reduce((a, b, i) => wheelValues[i] > wheelValues[WHEEL_DOMAINS.indexOf(a)] ? b : a);
+
+    const prompt = `Tu es Tata Éléonore, femme de parole et de transmission, Napene, coach certifiée aux sciences traditionnelles africaines, autrice. Tu écris un livre de sagesse.
+
+Une personne vient de compléter sa Roue de Vie. Voici ses résultats :
+
+${wheelSummary}
+
+Écris une analyse profonde et personnalisée de 10 à 14 lignes, comme une page de livre de coaching spirituel.
+
+Analyse les déséquilibres révélés par cette roue. Dis-lui ce que ses scores révèlent sur elle, ce qui l'empêche d'avancer, les liens cachés entre les domaines. Propose 2 ou 3 directions concrètes et profondes pour retrouver l'équilibre.
+Ton style : littéraire, chaleureux, ancré dans la sagesse africaine et universelle. Parle-lui directement avec le "tu". Aucune liste, aucun titre. Un seul souffle du début à la fin. Commence directement par l'analyse sans introduction.`;
+
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-6",
+          max_tokens: 1000,
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+      const data = await response.json();
+      const analysis = data.content?.[0]?.text;
+
+      loadingEl.style.display = "none";
+      textEl.textContent = analysis || "Prends le temps de regarder ta roue avec bienveillance. Chaque domaine que tu as noté raconte quelque chose. Là où tu te sens le plus limité·e, c'est souvent là que la prochaine transformation t'attend.";
+      textEl.style.display = "block";
+      sigEl.style.display = "block";
+      ctaBlock.style.display = "block";
+    } catch(e) {
+      loadingEl.style.display = "none";
+      textEl.textContent = "Prends le temps de regarder ta roue avec bienveillance. Chaque domaine que tu as noté raconte quelque chose. Là où tu te sens le plus limité·e, c'est souvent là que la prochaine transformation t'attend.";
+      textEl.style.display = "block";
+      sigEl.style.display = "block";
+      ctaBlock.style.display = "block";
+    }
   });
 }
 
