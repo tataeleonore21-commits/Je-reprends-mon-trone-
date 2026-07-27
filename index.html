@@ -2809,7 +2809,12 @@ function initPremiumView(){
   if (checkPremium()) {
     locked.style.display = "none";
     unlocked.style.display = "block";
-    setTimeout(() => { initWheel(); initOracle(); initEmotions(); }, 150);
+    setTimeout(() => {
+      initOracle();
+      initWheel();
+      drawWheel();
+      initEmotions();
+    }, 200);
   } else {
     locked.style.display = "block";
     unlocked.style.display = "none";
@@ -3048,18 +3053,20 @@ function drawWheel(){
 
 // Init la roue quand on clique sur l'onglet Oracle
 document.querySelector('.bottom-nav-btn[data-tab="premium"]').addEventListener("click", () => {
-  setTimeout(initPremiumView, 150);
+  setTimeout(() => {
+    initPremiumView();
+  }, 200);
 });
 
-// Init au chargement si premium déjà débloqué
+// Init au chargement
 setTimeout(() => {
-  initWheel();
-  if (checkPremium()) initPremiumView();
-  else {
+  if (checkPremium()) {
+    initPremiumView();
+  } else {
     document.getElementById("premium-locked").style.display = "block";
     document.getElementById("premium-unlocked").style.display = "none";
   }
-}, 500);
+}, 600);
 
 function exportReves(){
   const remplies = dreams.filter(d => d.text && d.text.trim());
