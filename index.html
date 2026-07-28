@@ -1043,6 +1043,61 @@ body{padding-bottom:80px}
 .dream-group-body{display:none;flex-direction:column;gap:8px;padding:10px}
 .dream-group-body.open{display:flex}
 .dream-item{display:flex;align-items:center;gap:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:10px 16px;transition:border-color .2s,background .3s}
+.todo-list{display:flex;flex-direction:column;gap:8px}
+.todo-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px 14px;
+  transition:all .3s;
+}
+.todo-item.done{
+  background:linear-gradient(135deg,rgba(169,128,47,.08),rgba(169,128,47,.02));
+  border-color:var(--gold);
+  opacity:.65;
+}
+.todo-check{
+  width:24px;height:24px;
+  border-radius:50%;
+  border:1.5px solid var(--border);
+  background:transparent;
+  cursor:pointer;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;
+  transition:all .25s;
+  touch-action:manipulation;
+}
+.todo-item.done .todo-check{
+  background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+  border-color:var(--gold);
+  color:#1A0F08;
+}
+.todo-input{
+  flex:1;
+  background:transparent;
+  border:none;
+  outline:none;
+  font-family:'EB Garamond',serif;
+  font-size:17px;
+  color:var(--ink);
+  transition:all .3s;
+}
+.todo-item.done .todo-input{
+  text-decoration:line-through;
+  color:var(--muted);
+}
+.todo-carried{
+  font-family:'Cinzel',serif;
+  font-size:7px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  flex-shrink:0;
+}
 .dream-item:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(169,128,47,0.08)}
 .dream-item.done{background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));border-color:var(--gold)}
 .dream-num{font-family:'Cinzel',serif;font-size:11px;color:var(--gold);opacity:.6;min-width:22px;text-align:right}
@@ -1785,6 +1840,14 @@ body{padding-bottom:80px}
       <textarea class="field-input" id="intention" rows="3" placeholder="Aujourd'hui, je choisis de…"></textarea>
       <button class="method-btn" id="open-method">Ancrer cette intention en 66 secondes</button>
     </div>
+
+    <div class="section-block" style="margin-top:16px">
+      <div class="section-header">
+        <span class="section-label">★ 5 actions qui me rapprochent de mon intention et de mes rêves</span>
+      </div>
+      <div class="todo-list" id="todo-list"></div>
+      <button class="save-btn" id="save-todo" style="margin-top:12px">★ Ancrer mes actions ★</button>
+    </div>
   </div>
 
   <div class="view" id="view-soir">
@@ -2139,6 +2202,7 @@ const QUOTES = [
 ];
 
 const STORAGE_KEY = "eleonore_days";
+const TODO_KEY = "eleonore_todo";
 const DREAMS_KEY = "eleonore_reves";
 const SELF_KEY = "eleonore_connaistoi";
 const ALIGN_KEY = "eleonore_alignement";
@@ -2208,7 +2272,7 @@ document.getElementById("welcome-close").addEventListener("click", () => {
   localStorage.setItem(WELCOME_KEY, "1");
   document.getElementById("welcome-overlay").classList.remove("open");
 });
-(document.getElementById("replay-welcome") || document.createElement("div")).addEventListener("click", () => {
+const rwEl = document.getElementById("replay-welcome"); if(rwEl) rwEl.addEventListener("click", () => {
   document.getElementById("welcome-overlay").classList.add("open");
 });
 document.getElementById("welcome-whoami-toggle").addEventListener("click", () => {
@@ -2335,7 +2399,7 @@ document.getElementById("bilan-share").addEventListener("click", () => {
   }
 });
 
-(document.getElementById("replay-bilan") || document.createElement("div")).addEventListener("click", () => {
+const rbEl = document.getElementById("replay-bilan"); if(rbEl) rbEl.addEventListener("click", () => {
   // Reset lesson display for fresh generation
   document.getElementById("bilan-loading").style.display = "block";
   document.getElementById("bilan-lesson").style.display = "none";
@@ -2510,6 +2574,84 @@ function showCelebration(){
   setTimeout(() => overlay.classList.remove("open"), 2600);
 }
 document.getElementById("save-soir").addEventListener("click", () => { saveJSON(STORAGE_KEY, days); renderStats(); showToast("★ Gravé dans ton royaume ★"); checkDayCompletion(); });
+
+// ═══ LISTE MAGIQUE DU JOUR ═══
+const TODO_MAX = 5;
+
+function loadTodos(){
+  const saved = loadJSON(TODO_KEY, { date: "", items: [] });
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayKey = yesterday.toISOString().slice(0, 10);
+
+  // Si les données sont d'aujourd'hui, on les retourne
+  if (saved.date === getTodayKey()) return saved.items;
+
+  // Sinon on reporte les tâches non faites d'hier (ou d'avant)
+  const carried = (saved.items || [])
+    .filter(t => t.text && !t.done)
+    .map(t => ({ ...t, carried: true }));
+
+  // Compléter avec des emplacements vides jusqu'à 5
+  const newItems = [...carried];
+  while (newItems.length < TODO_MAX) newItems.push({ text: "", done: false, carried: false });
+
+  return newItems;
+}
+
+function saveTodos(items){
+  saveJSON(TODO_KEY, { date: getTodayKey(), items });
+}
+
+function renderTodos(){
+  const list = document.getElementById("todo-list");
+  if (!list) return;
+  const items = loadTodos();
+
+  list.innerHTML = items.map((item, i) => `
+    <div class="todo-item${item.done ? " done" : ""}" data-index="${i}">
+      <button class="todo-check" data-index="${i}">${item.done ? "★" : ""}</button>
+      <input class="todo-input" type="text" placeholder="Action ${i + 1}…" value="${(item.text || "").replace(/"/g, "&quot;")}" data-index="${i}">
+      ${item.carried ? `<span class="todo-carried">Reporté</span>` : ""}
+    </div>
+  `).join("");
+
+  // Cocher/décocher
+  list.querySelectorAll(".todo-check").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const i = Number(btn.dataset.index);
+      const current = loadTodos();
+      current[i].done = !current[i].done;
+      current[i].text = list.querySelector(`.todo-input[data-index="${i}"]`).value;
+      saveTodos(current);
+      renderTodos();
+    });
+  });
+
+  // Sauvegarder au changement de texte
+  list.querySelectorAll(".todo-input").forEach(inp => {
+    inp.addEventListener("input", () => {
+      // auto-save silencieux
+      const current = loadTodos();
+      list.querySelectorAll(".todo-input").forEach(el => {
+        current[Number(el.dataset.index)].text = el.value;
+      });
+      saveTodos(current);
+    });
+  });
+}
+
+document.getElementById("save-todo").addEventListener("click", () => {
+  const list = document.getElementById("todo-list");
+  const current = loadTodos();
+  list.querySelectorAll(".todo-input").forEach(el => {
+    current[Number(el.dataset.index)].text = el.value;
+  });
+  saveTodos(current);
+  showToast("★ Actions ancrées ★");
+});
+
+renderTodos();
 
 // Méthode de respiration / visualisation (1 min 06)
 let methodTimerInterval = null;
@@ -3531,7 +3673,7 @@ function initAlignement(){
 // ═══ CONNAIS-TOI dans le Premium ═══
 function initConnaistoi(){
   const qualEl = document.getElementById("qualites");
-  const defEl = document.getElementById("defauts");
+  const defEl = document.getElementById("defauts") || document.createElement("textarea");
   if (!qualEl || qualEl.dataset.initialized) return;
   qualEl.dataset.initialized = "1";
 
