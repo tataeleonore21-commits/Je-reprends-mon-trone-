@@ -2635,9 +2635,20 @@ function dayIsComplete(entry){
   if (!entry) return false;
   return !!(entry.intention && entry.intention.trim() && entry.gratitudes && entry.gratitudes.some(g => g && g.trim()));
 }
+function dayHasAnyContent(entry){
+  if (!entry) return false;
+  return !!(entry.intention && entry.intention.trim()) || !!(entry.gratitudes && entry.gratitudes.some(g => g && g.trim()));
+}
 function computeStreak(){
   let count = 0;
   const d = new Date();
+
+  // Si aujourd'hui n'est pas complet, on commence à compter depuis hier
+  const todayComplete = dayIsComplete(days[d.toISOString().slice(0,10)]);
+  if (!todayComplete) {
+    d.setDate(d.getDate() - 1);
+  }
+
   while (true) {
     const key = d.toISOString().slice(0,10);
     if (dayIsComplete(days[key])) {
