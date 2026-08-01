@@ -158,6 +158,21 @@ body{
   transition:background .2s;
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
+  position:relative;
+}
+.bottom-nav-dot{
+  position:absolute;
+  top:4px;
+  right:6px;
+  width:7px;
+  height:7px;
+  background:var(--rose);
+  border-radius:50%;
+  animation:dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse{
+  0%,100%{opacity:.6;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.2)}
 }
 .bottom-nav-btn:hover{background:var(--card-tint)}
 .bottom-nav-btn.active{background:linear-gradient(135deg,rgba(169,128,47,.18),rgba(169,128,47,.06))}
@@ -1600,7 +1615,8 @@ body{padding-bottom:80px}
   z-index:3000;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
-  padding:40px 24px 36px;
+  scroll-behavior:smooth;
+  padding:40px 24px 100px;
 }
 .bilan-overlay.open{display:flex}
 .bilan-box{
@@ -1787,7 +1803,20 @@ body{padding-bottom:80px}
 }
 .planet-symbol{font-size:30px;margin-bottom:6px;line-height:1}
 .planet-day-theme{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);opacity:.9;margin-bottom:6px}
-.planet-name{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:19px;color:var(--ink);margin-bottom:16px}
+.planet-name{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:19px;color:var(--ink);margin-bottom:12px}
+.planet-affirmation{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:15px;
+  line-height:1.6;
+  color:var(--gold-deep);
+  background:linear-gradient(135deg,rgba(169,128,47,.1),rgba(169,128,47,.03));
+  border-left:2px solid var(--gold);
+  padding:10px 14px;
+  border-radius:0 10px 10px 0;
+  margin-bottom:18px;
+  text-align:left;
+}
 .planet-actions{display:flex;flex-direction:column;gap:7px;text-align:left;max-width:440px;margin:0 auto}
 .planet-action-item{font-family:'EB Garamond',serif;font-weight:600;font-size:15px;color:var(--ink-soft);display:flex;gap:8px;align-items:flex-start;line-height:1.4}
 .planet-action-item::before{content:'★';color:var(--gold);flex-shrink:0}
@@ -1864,7 +1893,7 @@ body{padding-bottom:80px}
     <p class="page-mantra">Chaque matin, pose une intention puissante.</p>
     <div class="section-block">
       <textarea class="field-input" id="intention" rows="3" placeholder="Aujourd'hui, je choisis de…"></textarea>
-      <button class="method-btn" id="open-method">Ancrer cette intention en 66 secondes</button>
+      <button class="method-btn" id="open-method">★ Ancrer en 66 secondes</button>
     </div>
 
     <div class="section-block" style="margin-top:16px">
@@ -2084,6 +2113,10 @@ body{padding-bottom:80px}
 
 <div class="signature">
   <a href="mailto:tataeleonore21@gmail.com" style="display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);border:1px solid var(--border);padding:7px 18px;border-radius:20px;text-decoration:none">Me contacter</a>
+  <div style="margin-top:16px;display:flex;gap:8px;justify-content:center">
+    <button id="export-data-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:14px;cursor:pointer">Exporter mes données</button>
+    <label id="import-data-label" style="background:none;border:1px solid var(--border);color:var(--muted);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:14px;cursor:pointer">Importer mes données<input type="file" id="import-data-input" accept=".json" style="display:none"></label>
+  </div>
 </div>
 
 <div class="whoami-section">
@@ -2225,6 +2258,26 @@ const QUOTES = [
   { text: "Sois toi-même, tout le monde l'est déjà.", author: "Oscar Wilde" },
   { text: "L'avenir appartient à ceux qui croient à la beauté de leurs rêves.", author: "Eleanor Roosevelt" },
   { text: "Tu es plus forte que tu ne le crois et plus capable que tu ne l'imagines.", author: "Anonyme" },
+  { text: "Ta fréquence est ton adresse. Choisis bien où tu veux que l'univers te livre.", author: "Tata Éléonore" },
+  { text: "Tes ancêtres ont survécu à l'impossible pour que tu sois là. Cette force coule dans tes veines.", author: "Tata Éléonore" },
+  { text: "Ce que tu ressens vraiment est plus puissant que ce que tu demandes.", author: "Tata Éléonore" },
+  { text: "La manifestation ne commence pas dans les mots. Elle commence dans la certitude.", author: "Tata Éléonore" },
+  { text: "Ton corps sait avant ton esprit. Écoute-le.", author: "Tata Éléonore" },
+  { text: "Napene — la prêtresse sait que tout ce qui est demandé avec le cœur est déjà accordé.", author: "Tata Éléonore" },
+  { text: "La cohérence entre ce que tu penses, ce que tu ressens et ce que tu fais — c'est là que les miracles vivent.", author: "Tata Éléonore" },
+  { text: "Quand tu te soignes, tu soignes aussi toute ta lignée.", author: "Tata Éléonore" },
+  { text: "L'univers répond toujours. Parfois par oui, parfois par mieux.", author: "Tata Éléonore" },
+  { text: "Ce que tu résistes persiste. Ce que tu acceptes peut enfin se transformer.", author: "Carl Jung" },
+  { text: "La gratitude est le terrain le plus fertile pour que les rêves prennent racine.", author: "Tata Éléonore" },
+  { text: "Tu n'attires pas ce que tu veux. Tu attires ce que tu es.", author: "Wayne Dyer" },
+  { text: "Chaque intention posée avec foi est une graine que l'univers arrose en silence.", author: "Tata Éléonore" },
+  { text: "Tes rêves sont des messages de ton âme. Prends-les au sérieux.", author: "Tata Éléonore" },
+  { text: "La transformation ne se voit pas toujours de l'intérieur — mais elle se ressent.", author: "Tata Éléonore" },
+  { text: "Ce que tu notes chaque soir est une conversation avec ce que tu veux devenir.", author: "Tata Éléonore" },
+  { text: "Les ancêtres ne t'ont pas transmis leur survie pour que tu vives à moitié.", author: "Tata Éléonore" },
+  { text: "Quand l'émotion et l'intention s'alignent, l'univers n'a plus le choix.", author: "Tata Éléonore" },
+  { text: "La discipline est la forme la plus haute d'amour qu'on se porte.", author: "Tata Éléonore" },
+  { text: "Ce que tu choisis de voir chaque matin crée la réalité que tu vis chaque soir.", author: "Tata Éléonore" },
 ];
 
 const STORAGE_KEY = "eleonore_days";
@@ -2238,18 +2291,25 @@ const DREAM_COUNT = 101;
 // Correspondance planétaire des jours (index = Date.getDay(), 0 = Dimanche)
 const PLANETARY_DAYS = [
   { day: "Dimanche", planet: "Soleil", symbol: "☉", theme: "Repos & Introspection",
+    affirmation: "Je rayonne de ma propre lumière. Je me repose et je reçois.",
     actions: ["Repose-toi sans culpabilité", "Fais le bilan de ta semaine", "Prends soin de ta lumière intérieure", "Ne fais rien, sois simplement"] },
   { day: "Lundi", planet: "Lune", symbol: "☽", theme: "Famille & Émotions",
+    affirmation: "Mon intuition est mon guide le plus fidèle. Je l'écoute et je lui fais confiance.",
     actions: ["Prends des nouvelles d'un proche", "Soigne ton foyer", "Écoute ton intuition", "Crée un moment en famille"] },
   { day: "Mardi", planet: "Mars", symbol: "♂", theme: "Action & Justice",
+    affirmation: "J'agis avec courage. Je prends ma place sans m'excuser d'exister.",
     actions: ["Affronte ce que tu évites", "Défends une injustice", "Bouge ton corps, fais du sport", "Prends une décision courageuse"] },
   { day: "Mercredi", planet: "Mercure", symbol: "☿", theme: "Communication & Administratif",
+    affirmation: "Mes mots ont du pouvoir. Je communique avec clarté et intention.",
     actions: ["Règle les papiers en attente", "Envoie les emails importants", "Apprends quelque chose de nouveau", "Clarifie un malentendu"] },
   { day: "Jeudi", planet: "Jupiter", symbol: "♃", theme: "Abondance & Expansion",
+    affirmation: "L'abondance me cherche autant que je la cherche. Je m'ouvre à recevoir.",
     actions: ["Occupe-toi de tes finances", "Fais une demande ou négocie", "Investis en toi-même", "Pense grand"] },
   { day: "Vendredi", planet: "Vénus", symbol: "♀", theme: "Amour & Beauté",
+    affirmation: "Je mérite l'amour que je donne aux autres. Je commence par me l'offrir.",
     actions: ["Prends soin de ton apparence", "Exprime ton amour à quelqu'un", "Savoure un plaisir simple", "Crée de la beauté autour de toi"] },
   { day: "Samedi", planet: "Saturne", symbol: "♄", theme: "Karma & Discipline",
+    affirmation: "Chaque effort posé aujourd'hui construit la version de moi de demain.",
     actions: ["Fais le tri, intérieur et extérieur", "Tire une leçon du passé", "Clôture ce qui doit l'être", "Structure ta semaine à venir"] },
 ];
 
@@ -2482,6 +2542,55 @@ if (new Date().getDay() === 0) {
   setTimeout(() => showBilanDimanche(), 1200);
 }
 
+// ═══ EXPORT / IMPORT DES DONNÉES ═══
+document.getElementById("export-data-btn").addEventListener("click", () => {
+  const allData = {
+    version: 1,
+    exportDate: getTodayKey(),
+    days: loadJSON(STORAGE_KEY, {}),
+    dreams: loadJSON(DREAMS_KEY, []),
+    selfKnowledge: loadJSON(SELF_KEY, {}),
+    alignment: loadJSON(ALIGN_KEY, []),
+    emotionHistory: loadJSON(EMOTION_HISTORY_KEY, {}),
+    wheel: loadJSON(WHEEL_KEY, []),
+    premium: localStorage.getItem(PREMIUM_KEY),
+    todo: loadJSON(TODO_KEY, {}),
+  };
+  const blob = new Blob([JSON.stringify(allData, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `je-reprends-mon-trone-${getTodayKey()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("★ Données exportées avec succès ★");
+});
+
+document.getElementById("import-data-input").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    try {
+      const data = JSON.parse(evt.target.result);
+      if (!data.version) throw new Error("Format invalide");
+      if (data.days) saveJSON(STORAGE_KEY, data.days);
+      if (data.dreams) saveJSON(DREAMS_KEY, data.dreams);
+      if (data.selfKnowledge) saveJSON(SELF_KEY, data.selfKnowledge);
+      if (data.alignment) saveJSON(ALIGN_KEY, data.alignment);
+      if (data.emotionHistory) saveJSON(EMOTION_HISTORY_KEY, data.emotionHistory);
+      if (data.wheel) saveJSON(WHEEL_KEY, data.wheel);
+      if (data.premium) localStorage.setItem(PREMIUM_KEY, data.premium);
+      if (data.todo) saveJSON(TODO_KEY, data.todo);
+      showToast("★ Données importées — rechargement en cours ★");
+      setTimeout(() => window.location.reload(), 1500);
+    } catch(err) {
+      showToast("★ Fichier invalide ★");
+    }
+  };
+  reader.readAsText(file);
+});
+
 document.getElementById("whoami-toggle").addEventListener("click", () => {
   document.getElementById("whoami-body").classList.toggle("open");
 });
@@ -2499,6 +2608,7 @@ function renderPlanetDay(){
       <div class="planet-symbol">${p.symbol}</div>
       <div class="planet-day-theme">${p.day} — Jour de ${p.planet}</div>
       <div class="planet-name">${p.theme}</div>
+      <div class="planet-affirmation">★ ${p.affirmation}</div>
       <div class="planet-actions">
         ${p.actions.map(a => `<div class="planet-action-item">${a}</div>`).join("")}
       </div>
@@ -2559,6 +2669,22 @@ function renderStats(){
     <div class="stat-card"><span class="stat-num">${totalDays}</span><span class="stat-label">Jours notés</span></div>
     <div class="stat-card"><span class="stat-num">${dreamsRealised}</span><span class="stat-label">Rêves réalisés</span></div>
   `;
+
+  // Indicateurs sur les onglets non complétés
+  const t = days[todayKey] || emptyDay();
+  const hasIntention = !!(t.intention && t.intention.trim());
+  const hasGratitudes = !!(t.gratitudes && t.gratitudes.some(g => g && g.trim()));
+
+  document.querySelectorAll(".bottom-nav-dot").forEach(d => d.remove());
+  if (!hasIntention) {
+    const btn = document.querySelector('.bottom-nav-btn[data-tab="matin"]');
+    if (btn) { const dot = document.createElement("span"); dot.className = "bottom-nav-dot"; btn.appendChild(dot); }
+  }
+  if (!hasGratitudes) {
+    const btn = document.querySelector('.bottom-nav-btn[data-tab="soir"]');
+    if (btn) { const dot = document.createElement("span"); dot.className = "bottom-nav-dot"; btn.appendChild(dot); }
+  }
+
   renderTodayProgress();
 }
 function renderTodayProgress(){
