@@ -262,6 +262,137 @@ body{padding-bottom:80px}
   opacity:.5;
 }
 
+/* Cercle Premium */
+.cercle-welcome{
+  text-align:center;
+  padding:24px 0 28px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:20px;
+}
+.cercle-welcome-title{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:20px;
+  color:var(--gold-deep);
+  margin-bottom:6px;
+}
+.cercle-welcome-sub{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:15px;
+  color:var(--muted);
+}
+.cercle-accordion{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:28px;
+}
+.cercle-item{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:border-color .2s;
+}
+.cercle-item.open{border-color:var(--gold)}
+.cercle-item-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 18px;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.cercle-item.open .cercle-item-header{
+  background:linear-gradient(135deg,rgba(169,128,47,.12),rgba(169,128,47,.03));
+  border-bottom:1px solid var(--border);
+}
+.cercle-item-info{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.cercle-item-icon{
+  font-size:22px;
+  color:var(--gold-deep);
+  width:28px;
+  text-align:center;
+  flex-shrink:0;
+}
+.cercle-item-title{
+  font-family:'Cinzel',serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--ink);
+  margin-bottom:3px;
+}
+.cercle-item-desc{
+  font-family:'EB Garamond',serif;
+  font-size:13px;
+  color:var(--muted);
+}
+.cercle-item-toggle{
+  font-size:11px;
+  color:var(--gold-deep);
+  flex-shrink:0;
+  transition:transform .2s;
+}
+.cercle-item.open .cercle-item-toggle{transform:rotate(180deg)}
+.cercle-item-body{
+  display:none;
+  padding:20px 18px;
+}
+.cercle-item.open .cercle-item-body{display:block}
+
+/* WhatsApp Premium */
+.whatsapp-premium-box{
+  background:linear-gradient(135deg,rgba(169,128,47,.08),rgba(169,128,47,.02));
+  border:1px solid var(--gold);
+  border-radius:18px;
+  padding:28px 22px;
+  text-align:center;
+  margin-top:8px;
+}
+.whatsapp-premium-icon{
+  color:var(--gold-deep);
+  margin-bottom:14px;
+}
+.whatsapp-premium-title{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:18px;
+  color:var(--gold-deep);
+  margin-bottom:12px;
+}
+.whatsapp-premium-text{
+  font-family:'EB Garamond',serif;
+  font-size:16px;
+  line-height:1.7;
+  color:var(--ink-soft);
+  margin-bottom:20px;
+  text-align:left;
+}
+.whatsapp-premium-btn{
+  display:block;
+  background:linear-gradient(135deg,#D4A24A,#B8893A);
+  border:none;
+  color:#1A0F08;
+  font-family:'Cinzel',serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  padding:14px;
+  border-radius:14px;
+  text-decoration:none;
+  text-align:center;
+  box-shadow:0 4px 14px rgba(169,128,47,0.3);
+}
+
 /* Premium verrouillé */
 .premium-lock-box{
   text-align:center;
@@ -1920,18 +2051,18 @@ body{padding-bottom:80px}
     <div class="premium-lock-box">
       <div class="premium-lock-icon">🔒</div>
       <h2 class="premium-lock-title">Table d'Alignement</h2>
-      <p class="premium-lock-sub">Espace Premium</p>
+      <p class="premium-lock-sub">Cercle Premium</p>
       <div class="premium-lock-features">
-        <div class="premium-feature">★ Oracle du Jour — Guidance quotidien</div>
-        <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
-        <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
-        <div class="premium-feature">★ Table d'Alignement — 3 lignes de transformation profonde</div>
-        <div class="premium-feature">★ Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
-        <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
-        <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
+        <div class="premium-feature">· Oracle du Jour — Guidance quotidien</div>
+        <div class="premium-feature">· Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
+        <div class="premium-feature">· Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
+        <div class="premium-feature">· Table d'Alignement — 3 lignes de transformation profonde</div>
+        <div class="premium-feature">· Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
+        <div class="premium-feature">· Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
+        <div class="premium-feature">· Défi de la semaine — une action concrète à réaliser chaque lundi</div>
       </div>
       <div class="premium-price-block">
-        <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'espace Premium à vie</a>
+        <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'Cercle Premium à vie</a>
         <p class="premium-price-note">Paiement sécurisé par Stripe</p>
       </div>
     </div>
@@ -1953,18 +2084,18 @@ body{padding-bottom:80px}
     <div class="premium-lock-box">
       <div class="premium-lock-icon">🔒</div>
       <h2 class="premium-lock-title">Connais-toi toi-même</h2>
-      <p class="premium-lock-sub">Espace Premium</p>
+      <p class="premium-lock-sub">Cercle Premium</p>
       <div class="premium-lock-features">
-        <div class="premium-feature">★ Oracle du Jour — Guidance quotidien</div>
-        <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
-        <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
-        <div class="premium-feature">★ Table d'Alignement — 3 lignes de transformation profonde</div>
-        <div class="premium-feature">★ Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
-        <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
-        <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
+        <div class="premium-feature">· Oracle du Jour — Guidance quotidien</div>
+        <div class="premium-feature">· Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
+        <div class="premium-feature">· Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
+        <div class="premium-feature">· Table d'Alignement — 3 lignes de transformation profonde</div>
+        <div class="premium-feature">· Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
+        <div class="premium-feature">· Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
+        <div class="premium-feature">· Défi de la semaine — une action concrète à réaliser chaque lundi</div>
       </div>
       <div class="premium-price-block">
-        <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'espace Premium à vie</a>
+        <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'Cercle Premium à vie</a>
         <p class="premium-price-note">Paiement sécurisé par Stripe</p>
       </div>
     </div>
@@ -1980,22 +2111,22 @@ body{padding-bottom:80px}
     <!-- ÉCRAN VERROUILLÉ -->
     <div id="premium-locked" style="display:none">
       <div class="premium-lock-box">
-        <div class="premium-lock-icon">🔒</div>
-        <h2 class="premium-lock-title">Espace Premium</h2>
+        <div class="premium-lock-icon">👑</div>
+        <h2 class="premium-lock-title">Cercle Premium</h2>
         <p class="premium-lock-sub">By Tata Éléonore</p>
         <div class="premium-lock-features">
-          <div class="premium-feature">★ Oracle du Jour — Guidance quotidien</div>
-          <div class="premium-feature">★ Roue de Vie — visualise tes 8 domaines de vie et prends conscience du changement à adopter</div>
-          <div class="premium-feature">★ Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
-          <div class="premium-feature">★ Table d'Alignement — 3 lignes de transformation profonde</div>
-          <div class="premium-feature">★ Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
-          <div class="premium-feature">★ Miroir du Jour — tes intentions, émotions et gratitudes en un coup d'œil</div>
-          <div class="premium-feature">★ Défi de la semaine — une action concrète à réaliser chaque lundi</div>
+          <div class="premium-feature">· Oracle du Jour — Guidance quotidien</div>
+          <div class="premium-feature">· Roue de Vie — visualise tes 8 domaines et le changement à adopter</div>
+          <div class="premium-feature">· Fréquences Émotionnelles — situe-toi et monte en vibration chaque jour</div>
+          <div class="premium-feature">· Table d'Alignement — 3 lignes de transformation profonde</div>
+          <div class="premium-feature">· Connais-toi toi-même — tes 3 forces de la semaine pour passer à l'action</div>
+          <div class="premium-feature">· Miroir du Jour — intentions, émotions et gratitudes croisées</div>
+          <div class="premium-feature">· Défi de la semaine — une action concrète chaque lundi</div>
+          <div class="premium-feature">· Groupe d'échange WhatsApp — accès direct à Tata Éléonore</div>
         </div>
         <div class="premium-price-block">
-          <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Débloquer l'espace Premium à vie</a>
+          <a class="premium-pay-btn" href="https://buy.stripe.com/fZufZgeSn3Lsbeg7kF9Ve04" target="_blank">Rejoindre le Cercle Premium à vie</a>
           <p class="premium-price-note">Paiement sécurisé par Stripe</p>
-          <a href="https://whatsapp.com/channel/0029VbDI76zDjiOiO8NubG0p" target="_blank" style="display:block;margin-top:14px;background:linear-gradient(135deg,#25D366,#128C7E);border:none;color:#fff;font-family:'Cinzel',serif;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:12px;border-radius:12px;text-decoration:none;text-align:center">Rejoindre la communauté WhatsApp</a>
         </div>
       </div>
     </div>
@@ -2004,109 +2135,185 @@ body{padding-bottom:80px}
     <div id="premium-unlocked" style="display:none">
       <div class="oracle-container">
 
-        <!-- 1. ORACLE -->
-        <div class="premium-section-title">★ Oracle du Jour</div>
-        <p class="oracle-subtitle" style="margin-bottom:24px">Choisis un chiffre entre 1 et 9 — ton intuition sait.</p>
-        <div class="oracle-number-grid" id="oracle-grid">
-          <button class="oracle-num-btn" data-num="1">1</button>
-          <button class="oracle-num-btn" data-num="2">2</button>
-          <button class="oracle-num-btn" data-num="3">3</button>
-          <button class="oracle-num-btn" data-num="4">4</button>
-          <button class="oracle-num-btn" data-num="5">5</button>
-          <button class="oracle-num-btn" data-num="6">6</button>
-          <button class="oracle-num-btn" data-num="7">7</button>
-          <button class="oracle-num-btn" data-num="8">8</button>
-          <button class="oracle-num-btn" data-num="9">9</button>
+        <div class="cercle-welcome">
+          <div class="cercle-welcome-title">Bienvenue dans le Cercle Premium</div>
+          <p class="cercle-welcome-sub">Ton espace de transformation personnelle. Chaque outil s'ouvre à la demande.</p>
         </div>
-        <div class="oracle-result" id="oracle-result">
-          <div class="oracle-number-meaning" id="oracle-meaning" style="display:none"></div>
-          <div class="oracle-card">
-            <p class="oracle-message" id="oracle-message"></p>
-            <p class="oracle-signature">— Tata Éléonore</p>
+
+        <div class="cercle-accordion" id="cercle-accordion">
+
+          <div class="cercle-item" data-item="oracle">
+            <div class="cercle-item-header">
+              <div class="cercle-item-info">
+                <span class="cercle-item-icon">◎</span>
+                <div><div class="cercle-item-title">Oracle du Jour</div><div class="cercle-item-desc">Guidance numérologique quotidienne</div></div>
+              </div>
+              <span class="cercle-item-toggle">▼</span>
+            </div>
+            <div class="cercle-item-body">
+              <p class="oracle-subtitle" style="margin-bottom:24px">Choisis un chiffre entre 1 et 9 — ton intuition sait.</p>
+              <div class="oracle-number-grid" id="oracle-grid">
+                <button class="oracle-num-btn" data-num="1">1</button>
+                <button class="oracle-num-btn" data-num="2">2</button>
+                <button class="oracle-num-btn" data-num="3">3</button>
+                <button class="oracle-num-btn" data-num="4">4</button>
+                <button class="oracle-num-btn" data-num="5">5</button>
+                <button class="oracle-num-btn" data-num="6">6</button>
+                <button class="oracle-num-btn" data-num="7">7</button>
+                <button class="oracle-num-btn" data-num="8">8</button>
+                <button class="oracle-num-btn" data-num="9">9</button>
+              </div>
+              <div class="oracle-result" id="oracle-result">
+                <div class="oracle-number-meaning" id="oracle-meaning" style="display:none"></div>
+                <div class="oracle-card">
+                  <p class="oracle-message" id="oracle-message"></p>
+                  <p class="oracle-signature">— Tata Éléonore</p>
+                </div>
+                <p class="oracle-return-msg">Ton tirage du jour est posé — reviens demain</p>
+              </div>
+            </div>
           </div>
-          <p class="oracle-return-msg">★ Ton tirage du jour est posé — reviens demain ★</p>
-        </div>
 
-        <div class="oracle-divider">·</div>
-
-        <!-- 2. ROUE DE VIE -->
-        <div class="premium-section-title">★ Ma Roue de Vie</div>
-        <p class="oracle-cta-text" style="margin-bottom:20px">Note chaque domaine de ta vie de 0 à 10 et vois les 3 domaines à améliorer en priorité.</p>
-        <div class="wheel-domains" id="wheel-domains"></div>
-        <canvas id="wheel-canvas" width="280" height="280" style="display:block;margin:24px auto"></canvas>
-        <div id="wheel-priority" class="wheel-priority-box" style="display:none"></div>
-        <button class="bilan-share-btn" id="wheel-save">Sauvegarder ma roue</button>
-
-        <div class="oracle-divider">·</div>
-
-        <!-- 3. BANDE DES FRÉQUENCES ÉMOTIONNELLES -->
-        <div class="premium-section-title">★ Mes Fréquences Émotionnelles</div>
-        <p class="oracle-cta-text" style="margin-bottom:16px">Où en es-tu aujourd'hui ? Ouvre ton niveau et clique "C'est ma fréquence du jour" pour te situer et recevoir ton conseil.</p>
-        <div id="emotion-today-display"></div>
-        <div class="emotion-list" id="emotion-list"></div>
-        <div id="emotion-result" style="display:none"></div>
-
-        <div class="oracle-divider">·</div>
-
-        <!-- 4. SUIVI ÉMOTIONNEL -->
-        <div class="premium-section-title">★ Mon Évolution Émotionnelle</div>
-        <p class="oracle-cta-text" style="margin-bottom:20px">Vois ta progression sur les 30 derniers jours. Chaque jour noté est une preuve que tu montes.</p>
-        <div class="emotion-chart-container">
-          <canvas id="emotion-chart" height="180"></canvas>
-        </div>
-        <div class="emotion-chart-stats" id="emotion-chart-stats"></div>
-        <button class="bilan-share-btn" id="emotion-share-btn" style="margin-top:16px">Partager ma progression ★</button>
-
-        <div class="oracle-divider">·</div>
-
-        <!-- 5. MIROIR DU JOUR -->
-        <div class="premium-section-title">★ Le Miroir du Jour</div>
-        <p class="oracle-cta-text" style="margin-bottom:20px">Intention · Émotion · Gratitude — trois courbes qui révèlent ta cohérence intérieure. Les jours où les trois sont hautes ensemble — quelque chose se crée en toi.</p>
-        <div class="emotion-chart-container">
-          <canvas id="miroir-chart" height="200"></canvas>
-        </div>
-        <div id="miroir-legend" style="display:flex;gap:16px;justify-content:center;margin:12px 0;flex-wrap:wrap"></div>
-        <div id="miroir-insight" class="miroir-insight-box" style="display:none"></div>
-        <button class="bilan-share-btn" id="miroir-share-btn" style="margin-top:12px">Partager mon miroir ★</button>
-
-        <div class="oracle-divider">·</div>
-
-        <!-- 6. DÉFI DE LA SEMAINE -->
-        <div class="premium-section-title">★ Défi de la Semaine</div>
-        <div class="defi-card" id="defi-card"></div>
-        <div class="defi-result-box" id="defi-result-box" style="display:none">
-          <textarea class="field-input" id="defi-result" placeholder="Note ici ce que tu as vécu, ressenti, découvert…" rows="4"></textarea>
-          <button class="save-btn" id="defi-save" style="margin-top:10px">★ Ancrer mon résultat</button>
-        </div>
-
-        <div class="oracle-divider">·</div>
-
-        <!-- 7. TABLE D'ALIGNEMENT -->
-        <div class="premium-section-title">★ Table d'Alignement</div>
-        <p class="oracle-cta-text" style="margin-bottom:16px">Note 3 choses que tu ne veux plus cette semaine, note son opposé (ce que tu veux), puis l'action concrète à mettre en place.</p>
-        <div id="align-list"></div>
-        <button class="save-btn" id="save-alignement" style="margin-top:12px">Ancrer cette table</button>
-        <button class="export-btn" id="export-alignement" style="margin-top:10px">Télécharger ma table en PDF</button>
-
-        <div class="oracle-divider">·</div>
-
-        <!-- 8. CONNAIS-TOI TOI-MÊME -->
-        <div class="premium-section-title">★ Connais-toi toi-même</div>
-        <p class="oracle-cta-text" style="margin-bottom:16px">Quelles sont les 3 forces dont tu as besoin cette semaine pour passer à l'action et réaliser tes rêves ?</p>
-        <div class="self-grid">
-          <div class="section-block">
-            <div class="section-header"><span class="section-label">Mes 3 forces de la semaine</span></div>
-            <textarea class="field-input self-textarea" id="qualites" placeholder="Ex : La patience, la ténacité, la foi…"></textarea>
+          <div class="cercle-item" data-item="roue">
+            <div class="cercle-item-header">
+              <div class="cercle-item-info">
+                <span class="cercle-item-icon">◈</span>
+                <div><div class="cercle-item-title">Ma Roue de Vie</div><div class="cercle-item-desc">8 domaines · Priorités · Graphique radar</div></div>
+              </div>
+              <span class="cercle-item-toggle">▼</span>
+            </div>
+            <div class="cercle-item-body">
+              <p class="oracle-cta-text" style="margin-bottom:20px">Note chaque domaine de ta vie de 0 à 10 et vois les 3 domaines à améliorer en priorité.</p>
+              <div class="wheel-domains" id="wheel-domains"></div>
+              <canvas id="wheel-canvas" width="280" height="280" style="display:block;margin:24px auto"></canvas>
+              <div id="wheel-priority" class="wheel-priority-box" style="display:none"></div>
+              <button class="bilan-share-btn" id="wheel-save">Sauvegarder ma roue</button>
+            </div>
           </div>
+
+          <div class="cercle-item" data-item="emotions">
+            <div class="cercle-item-header">
+              <div class="cercle-item-info">
+                <span class="cercle-item-icon">◐</span>
+                <div><div class="cercle-item-title">Fréquences Émotionnelles</div><div class="cercle-item-desc">12 niveaux · Conseil personnalisé</div></div>
+              </div>
+              <span class="cercle-item-toggle">▼</span>
+            </div>
+            <div class="cercle-item-body">
+              <p class="oracle-cta-text" style="margin-bottom:16px">Où en es-tu aujourd'hui ? Ouvre ton niveau et clique "C'est ma fréquence du jour" pour recevoir ton conseil.</p>
+              <div id="emotion-today-display"></div>
+              <div class="emotion-list" id="emotion-list"></div>
+              <div id="emotion-result" style="display:none"></div>
+            </div>
+          </div>
+
+          <div class="cercle-item" data-item="evolution">
+            <div class="cercle-item-header">
+              <div class="cercle-item-info">
+                <span class="cercle-item-icon">◷</span>
+                <div><div class="cercle-item-title">Mon Évolution Émotionnelle</div><div class="cercle-item-desc">30 jours · Statistiques · Progression</div></div>
+              </div>
+              <span class="cercle-item-toggle">▼</span>
+            </div>
+            <div class="cercle-item-body">
+              <p class="oracle-cta-text" style="margin-bottom:20px">Vois ta progression sur les 30 derniers jours. Chaque jour noté est une preuve que tu montes.</p>
+              <div class="emotion-chart-container">
+                <canvas id="emotion-chart" height="180"></canvas>
+              </div>
+              <div class="emotion-chart-stats" id="emotion-chart-stats"></div>
+              <button class="bilan-share-btn" id="emotion-share-btn" style="margin-top:16px">Partager ma progression</button>
+            </div>
+          </div>
+
+          <div class="cercle-item" data-item="miroir">
+            <div class="cercle-item-header">
+              <div class="cercle-item-info">
+                <span class="cercle-item-icon">☽</span>
+                <div><div class="cercle-item-title">Le Miroir du Jour</div><div class="cercle-item-desc">Intention · Émotion · Gratitude croisées</div></div>
+              </div>
+              <span class="cercle-item-toggle">▼</span>
+            </div>
+            <div class="cercle-item-body">
+              <p class="oracle-cta-text" style="margin-bottom:20px">Trois courbes qui révèlent ta cohérence intérieure. Les jours où les trois sont hautes — quelque chose se crée en toi.</p>
+              <div class="emotion-chart-container">
+                <canvas id="miroir-chart" height="200"></canvas>
+              </div>
+              <div id="miroir-legend" style="display:flex;gap:16px;justify-content:center;margin:12px 0;flex-wrap:wrap"></div>
+              <div id="miroir-insight" class="miroir-insight-box" style="display:none"></div>
+              <button class="bilan-share-btn" id="miroir-share-btn" style="margin-top:12px">Partager mon miroir</button>
+            </div>
+          </div>
+
+          <div class="cercle-item" data-item="defi">
+            <div class="cercle-item-header">
+              <div class="cercle-item-info">
+                <span class="cercle-item-icon">☀</span>
+                <div><div class="cercle-item-title">Défi de la Semaine</div><div class="cercle-item-desc">Une action concrète chaque lundi</div></div>
+              </div>
+              <span class="cercle-item-toggle">▼</span>
+            </div>
+            <div class="cercle-item-body">
+              <div class="defi-card" id="defi-card"></div>
+              <div class="defi-result-box" id="defi-result-box" style="display:none">
+                <textarea class="field-input" id="defi-result" placeholder="Note ici ce que tu as vécu, ressenti, découvert…" rows="4"></textarea>
+                <button class="save-btn" id="defi-save" style="margin-top:10px">Ancrer mon résultat</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cercle-item" data-item="alignement">
+            <div class="cercle-item-header">
+              <div class="cercle-item-info">
+                <span class="cercle-item-icon">◆</span>
+                <div><div class="cercle-item-title">Table d'Alignement</div><div class="cercle-item-desc">3 lignes de transformation profonde</div></div>
+              </div>
+              <span class="cercle-item-toggle">▼</span>
+            </div>
+            <div class="cercle-item-body">
+              <p class="oracle-cta-text" style="margin-bottom:16px">Note 3 choses que tu ne veux plus cette semaine, son opposé (ce que tu veux), puis l'action concrète.</p>
+              <div id="align-list"></div>
+              <button class="save-btn" id="save-alignement" style="margin-top:12px">Ancrer cette table</button>
+              <button class="export-btn" id="export-alignement" style="margin-top:10px">Télécharger ma table en PDF</button>
+            </div>
+          </div>
+
+          <div class="cercle-item" data-item="connaistoi">
+            <div class="cercle-item-header">
+              <div class="cercle-item-info">
+                <span class="cercle-item-icon">◉</span>
+                <div><div class="cercle-item-title">Connais-toi toi-même</div><div class="cercle-item-desc">Tes 3 forces de la semaine</div></div>
+              </div>
+              <span class="cercle-item-toggle">▼</span>
+            </div>
+            <div class="cercle-item-body">
+              <p class="oracle-cta-text" style="margin-bottom:16px">Quelles sont les 3 forces dont tu as besoin cette semaine pour passer à l'action et réaliser tes rêves ?</p>
+              <div class="self-grid">
+                <div class="section-block">
+                  <div class="section-header"><span class="section-label">Mes 3 forces de la semaine</span></div>
+                  <textarea class="field-input self-textarea" id="qualites" placeholder="Ex : La patience, la ténacité, la foi…"></textarea>
+                </div>
+              </div>
+              <button class="save-btn" id="save-connaistoi" style="margin-top:12px">Ancrer ces forces</button>
+              <button class="export-btn" id="export-connaistoi" style="margin-top:10px">Télécharger mon portrait en PDF</button>
+            </div>
+          </div>
+
         </div>
-        <button class="save-btn" id="save-connaistoi" style="margin-top:12px">Ancrer ces forces</button>
-        <button class="export-btn" id="export-connaistoi" style="margin-top:10px">Télécharger mon portrait en PDF</button>
+
+        <div class="whatsapp-premium-box">
+          <div class="whatsapp-premium-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <h3 class="whatsapp-premium-title">Groupe d'échange Cercle Premium</h3>
+          <p class="whatsapp-premium-text">En tant que membre du Cercle Premium, tu as accès à notre groupe WhatsApp privé — un espace d'échange, de soutien et de croissance collective. Tu peux y partager tes avancées, poser tes questions et bénéficier de l'accompagnement direct de Tata Éléonore. La vraie plus-value de ce groupe, c'est l'accès à moi.</p>
+          <a href="https://whatsapp.com/channel/0029VbDI76zDjiOiO8NubG0p" target="_blank" class="whatsapp-premium-btn">Rejoindre le groupe privé</a>
+        </div>
 
       </div>
     </div>
   </div>
 
-</div>
+
 
 <div class="signature">
   <a href="https://whatsapp.com/channel/0029VbDI76zDjiOiO8NubG0p" target="_blank" style="display:block;width:100%;max-width:340px;margin:0 auto 12px;background:none;border:1px solid var(--gold);color:var(--gold-deep);font-family:'Cinzel',serif;font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;padding:14px;border-radius:14px;text-decoration:none;text-align:center">
@@ -3511,17 +3718,40 @@ function initPremiumView(){
   if (checkPremium()) {
     locked.style.display = "none";
     unlocked.style.display = "block";
+
+    // Accordéons
+    document.querySelectorAll(".cercle-item-header").forEach(header => {
+      header.addEventListener("click", () => {
+        const item = header.closest(".cercle-item");
+        const wasOpen = item.classList.contains("open");
+        // Ferme tout
+        document.querySelectorAll(".cercle-item").forEach(i => i.classList.remove("open"));
+        // Ouvre celui-ci si c'était fermé
+        if (!wasOpen) {
+          item.classList.add("open");
+          const itemName = item.dataset.item;
+          // Init les outils au premier clic
+          if (itemName === "oracle") initOracle();
+          if (itemName === "roue") { initWheel(); drawWheel(); }
+          if (itemName === "emotions") initEmotions();
+          if (itemName === "evolution") renderEmotionChart();
+          if (itemName === "miroir") renderMiroir();
+          if (itemName === "defi") renderDefi();
+          if (itemName === "alignement") initAlignement();
+          if (itemName === "connaistoi") initConnaistoi();
+        }
+      });
+    });
+
+    // Ouvre l'Oracle par défaut
     setTimeout(() => {
-      initOracle();
-      initWheel();
-      drawWheel();
-      initEmotions();
-      renderEmotionChart();
-      renderMiroir();
-      renderDefi();
-      initAlignement();
-      initConnaistoi();
+      const firstItem = document.querySelector(".cercle-item[data-item='oracle']");
+      if (firstItem) {
+        firstItem.classList.add("open");
+        initOracle();
+      }
     }, 200);
+
   } else {
     locked.style.display = "block";
     unlocked.style.display = "none";
