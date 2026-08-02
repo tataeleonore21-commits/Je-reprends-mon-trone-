@@ -2109,7 +2109,9 @@ body{padding-bottom:80px}
 
 <div class="signature">
   <a href="mailto:tataeleonore21@gmail.com" style="display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);border:1px solid var(--border);padding:7px 18px;border-radius:20px;text-decoration:none">Me contacter</a>
-  <div style="margin-top:16px;display:flex;gap:8px;justify-content:center">
+  <br>
+  <button id="replay-bilan" style="margin-top:12px;background:none;border:none;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:4px">Voir mon bilan de la semaine</button>
+  <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
     <button id="export-data-btn" style="background:none;border:1px solid var(--border);color:var(--muted);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:14px;cursor:pointer">Exporter mes données</button>
     <label id="import-data-label" style="background:none;border:1px solid var(--border);color:var(--muted);font-family:'Cinzel',serif;font-size:8px;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border-radius:14px;cursor:pointer">Importer mes données<input type="file" id="import-data-input" accept=".json" style="display:none"></label>
   </div>
@@ -2419,7 +2421,7 @@ async function generateBilanLesson(weekData){
 
   if (!intentions && !gratitudesAll) return null;
 
-  const prompt = `Tu es à la fois un expert mondial de la psychologie de la manifestation, un mentaliste qui lit les patterns comportementaux humains à travers les mots, et un coach de développement personnel de haut niveau. Tu connais les lois de la manifestation (loi d'attraction, cohérence émotionnelle, fréquence vibratoire), la psychologie positive, l'analyse comportementale et la neuroplasticité.
+  const prompt = `Tu es à la fois un expert mondial de la psychologie de la manifestation, un mentaliste qui lit les patterns comportementaux humains à travers les mots, et Tata Éléonore — coach certifiée, Napene, femme de transmission et d'ancestralité africaine.
 
 Voici le journal croisé d'une personne sur les 7 derniers jours — intentions, fréquences émotionnelles et gratitudes croisées jour par jour :
 
@@ -2435,15 +2437,15 @@ ${avgEmo ? `Moyenne émotionnelle : ${avgEmo}/4.0 | Plus haute : ${maxEmo} | Plu
 ${jours_hauts.length > 0 ? `Jours à haute cohérence (émotion ≥ 3 + intention + gratitudes) : ${jours_hauts.map(j=>j.date).join(", ")}` : ""}
 ${jours_bas.length > 0 ? `Jours de basse fréquence : ${jours_bas.map(j=>j.date).join(", ")}` : ""}
 
-Sur la base de ces données, écris une analyse profonde et complète de 15 à 20 lignes qui :
+Écris un texte de 20 lignes exactement, en deux parties enchaînées sans titre ni séparateur visible — un seul bloc fluide :
 
-1. CROISE les intentions posées avec les émotions et les gratitudes de la même journée — est-ce que les jours à haute fréquence coïncident avec de meilleures intentions et plus de gratitudes ?
-2. IDENTIFIE les patterns comportementaux révélés — qu'est-ce que cette personne répète sans le savoir, quels thèmes reviennent dans ses intentions et ses gratitudes ?
-3. ANALYSE ce qui s'est manifesté ou bloqué — quand la cohérence intention-émotion était forte, qu'est-ce que les gratitudes révèlent ? Quand elle était faible, qu'est-ce qui manquait ?
-4. ÉCLAIRE les dynamiques inconscientes — ce que la personne dit qu'elle veut versus ce qu'elle ressent vraiment, les résistances cachées, les croyances limitantes visibles dans les mots choisis
-5. PROPOSE des pistes d'évolution concrètes et profondes pour la semaine suivante, basées sur les données
+PREMIÈRE PARTIE — L'ANALYSE (10 lignes) :
+Croise les intentions avec les émotions et les gratitudes. Identifie les patterns comportementaux révélés. Analyse ce qui s'est manifesté ou bloqué selon la cohérence émotion-intention. Éclaire les dynamiques inconscientes, les résistances cachées, ce que les mots choisis révèlent sur les croyances profondes. Sois précis, direct, sans complaisance mais avec bienveillance.
 
-Ton style : celui d'un grand professionnel — précis, profond, bienveillant mais sans complaisance. Tu nommes ce que tu vois vraiment. Pas de poésie excessive — de l'analyse rigoureuse servie par des mots justes. Parle directement à la personne avec "tu". Aucune liste, aucun titre. Un seul bloc de texte fluide et puissant. Commence directement par l'analyse.`;
+DEUXIÈME PARTIE — LA GUIDANCE (10 lignes) :
+En tant que Tata Éléonore — Napene et coach — donne une guidance spirituelle et concrète pour la semaine à venir. Ce qu'il faut renforcer, ce qu'il faut lâcher, ce qu'il faut activer. Ancre cette guidance dans l'ancestralité africaine, la loi de cohérence vibratoire et la manifestation consciente. Termine par une phrase forte qui résonne comme un sceau.
+
+Parle directement à la personne avec "tu". Aucune liste, aucun titre visible, aucun saut de paragraphe excessif. Un texte qui coule comme une rivière — de l'analyse vers la lumière.`;
 
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -2472,13 +2474,23 @@ function getWeekKey(){
 async function showBilanDimanche(force = false){
   const weekKey = getWeekKey();
   const bilanSaved = JSON.parse(localStorage.getItem(BILAN_KEY) || "{}");
-  if (!force && bilanSaved.weekKey === weekKey && bilanSaved.dismissed) return; // Déjà vu cette semaine
+
+  // Si pas forcé et déjà vu cette semaine → stop
+  if (!force && bilanSaved.weekKey === weekKey && bilanSaved.dismissed) return;
+
+  // Si c'est une nouvelle semaine (même sans force) → efface l'ancien
+  if (bilanSaved.weekKey && bilanSaved.weekKey !== weekKey) {
+    localStorage.removeItem(BILAN_KEY);
+  }
 
   const weekData = getWeekData();
   const hasContent = weekData.some(w => w.day.intention || (w.day.gratitudes && w.day.gratitudes.some(g => g)));
-  if (!hasContent) return; // Rien à résumer
+  if (!hasContent) {
+    showToast("Pose d'abord une intention ou des gratitudes cette semaine");
+    return;
+  }
 
-  // Ouvre la carte directement
+  // Ouvre la carte et force une nouvelle génération
   document.getElementById("bilan-loading").style.display = "block";
   document.getElementById("bilan-lesson").style.display = "none";
   document.getElementById("bilan-sig").style.display = "none";
@@ -2525,7 +2537,13 @@ document.getElementById("bilan-share").addEventListener("click", () => {
   }
 });
 
-const rbEl = document.getElementById("replay-bilan"); if(rbEl) rbEl.addEventListener("click", () => {
+const rbEl = document.getElementById("replay-bilan");
+if(rbEl) rbEl.addEventListener("click", () => {
+  document.getElementById("bilan-loading").style.display = "block";
+  document.getElementById("bilan-lesson").style.display = "none";
+  document.getElementById("bilan-sig").style.display = "none";
+  showBilanDimanche(true);
+});("click", () => {
   // Reset lesson display for fresh generation
   document.getElementById("bilan-loading").style.display = "block";
   document.getElementById("bilan-lesson").style.display = "none";
