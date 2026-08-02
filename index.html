@@ -3719,18 +3719,20 @@ function initPremiumView(){
     locked.style.display = "none";
     unlocked.style.display = "block";
 
-    // Accordéons
-    document.querySelectorAll(".cercle-item-header").forEach(header => {
-      header.addEventListener("click", () => {
+    // Délégation d'événement sur le conteneur — plus fiable sur iOS
+    const accordion = document.getElementById("cercle-accordion");
+    if (accordion && !accordion.dataset.initialized) {
+      accordion.dataset.initialized = "1";
+      accordion.addEventListener("click", (e) => {
+        const header = e.target.closest(".cercle-item-header");
+        if (!header) return;
         const item = header.closest(".cercle-item");
+        if (!item) return;
         const wasOpen = item.classList.contains("open");
-        // Ferme tout
         document.querySelectorAll(".cercle-item").forEach(i => i.classList.remove("open"));
-        // Ouvre celui-ci si c'était fermé
         if (!wasOpen) {
           item.classList.add("open");
           const itemName = item.dataset.item;
-          // Init les outils au premier clic
           if (itemName === "oracle") initOracle();
           if (itemName === "roue") { initWheel(); drawWheel(); }
           if (itemName === "emotions") initEmotions();
@@ -3741,16 +3743,16 @@ function initPremiumView(){
           if (itemName === "connaistoi") initConnaistoi();
         }
       });
-    });
+    }
 
     // Ouvre l'Oracle par défaut
     setTimeout(() => {
       const firstItem = document.querySelector(".cercle-item[data-item='oracle']");
-      if (firstItem) {
+      if (firstItem && !firstItem.classList.contains("open")) {
         firstItem.classList.add("open");
         initOracle();
       }
-    }, 200);
+    }, 250);
 
   } else {
     locked.style.display = "block";
