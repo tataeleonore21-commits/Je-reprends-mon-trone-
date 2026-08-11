@@ -2523,7 +2523,13 @@ const PLANETARY_DAYS = [
     actions: ["Fais le tri, intérieur et extérieur", "Tire une leçon du passé", "Clôture ce qui doit l'être", "Structure ta semaine à venir"] },
 ];
 
-function getTodayKey(){ return new Date().toISOString().slice(0,10); }
+function getLocalDateKey(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+day;
+}
+function getTodayKey(){ return getLocalDateKey(new Date()); }
 function getQuoteForDate(key){
   const daysSinceEpoch = Math.floor(new Date(key + "T12:00:00").getTime() / 86400000);
   return QUOTES[((daysSinceEpoch % QUOTES.length) + QUOTES.length) % QUOTES.length];
@@ -2584,7 +2590,7 @@ function getWeekData(){
   for (let i = 6; i >= 0; i--) {
     const d = new Date(today);
     d.setDate(today.getDate() - i);
-    const key = d.toISOString().slice(0, 10);
+    const key = getLocalDateKey(d);
     if (days[key]) weekItems.push({ key, day: days[key] });
   }
   return weekItems;
@@ -2904,13 +2910,13 @@ function computeStreak(){
   const d = new Date();
 
   // Si aujourd'hui n'est pas complet, on commence à compter depuis hier
-  const todayComplete = dayIsComplete(days[d.toISOString().slice(0,10)]);
+  const todayComplete = dayIsComplete(days[getLocalDateKey(d)]);
   if (!todayComplete) {
     d.setDate(d.getDate() - 1);
   }
 
   while (true) {
-    const key = d.toISOString().slice(0,10);
+    const key = getLocalDateKey(d);
     if (dayIsComplete(days[key])) {
       count++;
       d.setDate(d.getDate() - 1);
@@ -3084,7 +3090,7 @@ function loadTodos(){
   const saved = loadJSON(TODO_KEY, { date: "", items: [] });
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  const yesterdayKey = yesterday.toISOString().slice(0, 10);
+  const yesterdayKey = getLocalDateKey(yesterday);
 
   // Si les données sont d'aujourd'hui, on les retourne
   if (saved.date === getTodayKey()) return saved.items;
