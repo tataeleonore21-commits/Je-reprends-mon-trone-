@@ -366,6 +366,23 @@ body{padding-bottom:80px}
 .cercle-item.open .cercle-item-body{display:block}
 
 /* WhatsApp Premium */
+.wa-share-btn{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  background:none;
+  border:1px solid rgba(37,211,102,0.5);
+  color:#25D366;
+  font-family:'Cinzel',serif;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  padding:10px;
+  border-radius:12px;
+  cursor:pointer;
+  touch-action:manipulation;
+}
 .whatsapp-premium-box{
   background:linear-gradient(135deg,rgba(169,128,47,.08),rgba(169,128,47,.02));
   border:1px solid var(--gold);
@@ -1971,6 +1988,34 @@ body{padding-bottom:80px}
 .planet-actions{display:flex;flex-direction:column;gap:7px;text-align:left;max-width:440px;margin:0 auto}
 .planet-action-item{font-family:'EB Garamond',serif;font-weight:600;font-size:15px;color:var(--ink-soft);display:flex;gap:8px;align-items:flex-start;line-height:1.4}
 .planet-action-item::before{content:'★';color:var(--gold);flex-shrink:0}
+.planet-action-single{
+  margin-top:16px;
+  background:linear-gradient(135deg,rgba(169,128,47,.12),rgba(169,128,47,.03));
+  border:1px solid var(--gold);
+  border-left:3px solid var(--gold);
+  border-radius:0 14px 14px 0;
+  padding:14px 18px;
+  text-align:left;
+  max-width:440px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.planet-action-label{
+  font-family:'Cinzel',serif;
+  font-size:8px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  display:block;
+  margin-bottom:8px;
+}
+.planet-action-text{
+  font-family:'EB Garamond',serif;
+  font-weight:600;
+  font-size:17px;
+  color:var(--ink);
+  line-height:1.5;
+}
 </style>
 </head>
 <body>
@@ -2182,6 +2227,7 @@ body{padding-bottom:80px}
                   <p class="oracle-signature">— Tata Éléonore</p>
                 </div>
                 <p class="oracle-return-msg">Ton tirage du jour est posé — reviens demain</p>
+                <button class="wa-share-btn" id="oracle-wa-share">Partager dans le groupe ↗</button>
               </div>
             </div>
           </div>
@@ -2200,6 +2246,7 @@ body{padding-bottom:80px}
               <canvas id="wheel-canvas" width="280" height="280" style="display:block;margin:24px auto"></canvas>
               <div id="wheel-priority" class="wheel-priority-box" style="display:none"></div>
               <button class="bilan-share-btn" id="wheel-save">Sauvegarder ma roue</button>
+              <button class="wa-share-btn" id="wheel-wa-share">Partager dans le groupe ↗</button>
             </div>
           </div>
 
@@ -2234,25 +2281,7 @@ body{padding-bottom:80px}
               </div>
               <div class="emotion-chart-stats" id="emotion-chart-stats"></div>
               <button class="bilan-share-btn" id="emotion-share-btn" style="margin-top:16px">Partager ma progression</button>
-            </div>
-          </div>
-
-          <div class="cercle-item" data-item="miroir">
-            <div class="cercle-item-header">
-              <div class="cercle-item-info">
-                <span class="cercle-item-icon">☽</span>
-                <div><div class="cercle-item-title">Le Miroir du Jour</div><div class="cercle-item-desc">Intention · Émotion · Gratitude croisées</div></div>
-              </div>
-              <span class="cercle-item-toggle">▼</span>
-            </div>
-            <div class="cercle-item-body">
-              <p class="oracle-cta-text" style="margin-bottom:20px">Trois courbes qui révèlent ta cohérence intérieure. Les jours où les trois sont hautes — quelque chose se crée en toi.</p>
-              <div class="emotion-chart-container">
-                <canvas id="miroir-chart" height="200"></canvas>
-              </div>
-              <div id="miroir-legend" style="display:flex;gap:16px;justify-content:center;margin:12px 0;flex-wrap:wrap"></div>
-              <div id="miroir-insight" class="miroir-insight-box" style="display:none"></div>
-              <button class="bilan-share-btn" id="miroir-share-btn" style="margin-top:12px">Partager mon miroir</button>
+              <button class="wa-share-btn" id="emotion-wa-share">Partager dans le groupe ↗</button>
             </div>
           </div>
 
@@ -2269,6 +2298,7 @@ body{padding-bottom:80px}
               <div class="defi-result-box" id="defi-result-box" style="display:none">
                 <textarea class="field-input" id="defi-result" placeholder="Note ici ce que tu as vécu, ressenti, découvert…" rows="4"></textarea>
                 <button class="save-btn" id="defi-save" style="margin-top:10px">Ancrer mon résultat</button>
+                <button class="wa-share-btn" id="defi-wa-share">Partager dans le groupe ↗</button>
               </div>
             </div>
           </div>
@@ -2286,6 +2316,7 @@ body{padding-bottom:80px}
               <div id="align-list"></div>
               <button class="save-btn" id="save-alignement" style="margin-top:12px">Ancrer cette table</button>
               <button class="export-btn" id="export-alignement" style="margin-top:10px">Télécharger ma table en PDF</button>
+              <button class="wa-share-btn" id="align-wa-share">Partager dans le groupe ↗</button>
             </div>
           </div>
 
@@ -2307,6 +2338,7 @@ body{padding-bottom:80px}
               </div>
               <button class="save-btn" id="save-connaistoi" style="margin-top:12px">Ancrer ces forces</button>
               <button class="export-btn" id="export-connaistoi" style="margin-top:10px">Télécharger mon portrait en PDF</button>
+              <button class="wa-share-btn" id="connaistoi-wa-share">Partager dans le groupe ↗</button>
             </div>
           </div>
 
@@ -2882,13 +2914,16 @@ document.getElementById("quote-author").textContent = "— " + q.author;
 // Carte du jour planétaire
 function renderPlanetDay(){
   const p = PLANETARY_DAYS[new Date().getDay()];
+  const weekNum = Math.floor(new Date().getTime() / (7 * 24 * 60 * 60 * 1000));
+  const action = p.actions[weekNum % p.actions.length];
   document.getElementById("planet-card").innerHTML = `
     <div class="planet-inner">
       <div class="planet-symbol">${p.symbol}</div>
       <div class="planet-day-theme">${p.day} — Jour de ${p.planet}</div>
       <div class="planet-name">${p.theme}</div>
-      <div class="planet-actions">
-        ${p.actions.map(a => `<div class="planet-action-item">${a}</div>`).join("")}
+      <div class="planet-action-single">
+        <span class="planet-action-label">Ton action du jour</span>
+        <div class="planet-action-text">${action}</div>
       </div>
     </div>`;
 }
@@ -3725,6 +3760,7 @@ function showOracleResult(num, meaning, message){
 
 // ═══ PREMIUM ═══
 const PREMIUM_KEY = "eleonore_premium";
+const WA_GROUP = "https://chat.whatsapp.com/GDaHnAOJjR49cTmhs7znGg";
 
 function checkPremium(){
   return localStorage.getItem(PREMIUM_KEY) === "true";
@@ -3747,15 +3783,20 @@ function initPremiumView(){
         const item = header.closest(".cercle-item");
         if (!item) return;
         const wasOpen = item.classList.contains("open");
+        // Ferme tout
         document.querySelectorAll(".cercle-item").forEach(i => i.classList.remove("open"));
+        // Ouvre celui-ci si c'était fermé
         if (!wasOpen) {
           item.classList.add("open");
+          // Scroll doux vers l'item sans sauter
+          setTimeout(() => {
+            item.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 50);
           const itemName = item.dataset.item;
           if (itemName === "oracle") initOracle();
           if (itemName === "roue") { initWheel(); drawWheel(); }
           if (itemName === "emotions") initEmotions();
           if (itemName === "evolution") renderEmotionChart();
-          if (itemName === "miroir") renderMiroir();
           if (itemName === "defi") renderDefi();
           if (itemName === "alignement") initAlignement();
           if (itemName === "connaistoi") initConnaistoi();
@@ -3770,6 +3811,7 @@ function initPremiumView(){
         firstItem.classList.add("open");
         initOracle();
       }
+      initWAShareButtons();
     }, 250);
 
   } else {
@@ -4288,6 +4330,60 @@ function initConnaistoi(){
 
   const exportBtn = document.getElementById("export-connaistoi");
   if (exportBtn) exportBtn.addEventListener("click", exportConnaistoi);
+}
+
+function shareToWA(text){
+  const encoded = encodeURIComponent(text);
+  window.open(`https://wa.me/?text=${encoded}`, '_blank');
+}
+
+function initWAShareButtons(){
+  const oracleWA = document.getElementById("oracle-wa-share");
+  if (oracleWA) oracleWA.addEventListener("click", () => {
+    const msg = document.getElementById("oracle-message")?.textContent || "";
+    if (!msg) { showToast("Tire d'abord ton oracle du jour"); return; }
+    shareToWA(`🔮 Mon Oracle du Jour — Cercle Premium\n\n"${msg}"\n\n— Je reprends mon trône\ntataeleonore.com`);
+  });
+
+  const wheelWA = document.getElementById("wheel-wa-share");
+  if (wheelWA) wheelWA.addEventListener("click", () => {
+    const vals = WHEEL_DOMAINS.map((d, i) => `${d} : ${wheelValues[i]}/10`).join("\n");
+    const sorted = [...wheelValues].map((v, i) => ({ d: WHEEL_DOMAINS[i], v })).sort((a,b) => a.v - b.v);
+    shareToWA(`🌀 Ma Roue de Vie — Cercle Premium\n\n${vals}\n\nMon priorité : ${sorted[0].d}\n\ntataeleonore.com`);
+  });
+
+  const emotionWA = document.getElementById("emotion-wa-share");
+  if (emotionWA) emotionWA.addEventListener("click", () => {
+    const today = JSON.parse(localStorage.getItem(EMOTION_KEY) || "{}");
+    if (!today.name) { showToast("Note d'abord ta fréquence du jour"); return; }
+    shareToWA(`⚡ Ma fréquence du jour — Cercle Premium\n\n${today.score}/4.0 — ${today.name}\n\ntataeleonore.com`);
+  });
+
+  const defiWA = document.getElementById("defi-wa-share");
+  if (defiWA) defiWA.addEventListener("click", () => {
+    const weekNum = Math.floor(new Date().getTime() / (7 * 24 * 60 * 60 * 1000));
+    const defi = DEFIS[weekNum % DEFIS.length];
+    const result = document.getElementById("defi-result")?.value || "";
+    let text = `🎯 Mon défi de la semaine — Cercle Premium\n\n${defi.title}\n\n${defi.action}`;
+    if (result) text += `\n\nMon résultat : ${result}`;
+    text += `\n\ntataeleonore.com`;
+    shareToWA(text);
+  });
+
+  const alignWA = document.getElementById("align-wa-share");
+  if (alignWA) alignWA.addEventListener("click", () => {
+    const lines = alignment.filter(a => a.dontWant || a.want || a.action);
+    if (!lines.length) { showToast("Remplis d'abord ta table"); return; }
+    const text = lines.map((a, i) => `${i+1}. Je lâche : ${a.dontWant||"—"} → Je veux : ${a.want||"—"} → Action : ${a.action||"—"}`).join("\n");
+    shareToWA(`🔄 Ma Table d'Alignement — Cercle Premium\n\n${text}\n\ntataeleonore.com`);
+  });
+
+  const connaisWA = document.getElementById("connaistoi-wa-share");
+  if (connaisWA) connaisWA.addEventListener("click", () => {
+    const forces = selfKnowledge.qualites || "";
+    if (!forces) { showToast("Note d'abord tes forces"); return; }
+    shareToWA(`💪 Mes forces de la semaine — Cercle Premium\n\n${forces}\n\ntataeleonore.com`);
+  });
 }
 
 function initOracle(){
