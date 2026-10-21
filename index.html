@@ -4856,6 +4856,15 @@ function exportConnaistoi(){
   openPrintPage("Connais-toi toi-même", html);
 }
 document.getElementById("export-connaistoi").addEventListener("click", exportConnaistoi);
+
+// Ouverture directe via URL hash (ex: tataeleonore.com/#evenements)
+(function(){
+  const hash = window.location.hash.replace('#','');
+  const validTabs = ['pratique','reves','histoire','evenements','livres','premium'];
+  if(hash && validTabs.includes(hash)){
+    switchTab(hash);
+  }
+})();
 </script>
 
 </body>
